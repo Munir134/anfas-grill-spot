@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أنفاس — مشويات تركية أصيلة في جدة</title>
+  <meta name="description" content="مطعم أنفاس للمشويات التركية في حي السلامة، جدة. أطباق أصيلة على الفحم، أجواء دافئة، ومنيو غني بالمشاوي والحلويات التركية." />
+  <meta property="og:title" content="أنفاس — مشويات تركية أصيلة في جدة" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Tajawal:wght@300;400;500;700;900&display=swap" />
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── Design Tokens ── */
+    :root {
+      --bg:       #ffffff;
+      --cream:    #f7f2ee;
+      --ink:      #1a1a1e;
+      --primary:  #c8102e;
+      --deep:     #a50d25;
+      --muted:    #6b6b78;
+      --border:   #e8ddd3;
+      --card:     #ffffff;
+      --radius:   0.5rem;
+      --font-ar:  'Tajawal', 'Amiri', sans-serif;
+      --font-en:  'Playfair Display', serif;
+    }
+
+    body {
+      font-family: var(--font-ar);
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1,h2,h3,h4 { font-family: 'Amiri', 'Playfair Display', serif; letter-spacing: -0.01em; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ── Layout ── */
+    .container {
+      width: 100%; max-width: 1200px;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+    @media (min-width: 768px) { .container { padding-inline: 2rem; } }
+
+    /* ── Typography ── */
+    .divider-dot {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      color: var(--primary); font-size: 0.75rem;
+      letter-spacing: 0.25em; text-transform: uppercase;
+    }
+    .divider-dot::before,.divider-dot::after {
+      content: ""; width: 2.5rem; height: 1px;
+      background: currentColor; opacity: 0.6;
+    }
+    .font-latin { font-family: var(--font-en); }
+
+    /* ── Utilities ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--primary); color: #fff;
+      border-radius: 9999px; padding: 0.625rem 1.5rem;
+      font-size: 0.875rem; font-weight: 500;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .btn-primary:hover { background: var(--deep); transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(200,16,46,0.4); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1.5px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.05);
+      color: #fff; border-radius: 9999px;
+      padding: 0.625rem 1.5rem; font-size: 0.875rem; font-weight: 500;
+      backdrop-filter: blur(4px);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1.5px solid rgba(26,26,30,0.2); background: var(--bg);
+      color: var(--ink); border-radius: 9999px;
+      padding: 0.625rem 1.25rem; font-size: 0.875rem; font-weight: 500;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* ── Animations ── */
+    @keyframes kenburns {
+      0%   { transform: scale(1.08) translateY(0); }
+      100% { transform: scale(1.16) translateY(-1.5%); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim-kenburns { animation: kenburns 18s ease-in-out infinite alternate; }
+    .anim-fade { animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both; }
+    .delay-1 { animation-delay: 80ms; }
+    .delay-2 { animation-delay: 180ms; }
+    .delay-3 { animation-delay: 300ms; }
+    .delay-4 { animation-delay: 420ms; }
+    .delay-5 { animation-delay: 560ms; }
+
+    .hover-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.2); }
+
+    /* ── Header ── */
+    header {
+      position: sticky; top: 0; z-index: 40;
+      border-bottom: 1px solid rgba(232,221,211,0.6);
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 4rem;
+    }
+    @media (min-width: 768px) { .header-inner { height: 5rem; } }
+
+    .logo { display: flex; align-items: center; gap: 0.5rem; }
+    .logo-icon {
+      width: 2.5rem; height: 2.5rem;
+      background: var(--primary); color: #fff;
+      border-radius: 9999px;
+      display: grid; place-items: center;
+      font-size: 1rem; transition: transform 0.3s;
+    }
+    .logo:hover .logo-icon { transform: scale(1.05); }
+    .logo-name { font-size: 1.25rem; font-weight: 700; color: var(--ink); }
+    .logo-sub { font-size: 0.625rem; letter-spacing: 0.3em; color: var(--primary); font-family: var(--font-en); }
+
+    .site-nav { display: none; align-items: center; gap: 1.5rem; font-size: 0.875rem; font-weight: 500; }
+    @media (min-width: 768px) { .site-nav { display: flex; } }
+
+    .nav-link { color: var(--ink); transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: var(--primary); }
+
+    .lang-btn {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      border: 1.5px solid rgba(200,16,46,0.4);
+      border-radius: 9999px; padding: 0.25rem 0.75rem;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+      color: var(--primary); font-family: var(--font-en);
+      transition: background 0.3s, color 0.3s;
+    }
+    .lang-btn:hover { background: var(--primary); color: #fff; }
+
+    .header-actions { display: flex; align-items: center; gap: 0.5rem; }
+    .phone-btn-desktop {
+      display: none; align-items: center; gap: 0.5rem;
+      background: var(--primary); color: #fff; border-radius: 9999px;
+      padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500;
+      transition: background 0.3s, transform 0.3s;
+    }
+    @media (min-width: 768px) { .phone-btn-desktop { display: inline-flex; } }
+    .phone-btn-desktop:hover { background: var(--deep); transform: translateY(-2px); }
+
+    .phone-btn-mobile {
+      width: 2.5rem; height: 2.5rem;
+      background: var(--primary); color: #fff; border-radius: 9999px;
+      display: grid; place-items: center;
+    }
+    @media (min-width: 768px) { .phone-btn-mobile { display: none; } }
+
+    .lang-btn-mobile {
+      width: 2.25rem; height: 2.25rem;
+      border: 1.5px solid rgba(200,16,46,0.4); border-radius: 9999px;
+      display: none; place-items: center;
+      color: var(--primary); transition: background 0.3s, color 0.3s;
+      font-size: 0.65rem; font-weight: 700; font-family: var(--font-en);
+    }
+    @media (max-width: 767px) { .lang-btn-mobile { display: grid; } }
+    .lang-btn-mobile:hover { background: var(--primary); color: #fff; }
+
+    /* ── Pages ── */
+    .page { display: none; }
+    .page.active { display: block; }
+    main { flex: 1; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.5), rgba(0,0,0,0.8));
+    }
+    .hero-content {
+      position: relative;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 85vh; padding: 6rem 1.25rem;
+      text-align: center; color: #fff;
+    }
+    .hero-tagline { color: rgba(255,255,255,0.8); }
+    .hero-title { font-size: clamp(3rem,10vw,6rem); font-weight: 700; line-height: 1; margin-top: 1.5rem; }
+    .hero-en { font-size: 0.875rem; letter-spacing: 0.5em; color: rgba(200,16,46,0.9); margin-top: 0.75rem; font-family: var(--font-en); }
+    .hero-desc { max-width: 40rem; font-size: 1.125rem; color: rgba(255,255,255,0.85); line-height: 1.7; margin-top: 1.5rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 2.5rem; }
+
+    /* ── Section shared ── */
+    section { padding: 6rem 0; }
+    .section-sm { padding: 4rem 0; }
+    .bg-cream { background: var(--cream); }
+    .bg-ink { background: var(--ink); color: #fff; }
+
+    /* ── Story ── */
+    .story-grid { display: grid; gap: 3rem; align-items: center; }
+    @media (min-width: 768px) { .story-grid { grid-template-columns: 1fr 1fr; } }
+    .story-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .story-img { aspect-ratio: 4/5; width: 100%; border-radius: var(--radius); object-fit: cover; }
+    .story-img-2 { margin-top: 2rem; }
+    .story-title { font-size: clamp(2rem,5vw,3.5rem); font-weight: 700; color: var(--ink); line-height: 1.2; margin-top: 1.5rem; }
+    .story-title span { color: var(--primary); }
+    .story-p { color: var(--muted); line-height: 1.8; margin-top: 1.5rem; }
+
+    /* ── Signature Dishes ── */
+    .dishes-grid { display: grid; gap: 2rem; margin-top: 3.5rem; }
+    @media (min-width: 640px)  { .dishes-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 1024px) { .dishes-grid { grid-template-columns: repeat(3,1fr); } }
+
+    .dish-card {
+      border-radius: var(--radius); overflow: hidden;
+      background: var(--card); border: 1px solid rgba(232,221,211,0.6);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .dish-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.2); }
+    .dish-card-img { aspect-ratio: 4/3; overflow: hidden; }
+    .dish-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+    .dish-card:hover .dish-card-img img { transform: scale(1.05); }
+    .dish-card-body { padding: 1.5rem; }
+    .dish-card-header { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+    .dish-card-name { font-size: 1.5rem; font-weight: 700; color: var(--ink); }
+    .dish-card-en { font-size: 0.7rem; letter-spacing: 0.25em; color: var(--primary); font-family: var(--font-en); }
+    .dish-card-desc { margin-top: 0.75rem; font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── Gallery ── */
+    .gallery { display: grid; gap: 1rem; margin-top: 3.5rem; }
+    @media (min-width: 768px) {
+      .gallery { grid-template-columns: repeat(4,1fr); grid-template-rows: repeat(2,1fr); height: 520px; }
+      .gallery-main { grid-column: span 2; grid-row: span 2; }
+      .gallery-wide { grid-column: span 2; }
+    }
+    .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); aspect-ratio: 16/9; }
+    @media (min-width: 768px) { .gallery img { aspect-ratio: auto; } }
+
+    /* ── Features ── */
+    .features-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; margin-top: 3rem; }
+    @media (min-width: 640px) { .features-grid { grid-template-columns: repeat(4,1fr); } }
+    .feature-card {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.75rem; padding: 1.5rem; text-align: center;
+      border: 1px solid rgba(232,221,211,0.6); border-radius: var(--radius);
+      background: var(--card); color: var(--ink);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .feature-card:hover { border-color: var(--primary); transform: translateY(-4px); }
+    .feature-icon { font-size: 1.5rem; }
+    .feature-label { font-size: 0.875rem; }
+
+    /* ── Visit ── */
+    .visit-grid { display: grid; gap: 3rem; align-items: center; }
+    @media (min-width: 768px) { .visit-grid { grid-template-columns: 1fr 1fr; } }
+    .visit-title { font-size: clamp(2rem,5vw,3.5rem); font-weight: 700; line-height: 1.2; margin-top: 1.5rem; }
+    .visit-title span { color: var(--primary); }
+    .visit-list { margin-top: 2rem; list-style: none; display: flex; flex-direction: column; gap: 1.25rem; color: rgba(255,255,255,0.85); }
+    .visit-list li { display: flex; align-items: flex-start; gap: 0.75rem; }
+    .visit-list-icon { color: var(--primary); flex-shrink: 0; margin-top: 0.1rem; font-size: 1.1rem; }
+    .visit-label { font-weight: 600; color: #fff; font-size: 0.875rem; }
+    .visit-val { font-size: 0.875rem; margin-top: 0.25rem; }
+    .visit-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2.5rem; }
+    .map-wrap { overflow: hidden; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5); }
+
+    /* ── Menu page ── */
+    .menu-hero { background: var(--cream); padding: 4rem 0 5rem; border-bottom: 1px solid rgba(232,221,211,0.6); text-align: center; }
+    .menu-title { font-size: clamp(2.5rem,8vw,4rem); font-weight: 700; color: var(--ink); margin-top: 1.5rem; }
+    .menu-desc { max-width: 38rem; color: var(--muted); margin: 1rem auto 0; }
+    .menu-hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 2rem; }
+    .category { margin-bottom: 5rem; }
+    .cat-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+    .cat-title { font-size: clamp(1.75rem,4vw,2.5rem); font-weight: 700; color: var(--ink); }
+    .cat-en { font-size: 0.75rem; letter-spacing: 0.4em; color: var(--primary); font-family: var(--font-en); }
+    .item-list { list-style: none; margin-top: 2rem; }
+    .item-row {
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: 1.25rem 0; border-bottom: 1px solid rgba(232,221,211,0.6);
+    }
+    .item-thumb {
+      flex-shrink: 0; width: 5rem; height: 5rem;
+      border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(232,221,211,0.6);
+    }
+    @media (min-width: 768px) { .item-thumb { width: 6rem; height: 6rem; } }
+    .item-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .item-thumb:hover img { transform: scale(1.1); }
+    .item-info { flex: 1; min-width: 0; }
+    .item-names { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; }
+    .item-name-ar { font-size: 1.125rem; font-weight: 600; color: var(--ink); }
+    .item-name-en { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--muted); font-family: var(--font-en); }
+    .item-desc { margin-top: 0.25rem; font-size: 0.875rem; color: var(--muted); line-height: 1.5; max-width: 40rem; }
+    .item-price { flex-shrink: 0; font-size: 1.125rem; font-weight: 700; color: var(--primary); }
+    .item-price span { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+
+    /* ── Contact page ── */
+    .contact-hero { background: var(--cream); padding: 4rem 0 5rem; border-bottom: 1px solid rgba(232,221,211,0.6); text-align: center; }
+    .contact-title { font-size: clamp(2.5rem,8vw,4rem); font-weight: 700; color: var(--ink); margin-top: 1.5rem; }
+    .contact-grid { display: grid; gap: 2.5rem; padding: 5rem 0; }
+    @media (min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+    .info-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .info-card {
+      display: flex; align-items: flex-start; gap: 1rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--card); padding: 1.25rem;
+    }
+    .info-icon {
+      width: 2.75rem; height: 2.75rem; flex-shrink: 0;
+      background: rgba(200,16,46,0.1); color: var(--primary);
+      border-radius: 9999px; display: grid; place-items: center; font-size: 1.1rem;
+    }
+    .info-label { font-size: 0.875rem; font-weight: 600; color: var(--ink); }
+    .info-val { font-size: 0.875rem; color: var(--muted); margin-top: 0.25rem; }
+    .info-val a:hover { color: var(--primary); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid rgba(232,221,211,0.6); background: var(--cream); margin-top: 6rem; }
+    .footer-grid { display: grid; gap: 2.5rem; padding: 3.5rem 0; }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3,1fr); } }
+    .footer-desc { font-size: 0.875rem; color: var(--muted); max-width: 18rem; line-height: 1.7; margin-top: 1rem; }
+    .footer-heading { font-size: 0.875rem; font-weight: 600; color: var(--ink); letter-spacing: 0.15em; }
+    .footer-list { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem; color: var(--muted); }
+    .footer-list li { display: flex; align-items: flex-start; gap: 0.5rem; }
+    .footer-list a:hover { color: var(--primary); }
+    .footer-hours-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(232,221,211,0.6); padding-bottom: 0.5rem; }
+    .footer-bottom { border-top: 1px solid rgba(232,221,211,0.6); }
+    .footer-bottom-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 1.25rem 0; font-size: 0.75rem; color: var(--muted); }
+
+    /* ── SVG Icons ── */
+    .icon { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; flex-shrink: 0; }
+    .icon-sm { width: 0.875rem; height: 0.875rem; }
+    .icon-md { width: 1.125rem; height: 1.125rem; }
+    .icon-lg { width: 1.25rem; height: 1.25rem; }
+    .icon-primary { color: var(--primary); }
+
+    /* Download button */
+    .download-bar { background: var(--ink); color: #fff; padding: 0.75rem 0; text-align: center; font-size: 0.8rem; }
+    .download-bar a {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--primary); color: #fff;
+      padding: 0.4rem 1.2rem; border-radius: 9999px;
+      font-size: 0.8rem; font-weight: 600; transition: background 0.3s;
+      margin-right: 0.75rem;
+    }
+    .download-bar a:hover { background: var(--deep); }
+
+    /* Responsive text */
+    .text-center { text-align: center; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mx-auto { margin-inline: auto; }
+    .max-w-xl { max-width: 36rem; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════════ -->
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <!-- Logo -->
+      <a href="#" onclick="showPage('home')" class="logo">
+        <span class="logo-icon">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+        </span>
+        <div>
+          <div class="logo-name" id="logoName">أنفاس</div>
+          <div class="logo-sub">ANFAS</div>
+        </div>
+      </a>
+
+      <!-- Nav Desktop -->
+      <nav class="site-nav" id="siteNav">
+        <a href="#" class="nav-link active" onclick="showPage('home')" id="navHome">الرئيسية</a>
+        <a href="#" class="nav-link" onclick="showPage('menu')" id="navMenu">المنيو</a>
+        <a href="#" class="nav-link" onclick="showPage('contact')" id="navContact">زُرنا</a>
+        <button class="lang-btn" onclick="toggleLang()" id="langBtnDesktop">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="langBtnText">EN</span>
+        </button>
+      </nav>
+
+      <!-- Actions -->
+      <div class="header-actions">
+        <a href="tel:0534900038" class="phone-btn-desktop">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.27z"/></svg>
+          <span id="bookTableText">احجز طاولة</span>
+        </a>
+        <button class="lang-btn-mobile" onclick="toggleLang()" id="langBtnMobile" title="تغيير اللغة">EN</button>
+        <a href="tel:0534900038" class="phone-btn-mobile">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.27z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════
+     HOME PAGE
+════════════════════════════════════════════════════════════ -->
+<div id="pagHome" class="page active">
+
+  <!-- Hero -->
+  <section class="hero">
+    <img src="images/hero-grill.jpg" alt="" class="hero-img anim-kenburns" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+      <span class="divider-dot text-white hero-tagline anim-fade delay-1" id="heroTagline" style="color:rgba(255,255,255,0.8)">مشويات تركية · جدة</span>
+      <h1 class="hero-title anim-fade delay-2" id="heroTitle">أنفاس</h1>
+      <div class="hero-en anim-fade delay-3 font-latin">ANFAS · TURKISH GRILL</div>
+      <p class="hero-desc anim-fade delay-4" id="heroDesc">نفَسٌ تركيٌ أصيل على جمر الفحم — أطباق مشويّة بتوابل الأناضول، تُقدَّم في قلب حي السلامة بجدة.</p>
+      <div class="hero-actions anim-fade delay-5">
+        <a href="tel:0534900038" class="btn-primary">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span id="orderNowBtn">اطلب الآن</span>
+        </a>
+        <a href="#" onclick="showPage('menu')" class="btn-ghost" id="viewMenuBtn">عرض المنيو</a>
+        <a href="tel:0534900038" class="btn-ghost" id="bookTableBtn2">احجز طاولة</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="bg-cream">
+    <div class="container story-grid">
+      <div>
+        <span class="divider-dot" id="ourStoryLabel">قصتنا</span>
+        <h2 class="story-title">
+          <span id="storyTitle1">نفَسٌ من الأناضول</span><br/>
+          <span style="color:var(--primary)" id="storyTitle2">إلى جدة</span>
+        </h2>
+        <p class="story-p" id="storyP1">في مطعم أنفاس، ننقل تجربة المشاوي التركية كما تُعدّ في أزقّة إسطنبول وأضنة — لحوم مختارة بعناية، توابل مطحونة يومياً، وشوّاؤون يجيدون فنّ إتقان الجمر.</p>
+        <p class="story-p" id="storyP2">كل طبق يخرج من مطبخنا يحمل نفَسَ التراث التركي، بلمسة ضيافة سعودية دافئة تجعل من زيارتك ذكرى.</p>
+      </div>
+      <div class="story-img-grid">
+        <img src="images/interior-grill.jpg" alt="" class="story-img hover-lift" />
+        <img src="images/interior-1.jpg" alt="" class="story-img story-img-2 hover-lift" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Signature Dishes -->
+  <section>
+    <div class="container">
+      <div class="text-center">
+        <span class="divider-dot" id="signaturesLabel">قائمتنا المميزة</span>
+        <h2 class="mt-6" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:var(--ink)" id="signaturesTitle">أطباقٌ نفتخر بها</h2>
+        <p class="max-w-xl mx-auto mt-4" style="color:var(--muted)" id="signaturesDesc">نخبة من أشهر المشاوي التركية، محضّرة بأيدي شوّائين مختصّين.</p>
+      </div>
+      <div class="dishes-grid">
+        <article class="dish-card">
+          <div class="dish-card-img"><img src="images/dish-adana.jpg" alt="أضنة كباب" loading="lazy" /></div>
+          <div class="dish-card-body">
+            <div class="dish-card-header"><h3 class="dish-card-name" data-ar="أضنة كباب" data-en="Adana Kebab">أضنة كباب</h3><span class="dish-card-en font-latin">Adana Kebab</span></div>
+            <p class="dish-card-desc" data-ar="كباب لحم مفروم حار مشوي على الفحم، توابل تركية أصيلة." data-en="Spicy minced meat kebab grilled on charcoal with authentic Turkish spices.">كباب لحم مفروم حار مشوي على الفحم، توابل تركية أصيلة.</p>
+          </div>
+        </article>
+        <article class="dish-card">
+          <div class="dish-card-img"><img src="images/dish-urfa.jpg" alt="أورفا كباب" loading="lazy" /></div>
+          <div class="dish-card-body">
+            <div class="dish-card-header"><h3 class="dish-card-name" data-ar="أورفا كباب" data-en="Urfa Kebab">أورفا كباب</h3><span class="dish-card-en font-latin">Urfa Kebab</span></div>
+            <p class="dish-card-desc" data-ar="النسخة الأخف حرارة من الكباب، بنكهة دخانية عميقة." data-en="The milder version of kebab with a deep smoky flavor.">النسخة الأخف حرارة من الكباب، بنكهة دخانية عميقة.</p>
+          </div>
+        </article>
+        <article class="dish-card">
+          <div class="dish-card-img"><img src="images/dish-shish.jpg" alt="شيش كباب" loading="lazy" /></div>
+          <div class="dish-card-body">
+            <div class="dish-card-header"><h3 class="dish-card-name" data-ar="شيش كباب" data-en="Shish Kebab">شيش كباب</h3><span class="dish-card-en font-latin">Shish Kebab</span></div>
+            <p class="dish-card-desc" data-ar="قطع لحم غنم متبّلة ومشوية على الجمر مع الخضار." data-en="Marinated lamb pieces grilled over charcoal with vegetables.">قطع لحم غنم متبّلة ومشوية على الجمر مع الخضار.</p>
+          </div>
+        </article>
+        <article class="dish-card">
+          <div class="dish-card-img"><img src="images/dish-kofte.jpg" alt="كفتة مشوية" loading="lazy" /></div>
+          <div class="dish-card-body">
+            <div class="dish-card-header"><h3 class="dish-card-name" data-ar="كفتة مشوية" data-en="Kofte">كفتة مشوية</h3><span class="dish-card-en font-latin">Kofte</span></div>
+            <p class="dish-card-desc" data-ar="كرات لحم متبّلة بالبقدونس والبصل، مشوية على الفحم." data-en="Seasoned meat balls with parsley and onion, grilled on charcoal.">كرات لحم متبّلة بالبقدونس والبصل، مشوية على الفحم.</p>
+          </div>
+        </article>
+        <article class="dish-card">
+          <div class="dish-card-img"><img src="images/dish-mixed.jpg" alt="مشاوي مشكّلة" loading="lazy" /></div>
+          <div class="dish-card-body">
+            <div class="dish-card-header"><h3 class="dish-card-name" data-ar="مشاوي مشكّلة" data-en="Mixed Grill">مشاوي مشكّلة</h3><span class="dish-card-en font-latin">Mixed Grill</span></div>
+            <p class="dish-card-desc" data-ar="تشكيلة من أفضل مشاويّنا في طبق واحد، للعائلة والمجموعات." data-en="A selection of our best grills on one plate, for families and groups.">تشكيلة من أفضل مشاويّنا في طبق واحد، للعائلة والمجموعات.</p>
+          </div>
+        </article>
+        <article class="dish-card">
+          <div class="dish-card-img"><img src="images/dish-kunefe.jpg" alt="كنافة نابلسية" loading="lazy" /></div>
+          <div class="dish-card-body">
+            <div class="dish-card-header"><h3 class="dish-card-name" data-ar="كنافة نابلسية" data-en="Künefe">كنافة نابلسية</h3><span class="dish-card-en font-latin">Künefe</span></div>
+            <p class="dish-card-desc" data-ar="كنافة بالجبنة الطازجة والقطر، مزيّنة بالفستق الحلبي." data-en="Cheese pastry with syrup, topped with Aleppo pistachios.">كنافة بالجبنة الطازجة والقطر، مزيّنة بالفستق الحلبي.</p>
+          </div>
+        </article>
+      </div>
+      <div class="text-center mt-6">
+        <a href="#" onclick="showPage('menu')" style="display:inline-flex;align-items:center;gap:0.5rem;border-radius:9999px;background:var(--ink);color:#fff;padding:0.75rem 1.5rem;font-size:0.875rem;font-weight:500;transition:background 0.3s,transform 0.3s" onmouseover="this.style.background='var(--primary)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--ink)';this.style.transform=''" id="fullMenuLink">
+          المنيو الكامل
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Atmosphere -->
+  <section class="bg-cream">
+    <div class="container">
+      <div class="text-center">
+        <span class="divider-dot" id="atmosphereLabel">الأجواء</span>
+        <h2 class="mt-6" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:var(--ink)" id="atmosphereTitle">دفءٌ، فحمٌ، وشايٌ تركي</h2>
+      </div>
+      <div class="gallery">
+        <img src="images/interior-1.jpg" class="gallery-main hover-lift" alt="" loading="lazy" />
+        <img src="images/interior-tea.jpg" class="hover-lift" alt="" loading="lazy" />
+        <img src="images/interior-family.jpg" class="hover-lift" alt="" loading="lazy" />
+        <img src="images/interior-grill.jpg" class="gallery-wide hover-lift" alt="" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section>
+    <div class="container">
+      <div class="text-center">
+        <span class="divider-dot" id="featuresLabel">ما يميّزنا</span>
+        <h2 class="mt-6" style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;color:var(--ink)" id="featuresTitle">تجربة كاملة تحت سقف واحد</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">🍽️</div><div class="feature-label" data-ar="طعام حلال" data-en="Halal Food">طعام حلال</div></div>
+        <div class="feature-card"><div class="feature-icon">🎵</div><div class="feature-label" data-ar="موسيقى حية" data-en="Live Music">موسيقى حية</div></div>
+        <div class="feature-card"><div class="feature-icon">👨‍👩‍👧‍👦</div><div class="feature-label" data-ar="مناسب للعائلة" data-en="Family Friendly">مناسب للعائلة</div></div>
+        <div class="feature-card"><div class="feature-icon">🚗</div><div class="feature-label" data-ar="مواقف مجانية" data-en="Free Parking">مواقف مجانية</div></div>
+        <div class="feature-card"><div class="feature-icon">🛵</div><div class="feature-label" data-ar="خدمة توصيل" data-en="Delivery Service">خدمة توصيل</div></div>
+        <div class="feature-card"><div class="feature-icon">♿</div><div class="feature-label" data-ar="مناسب للكراسي المتحركة" data-en="Wheelchair Accessible">مناسب للكراسي المتحركة</div></div>
+        <div class="feature-card"><div class="feature-icon">👶</div><div class="feature-label" data-ar="قائمة للأطفال" data-en="Kids Menu">قائمة للأطفال</div></div>
+        <div class="feature-card"><div class="feature-icon">🌙</div><div class="feature-label" data-ar="مفتوح حتى ٤ صباحاً" data-en="Open Until 4 AM">مفتوح حتى ٤ صباحاً</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visit -->
+  <section class="bg-ink">
+    <div class="container visit-grid">
+      <div>
+        <span class="divider-dot" id="visitLabel" style="color:rgba(255,255,255,0.8)">زُرنا</span>
+        <h2 class="visit-title">
+          <span id="visitTitle1">نستقبلك في</span><br/>
+          <span style="color:var(--primary)" id="visitTitle2">حي السلامة</span>
+        </h2>
+        <ul class="visit-list">
+          <li>
+            <span class="visit-list-icon">📍</span>
+            <div>
+              <div class="visit-label" id="addressLabel">العنوان</div>
+              <div class="visit-val" id="addressValue">6889 صقر قريش، السلامة، جدة 23436</div>
+            </div>
+          </li>
+          <li>
+            <span class="visit-list-icon">🕐</span>
+            <div>
+              <div class="visit-label" id="hoursLabel">أوقات العمل</div>
+              <div class="visit-val" dir="ltr">Daily · 1:00 PM – 4:00 AM</div>
+            </div>
+          </li>
+        </ul>
+        <div class="visit-actions">
+          <a href="tel:0534900038" class="btn-primary">
+            <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span id="orderNowBtn2">اطلب الآن</span>
+          </a>
+          <a href="tel:0534900038" class="btn-ghost" style="border-color:rgba(255,255,255,0.3);color:#fff">
+            <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.27z"/></svg>
+            053 490 0038
+          </a>
+        </div>
+      </div>
+      <div class="map-wrap">
+        <iframe src="https://www.google.com/maps?q=6889+Saqr+Quraish,+As+Salamah,+Jeddah+23436&output=embed" width="100%" height="420" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="display:block;width:100%;border:0" title="Anfas Restaurant Map"></iframe>
+      </div>
+    </div>
+  </section>
+</div><!-- end home page -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     MENU PAGE
+════════════════════════════════════════════════════════════ -->
+<div id="pagMenu" class="page">
+  <div class="menu-hero">
+    <div class="container">
+      <span class="divider-dot" id="menuLabel">قائمة الطعام</span>
+      <h1 class="menu-title" id="menuTitle">المنيو</h1>
+      <p class="menu-desc" id="menuDesc">نخبة من أشهر الأطباق التركية، تُحضَّر يومياً من مكوّنات طازجة. الأسعار بالريال السعودي وتشمل الضريبة.</p>
+      <div class="menu-hero-actions">
+        <a href="tel:0534900038" class="btn-outline">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.27z"/></svg>
+          <span id="orderDeliveryBtn">اطلب توصيل</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section style="padding:5rem 0">
+    <div class="container">
+
+      <!-- GRILLS -->
+      <div class="category">
+        <div class="cat-header">
+          <h2 class="cat-title" data-ar="المشاوي" data-en="Grills">المشاوي</h2>
+          <span class="cat-en font-latin">GRILL</span>
+        </div>
+        <ul class="item-list">
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-adana.jpg" alt="أضنة كباب" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="أضنة كباب" data-en="Adana Kebab">أضنة كباب</span><span class="item-name-en font-latin">Adana Kebab</span></div><p class="item-desc" data-ar="لحم مفروم متبّل حار على الفحم." data-en="Spicy minced meat kebab grilled on charcoal.">لحم مفروم متبّل حار على الفحم.</p></div><div class="item-price">٦٥ <span id="sarLabel">ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-urfa.jpg" alt="أورفا كباب" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="أورفا كباب" data-en="Urfa Kebab">أورفا كباب</span><span class="item-name-en font-latin">Urfa Kebab</span></div><p class="item-desc" data-ar="النسخة الأخف حرارة، نكهة دخانية." data-en="The milder version with a deep smoky flavor.">النسخة الأخف حرارة، نكهة دخانية.</p></div><div class="item-price">٦٥ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-shish.jpg" alt="شيش كباب" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="شيش كباب" data-en="Shish Kebab">شيش كباب</span><span class="item-name-en font-latin">Shish Kebab</span></div><p class="item-desc" data-ar="قطع لحم غنم متبّلة مشوية." data-en="Marinated lamb pieces grilled on charcoal.">قطع لحم غنم متبّلة مشوية.</p></div><div class="item-price">٧٥ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-shish.jpg" alt="شيش طاووق" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="شيش طاووق" data-en="Shish Tawook">شيش طاووق</span><span class="item-name-en font-latin">Shish Tawook</span></div><p class="item-desc" data-ar="قطع دجاج بتتبيلة تركية على الفحم." data-en="Chicken pieces with Turkish marinade, grilled on charcoal.">قطع دجاج بتتبيلة تركية على الفحم.</p></div><div class="item-price">٥٥ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-kofte.jpg" alt="كفتة مشوية" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="كفتة مشوية" data-en="Kofte">كفتة مشوية</span><span class="item-name-en font-latin">Kofte</span></div><p class="item-desc" data-ar="كرات لحم بالبقدونس والبصل." data-en="Meat balls with parsley and onion.">كرات لحم بالبقدونس والبصل.</p></div><div class="item-price">٥٥ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-mixed.jpg" alt="مشاوي مشكّلة" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="مشاوي مشكّلة" data-en="Mixed Grill">مشاوي مشكّلة</span><span class="item-name-en font-latin">Mixed Grill</span></div><p class="item-desc" data-ar="تشكيلة كاملة من مشاويّنا." data-en="A complete selection of our grills on one plate.">تشكيلة كاملة من مشاويّنا.</p></div><div class="item-price">١٤٠ <span>ر.س</span></div></li>
+        </ul>
+      </div>
+
+      <!-- MEZZE -->
+      <div class="category">
+        <div class="cat-header">
+          <h2 class="cat-title" data-ar="المقبّلات" data-en="Mezze">المقبّلات</h2>
+          <span class="cat-en font-latin">MEZZE</span>
+        </div>
+        <ul class="item-list">
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-hummus.jpg" alt="حمّص بالطحينة" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="حمّص بالطحينة" data-en="Hummus">حمّص بالطحينة</span><span class="item-name-en font-latin">Hummus</span></div><p class="item-desc" data-ar="حمّص كريمي مع الطحينة وزيت الزيتون." data-en="Creamy chickpea dip with tahini and olive oil.">حمّص كريمي مع الطحينة وزيت الزيتون.</p></div><div class="item-price">٢٥ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-baba-ghanoush.jpg" alt="متبّل باذنجان" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="متبّل باذنجان" data-en="Baba Ghanoush">متبّل باذنجان</span><span class="item-name-en font-latin">Baba Ghanoush</span></div><p class="item-desc" data-ar="باذنجان مشوي مع الطحينة وعصير الليمون." data-en="Smoky roasted eggplant dip with tahini and lemon.">باذنجان مشوي مع الطحينة وعصير الليمون.</p></div><div class="item-price">٢٥ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-shakshuka.jpg" alt="شكشوكة تركية" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="شكشوكة تركية" data-en="Turkish Shakshuka">شكشوكة تركية</span><span class="item-name-en font-latin">Turkish Shakshuka</span></div><p class="item-desc" data-ar="بيض مطبوخ بصلصة الطماطم والفلفل التركي." data-en="Eggs poached in spiced tomato and pepper sauce.">بيض مطبوخ بصلصة الطماطم والفلفل التركي.</p></div><div class="item-price">٣٠ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-choban-salad.jpg" alt="سلطة الرعاة" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="سلطة الرعاة" data-en="Choban Salad">سلطة الرعاة</span><span class="item-name-en font-latin">Choban Salad</span></div><p class="item-desc" data-ar="سلطة طازجة بالطماطم والخيار والبقدونس." data-en="Fresh shepherd's salad with tomatoes, cucumber and parsley.">سلطة طازجة بالطماطم والخيار والبقدونس.</p></div><div class="item-price">٢٠ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-hummus-kawarma.jpg" alt="حمّص كوارما" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="حمّص كوارما" data-en="Hummus Kawarma">حمّص كوارما</span><span class="item-name-en font-latin">Hummus Kawarma</span></div><p class="item-desc" data-ar="حمّص مع لحم خروف متبّل وصنوبر." data-en="Hummus topped with spiced lamb and pine nuts.">حمّص مع لحم خروف متبّل وصنوبر.</p></div><div class="item-price">٣٥ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-labneh.jpg" alt="لبنة بالنعناع" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="لبنة بالنعناع" data-en="Labneh">لبنة بالنعناع</span><span class="item-name-en font-latin">Labneh</span></div><p class="item-desc" data-ar="لبنة طازجة بالنعناع وزيت الزيتون." data-en="Strained yogurt with fresh mint and olive oil.">لبنة طازجة بالنعناع وزيت الزيتون.</p></div><div class="item-price">٢٠ <span>ر.س</span></div></li>
+        </ul>
+      </div>
+
+      <!-- DESSERTS -->
+      <div class="category">
+        <div class="cat-header">
+          <h2 class="cat-title" data-ar="الحلويات" data-en="Desserts">الحلويات</h2>
+          <span class="cat-en font-latin">DESSERTS</span>
+        </div>
+        <ul class="item-list">
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-kunefe.jpg" alt="كنافة نابلسية" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="كنافة نابلسية" data-en="Künefe">كنافة نابلسية</span><span class="item-name-en font-latin">Künefe</span></div><p class="item-desc" data-ar="جبنة طازجة، قطر، وفستق حلبي." data-en="Fresh cheese pastry with syrup and Aleppo pistachios.">جبنة طازجة، قطر، وفستق حلبي.</p></div><div class="item-price">٤٥ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-baklava.jpg" alt="بقلاوة" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="بقلاوة" data-en="Baklava">بقلاوة</span><span class="item-name-en font-latin">Baklava</span></div><p class="item-desc" data-ar="طبقات فيلو مع الجوز والفستق والعسل." data-en="Filo pastry layers with nuts and honey syrup.">طبقات فيلو مع الجوز والفستق والعسل.</p></div><div class="item-price">٤٠ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-sahlab.jpg" alt="سحلب" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="سحلب" data-en="Sahlab">سحلب</span><span class="item-name-en font-latin">Sahlab</span></div><p class="item-desc" data-ar="مشروب دافئ بالقرفة والفستق." data-en="Warm creamy drink with cinnamon and pistachios.">مشروب دافئ بالقرفة والفستق.</p></div><div class="item-price">٢٥ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-kazandibi.jpg" alt="كازانديبي" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="كازانديبي" data-en="Kazandibi">كازانديبي</span><span class="item-name-en font-latin">Kazandibi</span></div><p class="item-desc" data-ar="حلوى حليب تركية بقشرة كراميل." data-en="Turkish burnt milk pudding with caramel crust.">حلوى حليب تركية بقشرة كراميل.</p></div><div class="item-price">٣٥ <span>ر.س</span></div></li>
+        </ul>
+      </div>
+
+      <!-- BEVERAGES -->
+      <div class="category">
+        <div class="cat-header">
+          <h2 class="cat-title" data-ar="المشروبات" data-en="Beverages">المشروبات</h2>
+          <span class="cat-en font-latin">BEVERAGES</span>
+        </div>
+        <ul class="item-list">
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-turkish-tea.jpg" alt="شاي تركي" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="شاي تركي" data-en="Turkish Tea">شاي تركي</span><span class="item-name-en font-latin">Turkish Tea</span></div><p class="item-desc" data-ar="شاي تركي تقليدي في كوب التيوليب." data-en="Traditional Turkish tea in a tulip glass.">شاي تركي تقليدي في كوب التيوليب.</p></div><div class="item-price">١٠ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-turkish-coffee.jpg" alt="قهوة تركية" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="قهوة تركية" data-en="Turkish Coffee">قهوة تركية</span><span class="item-name-en font-latin">Turkish Coffee</span></div><p class="item-desc" data-ar="قهوة غنية تُحضَّر بالجزوة النحاسية." data-en="Rich coffee brewed in a traditional copper pot.">قهوة غنية تُحضَّر بالجزوة النحاسية.</p></div><div class="item-price">١٥ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-ayran.jpg" alt="عيران" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="عيران" data-en="Ayran">عيران</span><span class="item-name-en font-latin">Ayran</span></div><p class="item-desc" data-ar="مشروب الزبادي البارد المنعش." data-en="Chilled refreshing yogurt drink.">مشروب الزبادي البارد المنعش.</p></div><div class="item-price">١٠ <span>ر.س</span></div></li>
+          <li class="item-row"><div class="item-thumb"><img src="images/dish-ayran.jpg" alt="ليموناضة نعناع" loading="lazy"/></div><div class="item-info"><div class="item-names"><span class="item-name-ar" data-ar="ليموناضة نعناع" data-en="Mint Lemonade">ليموناضة نعناع</span><span class="item-name-en font-latin">Mint Lemonade</span></div><p class="item-desc" data-ar="ليموناضة طازجة بالنعناع والثلج." data-en="Fresh mint lemonade with ice.">ليموناضة طازجة بالنعناع والثلج.</p></div><div class="item-price">٢٠ <span>ر.س</span></div></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+</div><!-- end menu page -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CONTACT PAGE
+════════════════════════════════════════════════════════════ -->
+<div id="pagContact" class="page">
+  <div class="contact-hero">
+    <div class="container">
+      <span class="divider-dot" id="contactLabel">تواصل معنا</span>
+      <h1 class="contact-title" id="contactTitle">زُرنا</h1>
+      <p class="max-w-xl mx-auto" style="color:var(--muted);margin-top:1rem" id="contactDesc">في قلب حي السلامة بجدة، ننتظر زيارتك يومياً حتى ساعات متأخرة.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="contact-grid">
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label" id="contactAddressLabel">العنوان</div>
+            <div class="info-val" id="contactAddressVal">6889 صقر قريش، حي السلامة، جدة 23436</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label" id="contactPhoneLabel">الهاتف</div>
+            <div class="info-val"><a href="tel:0534900038" dir="ltr">053 490 0038</a></div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🕐</div>
+          <div>
+            <div class="info-label" id="contactHoursLabel">أوقات العمل</div>
+            <div class="info-val" dir="ltr">Daily · 1:00 PM – 4:00 AM</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📸</div>
+          <div>
+            <div class="info-label" id="contactInstaLabel">إنستقرام</div>
+            <div class="info-val"><a href="https://instagram.com/anfasrestaurant" target="_blank" rel="noreferrer">@anfasrestaurant</a></div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🌐</div>
+          <div>
+            <div class="info-label" id="contactWebLabel">الموقع الإلكتروني</div>
+            <div class="info-val"><a href="https://anfasrestaurant.com" target="_blank" rel="noreferrer">anfasrestaurant.com</a></div>
+          </div>
+        </div>
+      </div>
+      <div style="overflow:hidden;border-radius:var(--radius);border:1px solid var(--border);box-shadow:0 8px 32px -8px rgba(0,0,0,0.12)">
+        <iframe src="https://www.google.com/maps?q=6889+Saqr+Quraish,+As+Salamah,+Jeddah+23436&output=embed" width="100%" height="520" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="display:block;width:100%;border:0" title="Anfas Map"></iframe>
+      </div>
+    </div>
+  </div>
+</div><!-- end contact page -->
+
+</main>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:0.5rem">
+          <span style="width:2.5rem;height:2.5rem;background:var(--primary);color:#fff;border-radius:9999px;display:grid;place-items:center;font-size:1rem">🔥</span>
+          <div>
+            <div style="font-size:1.25rem;font-weight:700;color:var(--ink)" id="footerLogo">أنفاس</div>
+            <div class="font-latin" style="font-size:0.625rem;letter-spacing:0.3em;color:var(--primary)">ANFAS</div>
+          </div>
+        </div>
+        <p class="footer-desc" id="footerDesc">مشويات تركية أصيلة على الفحم، بأجواء دافئة في قلب حي السلامة بجدة.</p>
+      </div>
+      <div>
+        <h3 class="footer-heading" id="footerContactTitle">تواصل معنا</h3>
+        <ul class="footer-list">
+          <li><span style="color:var(--primary);flex-shrink:0">📍</span><span id="footerAddress">6889 صقر قريش، السلامة، جدة 23436</span></li>
+          <li><span style="color:var(--primary);flex-shrink:0">📞</span><a href="tel:0534900038" dir="ltr">053 490 0038</a></li>
+          <li><span style="color:var(--primary);flex-shrink:0">📸</span><a href="https://instagram.com/anfasrestaurant" target="_blank" rel="noreferrer">@anfasrestaurant</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-heading" id="footerHoursTitle">أوقات العمل</h3>
+        <ul class="footer-list" style="margin-top:1rem">
+          <li class="footer-hours-row" style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(232,221,211,0.6);padding-bottom:0.5rem">
+            <span id="footerDaily">يومياً</span><span dir="ltr">1:00 PM – 4:00 AM</span>
+          </li>
+          <li style="margin-top:0.5rem;font-size:0.75rem;color:rgba(107,107,120,0.8)" id="footerHoursNote">مفتوح للغداء والعشاء وحتى ساعات متأخرة.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-inner">
+        <span id="footerCopyright">© 2025 مطعم أنفاس. جميع الحقوق محفوظة.</span>
+        <span class="font-latin" style="letter-spacing:0.15em">ANFAS · JEDDAH</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════════ -->
+<script>
+  // ── Page Navigation ───────────────────────────────────────
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('pag' + name.charAt(0).toUpperCase() + name.slice(1)).classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    const navMap = { home: 'navHome', menu: 'navMenu', contact: 'navContact' };
+    document.getElementById(navMap[name]).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+
+  // ── Language ──────────────────────────────────────────────
+  let currentLang = 'ar';
+
+  const translations = {
+    ar: {
+      logoName: 'أنفاس',
+      navHome: 'الرئيسية',
+      navMenu: 'المنيو',
+      navContact: 'زُرنا',
+      langBtn: 'EN',
+      bookTable: 'احجز طاولة',
+      // Hero
+      heroTagline: 'مشويات تركية · جدة',
+      heroTitle: 'أنفاس',
+      heroDesc: 'نفَسٌ تركيٌ أصيل على جمر الفحم — أطباق مشويّة بتوابل الأناضول، تُقدَّم في قلب حي السلامة بجدة.',
+      orderNow: 'اطلب الآن',
+      viewMenu: 'عرض المنيو',
+      // Story
+      ourStoryLabel: 'قصتنا',
+      storyTitle1: 'نفَسٌ من الأناضول',
+      storyTitle2: 'إلى جدة',
+      storyP1: 'في مطعم أنفاس، ننقل تجربة المشاوي التركية كما تُعدّ في أزقّة إسطنبول وأضنة — لحوم مختارة بعناية، توابل مطحونة يومياً، وشوّاؤون يجيدون فنّ إتقان الجمر.',
+      storyP2: 'كل طبق يخرج من مطبخنا يحمل نفَسَ التراث التركي، بلمسة ضيافة سعودية دافئة تجعل من زيارتك ذكرى.',
+      // Signatures
+      signaturesLabel: 'قائمتنا المميزة',
+      signaturesTitle: 'أطباقٌ نفتخر بها',
+      signaturesDesc: 'نخبة من أشهر المشاوي التركية، محضّرة بأيدي شوّائين مختصّين.',
+      fullMenuLink: 'المنيو الكامل',
+      // Atmosphere
+      atmosphereLabel: 'الأجواء',
+      atmosphereTitle: 'دفءٌ، فحمٌ، وشايٌ تركي',
+      // Features
+      featuresLabel: 'ما يميّزنا',
+      featuresTitle: 'تجربة كاملة تحت سقف واحد',
+      // Visit
+      visitLabel: 'زُرنا',
+      visitTitle1: 'نستقبلك في',
+      visitTitle2: 'حي السلامة',
+      addressLabel: 'العنوان',
+      addressValue: '6889 صقر قريش، السلامة، جدة 23436',
+      hoursLabel: 'أوقات العمل',
+      // Menu
+      menuLabel: 'قائمة الطعام',
+      menuTitle: 'المنيو',
+      menuDesc: 'نخبة من أشهر الأطباق التركية، تُحضَّر يومياً من مكوّنات طازجة. الأسعار بالريال السعودي وتشمل الضريبة.',
+      orderDelivery: 'اطلب توصيل',
+      sarLabel: 'ر.س',
+      // Contact
+      contactLabel: 'تواصل معنا',
+      contactTitle: 'زُرنا',
+      contactDesc: 'في قلب حي السلامة بجدة، ننتظر زيارتك يومياً حتى ساعات متأخرة.',
+      contactAddressLabel: 'العنوان',
+      contactAddressVal: '6889 صقر قريش، حي السلامة، جدة 23436',
+      contactPhoneLabel: 'الهاتف',
+      contactHoursLabel: 'أوقات العمل',
+      contactInstaLabel: 'إنستقرام',
+      contactWebLabel: 'الموقع الإلكتروني',
+      // Footer
+      footerDesc: 'مشويات تركية أصيلة على الفحم، بأجواء دافئة في قلب حي السلامة بجدة.',
+      footerContactTitle: 'تواصل معنا',
+      footerAddress: '6889 صقر قريش، السلامة، جدة 23436',
+      footerHoursTitle: 'أوقات العمل',
+      footerDaily: 'يومياً',
+      footerHoursNote: 'مفتوح للغداء والعشاء وحتى ساعات متأخرة.',
+      footerCopyright: '© 2025 مطعم أنفاس. جميع الحقوق محفوظة.',
+      footerLogo: 'أنفاس',
+    },
+    en: {
+      logoName: 'Anfas',
+      navHome: 'Home',
+      navMenu: 'Menu',
+      navContact: 'Visit Us',
+      langBtn: 'عربي',
+      bookTable: 'Book a Table',
+      // Hero
+      heroTagline: 'Turkish Grill · Jeddah',
+      heroTitle: 'Anfas',
+      heroDesc: 'An authentic Turkish breath on charcoal — grilled dishes with Anatolian spices, served in the heart of Al-Salamah district, Jeddah.',
+      orderNow: 'Order Now',
+      viewMenu: 'View Menu',
+      // Story
+      ourStoryLabel: 'Our Story',
+      storyTitle1: 'A Breath from Anatolia',
+      storyTitle2: 'to Jeddah',
+      storyP1: 'At Anfas Restaurant, we bring the Turkish grill experience as it is prepared in the alleys of Istanbul and Adana — carefully selected meats, daily-ground spices, and grill masters who have mastered the art of charcoal.',
+      storyP2: 'Every dish that comes out of our kitchen carries the breath of Turkish heritage, with a warm Saudi hospitality touch that makes your visit a lasting memory.',
+      // Signatures
+      signaturesLabel: 'Our Signature Menu',
+      signaturesTitle: "Dishes We're Proud Of",
+      signaturesDesc: 'A selection of the most famous Turkish grills, prepared by specialist grill chefs.',
+      fullMenuLink: 'Full Menu',
+      // Atmosphere
+      atmosphereLabel: 'Atmosphere',
+      atmosphereTitle: 'Warmth, Charcoal & Turkish Tea',
+      // Features
+      featuresLabel: 'What Sets Us Apart',
+      featuresTitle: 'A Complete Experience Under One Roof',
+      // Visit
+      visitLabel: 'Visit Us',
+      visitTitle1: 'We Welcome You in',
+      visitTitle2: 'Al-Salamah District',
+      addressLabel: 'Address',
+      addressValue: '6889 Saqr Quraish, Al-Salamah, Jeddah 23436',
+      hoursLabel: 'Working Hours',
+      // Menu
+      menuLabel: 'Food Menu',
+      menuTitle: 'Menu',
+      menuDesc: 'A selection of the most famous Turkish dishes, prepared daily from fresh ingredients. Prices in Saudi Riyal, inclusive of tax.',
+      orderDelivery: 'Order Delivery',
+      sarLabel: 'SAR',
+      // Contact
+      contactLabel: 'Contact Us',
+      contactTitle: 'Visit Us',
+      contactDesc: 'In the heart of Al-Salamah district, Jeddah — we welcome you daily until late hours.',
+      contactAddressLabel: 'Address',
+      contactAddressVal: '6889 Saqr Quraish, Al-Salamah, Jeddah 23436',
+      contactPhoneLabel: 'Phone',
+      contactHoursLabel: 'Working Hours',
+      contactInstaLabel: 'Instagram',
+      contactWebLabel: 'Website',
+      // Footer
+      footerDesc: 'Authentic Turkish charcoal grills in a warm atmosphere in the heart of Al-Salamah district, Jeddah.',
+      footerContactTitle: 'Contact Us',
+      footerAddress: '6889 Saqr Quraish, Al-Salamah, Jeddah 23436',
+      footerHoursTitle: 'Working Hours',
+      footerDaily: 'Daily',
+      footerHoursNote: 'Open for lunch, dinner and late night hours.',
+      footerCopyright: '© 2025 Anfas Restaurant. All rights reserved.',
+      footerLogo: 'Anfas',
+    }
+  };
+
+  const textIds = [
+    'logoName','navHome','navMenu','navContact','bookTableText',
+    'heroTagline','heroTitle','heroDesc','orderNowBtn','viewMenuBtn','bookTableBtn2',
+    'ourStoryLabel','storyTitle1','storyTitle2','storyP1','storyP2',
+    'signaturesLabel','signaturesTitle','signaturesDesc','fullMenuLink',
+    'atmosphereLabel','atmosphereTitle','featuresLabel','featuresTitle',
+    'visitLabel','visitTitle1','visitTitle2','addressLabel','addressValue','hoursLabel',
+    'orderNowBtn2',
+    'menuLabel','menuTitle','menuDesc','orderDeliveryBtn','sarLabel',
+    'contactLabel','contactTitle','contactDesc',
+    'contactAddressLabel','contactAddressVal','contactPhoneLabel','contactHoursLabel','contactInstaLabel','contactWebLabel',
+    'footerDesc','footerContactTitle','footerAddress','footerHoursTitle','footerDaily','footerHoursNote','footerCopyright','footerLogo',
+  ];
+
+  function toggleLang() {
+    currentLang = currentLang === 'ar' ? 'en' : 'ar';
+    const html = document.documentElement;
+    const t = translations[currentLang];
+
+    // Direction / lang
+    html.lang = currentLang;
+    html.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+    // Update all simple text elements
+    textIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && t[id] !== undefined) el.textContent = t[id];
+    });
+
+    // Update lang buttons
+    ['langBtnText','langBtnMobile'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = t.langBtn;
+    });
+
+    // Update data-ar / data-en elements
+    document.querySelectorAll('[data-ar][data-en]').forEach(el => {
+      el.textContent = currentLang === 'ar' ? el.dataset.ar : el.dataset.en;
+    });
+
+    // Show/hide English names on dish cards based on lang
+    document.querySelectorAll('.dish-card-en').forEach(el => {
+      el.style.display = currentLang === 'ar' ? '' : 'none';
+    });
+    // Show/hide item-name-en (small label) based on lang
+    document.querySelectorAll('.item-name-en').forEach(el => {
+      el.style.display = currentLang === 'ar' ? '' : 'none';
+    });
+  }
+
+  // ── Init ──────────────────────────────────────────────────
+  document.getElementById('footerCopyright').textContent = '© ' + new Date().getFullYear() + ' مطعم أنفاس. جميع الحقوق محفوظة.';
+</script>
+
+</body>
+</html>

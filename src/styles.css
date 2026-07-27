@@ -1,0 +1,192 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Anfas — Turkish Grill Restaurant
+ * Palette: white background, cream soft surface, charcoal ink, brand red accent.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --font-display: "Playfair Display", "Amiri", serif;
+  --font-arabic-display: "Amiri", "Playfair Display", serif;
+  --font-sans: "Tajawal", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Anfas brand */
+  --background: oklch(1 0 0);              /* #ffffff */
+  --foreground: oklch(0.2 0.01 260);       /* near-charcoal */
+  --cream: oklch(0.972 0.008 70);          /* #f7f2ee soft warm surface */
+  --ink: oklch(0.2 0.01 260);              /* #1a1a1a body ink */
+  --brand: oklch(0.54 0.21 27);            /* #c8102e primary red */
+  --brand-deep: oklch(0.45 0.19 27);       /* deeper red for hovers */
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--ink);
+  --primary: var(--brand);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: var(--cream);
+  --secondary-foreground: var(--ink);
+  --muted: var(--cream);
+  --muted-foreground: oklch(0.45 0.02 260);
+  --accent: var(--cream);
+  --accent-foreground: var(--brand);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.92 0.008 60);
+  --input: oklch(0.92 0.008 60);
+  --ring: var(--brand);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern", "liga";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-arabic-display);
+    letter-spacing: -0.01em;
+  }
+
+  [lang="en"], .font-latin {
+    font-family: var(--font-display);
+  }
+}
+
+@utility container-anfas {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility divider-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--brand);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  &::before, &::after {
+    content: "";
+    width: 2.5rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+}
+
+@utility hover-lift {
+  transition: transform 250ms ease, box-shadow 250ms ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px oklch(0 0 0 / 0.2);
+  }
+}
+
+/* ---------- Soft animations ---------- */
+
+@keyframes anfas-fade-up {
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes anfas-fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes anfas-kenburns {
+  0% { transform: scale(1.08) translateY(0); }
+  100% { transform: scale(1.16) translateY(-1.5%); }
+}
+
+@utility anim-fade-up {
+  animation: anfas-fade-up 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility anim-fade-in {
+  animation: anfas-fade-in 1200ms ease-out both;
+}
+
+@utility anim-kenburns {
+  animation: anfas-kenburns 18s ease-in-out infinite alternate;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .anim-fade-up,
+  .anim-fade-in,
+  .anim-kenburns {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
