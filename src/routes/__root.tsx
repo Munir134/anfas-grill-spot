@@ -8,11 +8,16 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import { Flame, Instagram, Phone, MapPin, Globe } from "lucide-react";
+import { Flame, Instagram, Phone, MapPin, Globe, ShoppingBag } from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LanguageProvider, useLanguage } from "../lib/LanguageContext";
+import { CartProvider, useCart } from "../lib/CartContext";
+import AnfasCartDrawer from "../components/AnfasCartDrawer";
+import AnfasProductCustomizerModal from "../components/AnfasProductCustomizerModal";
+import AnfasOrderTrackerModal from "../components/AnfasOrderTrackerModal";
+import { WaselClient } from "../lib/wasel";
 
 function NotFoundComponent() {
   const { t } = useLanguage();
@@ -117,6 +122,49 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Tajawal:wght@300;400;500;700;900&display=swap",
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Restaurant",
+          name: "Anfas Turkish Grill — مطعم أنفاس للمشويات التركية",
+          image:
+            "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/114b85a7-3b0b-45f8-a192-a59f338fe396/id-preview-18b2c8d5--1bd7513e-7d18-420f-8a46-85bf40b815d7.lovable.app-1785090278395.png",
+          servesCuisine: ["Turkish", "Middle Eastern", "Grill", "BBQ"],
+          priceRange: "$$",
+          telephone: "+966500000000",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Al Salamah District — حي السلامة",
+            addressLocality: "Jeddah — جدة",
+            addressRegion: "Makkah",
+            addressCountry: "SA",
+          },
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: 21.5833,
+            longitude: 39.1667,
+          },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+              ],
+              opens: "13:00",
+              closes: "02:00",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -160,20 +208,63 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
-        <div className="flex min-h-screen flex-col bg-background text-foreground">
-          <SiteHeader />
-          <main className="flex-1">
-            <Outlet />
-          </main>
-          <SiteFooter />
-        </div>
+        <CartProvider>
+          <div className="flex min-h-screen flex-col bg-background text-foreground">
+            <SiteHeader />
+            <main className="flex-1">
+              <Outlet />
+            </main>
+            <SiteFooter />
+          </div>
+          {/* Wasel Global Ordering Modals & Floating Red Cart */}
+          <FloatingCartButton />
+          <AnfasCartDrawer />
+          <AnfasProductCustomizerModal />
+          <AnfasOrderTrackerModal />
+        </CartProvider>
       </LanguageProvider>
     </QueryClientProvider>
   );
 }
 
+function FloatingCartButton() {
+  const { openCart, totalItemCount, subtotal } = useCart();
+  const { t } = useLanguage();
+
+  return (
+    <aside aria-label={t("cart")} className="fixed bottom-6 end-6 z-40 pointer-events-auto">
+      <button
+        onClick={openCart}
+        type="button"
+        aria-label={t("cart")}
+        className="group relative flex items-center gap-3 rounded-full bg-primary px-5 py-3.5 text-primary-foreground shadow-2xl hover:bg-brand-deep hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer border-2 border-white/20"
+      >
+        <div className="relative flex items-center justify-center">
+          <ShoppingBag className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+          {totalItemCount > 0 && (
+            <span className="absolute -top-2.5 -end-3 flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 font-mono text-[11px] font-black text-primary shadow-md">
+              {totalItemCount}
+            </span>
+          )}
+        </div>
+        <div className="flex flex-col text-start leading-tight">
+          <span className="text-xs font-bold">{t("cart")}</span>
+          {subtotal > 0 ? (
+            <span className="font-mono text-[11px] font-semibold text-white/90">
+              {subtotal} {t("sar")}
+            </span>
+          ) : (
+            <span className="text-[10px] text-white/80">{t("orderNow")}</span>
+          )}
+        </div>
+      </button>
+    </aside>
+  );
+}
+
 function SiteHeader() {
   const { t, lang, toggleLang } = useLanguage();
+  const { openCart, totalItemCount } = useCart();
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/90 backdrop-blur">
@@ -224,12 +315,27 @@ function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {/* Brand Red Cart Button */}
+          <button
+            onClick={openCart}
+            aria-label={t("cart")}
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-bold text-primary-foreground shadow-sm hover:bg-brand-deep hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+          >
+            <ShoppingBag className="h-4 w-4" />
+            <span>{t("cart")}</span>
+            {totalItemCount > 0 && (
+              <span className="grid h-5 min-w-5 px-1 place-items-center rounded-full bg-white text-primary text-[11px] font-bold font-mono shadow-2xs">
+                {totalItemCount}
+              </span>
+            )}
+          </button>
+
           <a
             href="tel:0534900038"
-            className="hidden md:inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm hover:bg-brand-deep hover:-translate-y-0.5 transition-all duration-300"
+            className="hidden md:inline-flex items-center gap-2 rounded-full bg-cream border border-border px-4 py-2 text-sm font-medium text-ink shadow-2xs hover:bg-border/60 hover:-translate-y-0.5 transition-all duration-300"
           >
-            <Phone className="h-4 w-4" />
-            {t("bookTable")}
+            <Phone className="h-4 w-4 text-primary" />
+            <span>{t("bookTable")}</span>
           </a>
 
           {/* Mobile lang toggle */}
@@ -240,19 +346,12 @@ function SiteHeader() {
           >
             <Globe className="h-4 w-4" />
           </button>
-
-          <a
-            href="tel:0534900038"
-            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground"
-            aria-label={t("bookTable")}
-          >
-            <Phone className="h-4 w-4" />
-          </a>
         </div>
       </div>
     </header>
   );
 }
+
 
 function SiteFooter() {
   const { t, lang } = useLanguage();

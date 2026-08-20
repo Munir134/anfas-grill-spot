@@ -12,6 +12,8 @@ import {
   Truck,
   Baby,
   ShoppingBag,
+  Plus,
+  Flame,
 } from "lucide-react";
 
 import heroImg from "../assets/hero-grill.jpg";
@@ -28,6 +30,8 @@ import interiorFamily from "../assets/interior-family.jpg";
 import OrderModal from "../components/OrderModal";
 import { useReveal } from "../hooks/useReveal";
 import { useLanguage } from "../lib/LanguageContext";
+import { useCart } from "../lib/CartContext";
+import { WaselProduct } from "../lib/wasel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -52,46 +56,120 @@ export const Route = createFileRoute("/")({
 function Home() {
   const [orderOpen, setOrderOpen] = useState(false);
   const { t, lang } = useLanguage();
+  const { addItem, openCustomizer, openCart } = useCart();
   useReveal();
+
+  const grillModifiers = [
+    {
+      id: "mg-anfas-spice",
+      name: "درجة الحرارة — Spice Level",
+      min_selections: 0,
+      max_selections: 1,
+      options: [
+        { id: "m-anfas-mild", name: "Mild — بارد خفيف", price: 0, is_available: true },
+        { id: "m-anfas-med", name: "Medium — متوسط الحرارة", price: 0, is_available: true },
+        { id: "m-anfas-spicy", name: "Turkish Spicy — حار تركي أصلي", price: 0, is_available: true },
+      ],
+    },
+    {
+      id: "mg-anfas-sides",
+      name: "إضافات وصوصات — Extra Sides & Dips",
+      min_selections: 0,
+      max_selections: 4,
+      options: [
+        { id: "m-anfas-toum", name: "Extra Garlic Toum — ثوم إضافي", price: 4, is_available: true },
+        { id: "m-anfas-rice", name: "Spiced Rice — أرز تركي متبل", price: 6, is_available: true },
+        { id: "m-anfas-harissa", name: "Turkish Harissa — شطة تركية", price: 4, is_available: true },
+        { id: "m-anfas-pickles", name: "Turkish Pickles — مخلل تركي مشكل", price: 4, is_available: true },
+      ],
+    },
+  ];
 
   const dishes = [
     {
+      id: "p-anfas-adana",
       img: dishAdana,
       name: lang === "ar" ? "أضنة كباب" : "Adana Kebab",
       en: "Adana Kebab",
       desc: t("dish_adana_desc"),
+      price: 65,
+      hasModifiers: true,
     },
     {
+      id: "p-anfas-urfa",
       img: dishUrfa,
       name: lang === "ar" ? "أورفا كباب" : "Urfa Kebab",
       en: "Urfa Kebab",
       desc: t("dish_urfa_desc"),
+      price: 65,
+      hasModifiers: true,
     },
     {
+      id: "p-anfas-shish",
       img: dishShish,
       name: lang === "ar" ? "شيش كباب" : "Shish Kebab",
       en: "Shish Kebab",
       desc: t("dish_shish_desc"),
+      price: 75,
+      hasModifiers: true,
     },
     {
+      id: "p-anfas-kofte",
       img: dishKofte,
       name: lang === "ar" ? "كفتة مشوية" : "Kofte",
       en: "Kofte",
       desc: t("dish_kofte_desc"),
+      price: 55,
+      hasModifiers: true,
     },
     {
+      id: "p-anfas-mixed",
       img: dishMixed,
       name: lang === "ar" ? "مشاوي مشكّلة" : "Mixed Grill",
       en: "Mixed Grill",
       desc: t("dish_mixed_desc"),
+      price: 140,
+      hasModifiers: true,
     },
     {
+      id: "p-anfas-kunefe",
       img: dishKunefe,
       name: lang === "ar" ? "كنافة نابلسية" : "Künefe",
       en: "Künefe",
       desc: t("dish_kunefe_desc"),
+      price: 35,
+      hasModifiers: false,
     },
   ];
+
+  const handleDishClick = (d: (typeof dishes)[0]) => {
+    if (d.hasModifiers) {
+      const waselProd: WaselProduct = {
+        id: d.id,
+        category_id: "c-anfas-grills",
+        name: d.name,
+        description: d.desc,
+        base_price: d.price,
+        image_url: d.img,
+        is_available: true,
+        preparation_time_minutes: 25,
+        calories: 550,
+        is_featured: true,
+        modifier_groups: grillModifiers,
+      };
+      openCustomizer(waselProd);
+    } else {
+      addItem({
+        productId: d.id,
+        name: d.name,
+        nameEn: d.en,
+        image: d.img,
+        unitPrice: d.price,
+        quantity: 1,
+        selectedOptions: [],
+      });
+    }
+  };
 
   const features = [
     { icon: UtensilsCrossed, label: t("feat_halal") },
@@ -148,8 +226,8 @@ function Home() {
             style={{ animationDelay: "560ms" }}
           >
             <button
-              onClick={() => setOrderOpen(true)}
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-lg hover:bg-brand-deep hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300"
+              onClick={openCart}
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg hover:bg-brand-deep hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
               <ShoppingBag className="h-4 w-4" />
               {t("orderNow")}
@@ -223,28 +301,45 @@ function Home() {
                 key={d.en}
                 data-reveal
                 data-reveal-delay={String(120 + i * 90)}
-                className="group overflow-hidden rounded-lg bg-card border border-border/60 hover-lift"
+                className="group overflow-hidden rounded-xl bg-card border border-border/60 hover-lift flex flex-col justify-between"
               >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={d.img}
-                    alt={d.name}
-                    width={1024}
-                    height={1024}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <h3 className="text-2xl font-bold text-ink">{d.name}</h3>
-                    {lang === "ar" && (
-                      <span className="text-[11px] tracking-[0.25em] text-primary font-latin">
-                        {d.en}
-                      </span>
-                    )}
+                <div>
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img
+                      src={d.img}
+                      alt={d.name}
+                      width={1024}
+                      height={1024}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
                   </div>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{d.desc}</p>
+                  <div className="p-6">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <h3 className="text-2xl font-bold text-ink">{d.name}</h3>
+                      {lang === "ar" && (
+                        <span className="text-[11px] tracking-[0.25em] text-primary font-latin">
+                          {d.en}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{d.desc}</p>
+                  </div>
+                </div>
+
+                <div className="px-6 pb-6 pt-2 flex items-center justify-between border-t border-border/40">
+                  <div className="text-xl font-bold font-mono text-primary">
+                    {d.price} <span className="text-xs font-normal text-muted-foreground">{t("sar")}</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => handleDishClick(d)}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary hover:bg-brand-deep text-primary-foreground text-xs font-bold shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                    <span>{d.hasModifiers ? t("customize") : t("addToCart")}</span>
+                  </button>
                 </div>
               </article>
             ))}

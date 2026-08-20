@@ -6,7 +6,7 @@
 
 /*
  * Anfas — Turkish Grill Restaurant
- * Palette: white background, cream soft surface, charcoal ink, brand red accent.
+ * Authentic Palette: white background, cream soft surface, charcoal ink, brand red accent (#c8102e).
  */
 
 @theme inline {
@@ -48,7 +48,7 @@
 :root {
   --radius: 0.5rem;
 
-  /* Anfas brand */
+  /* Anfas signature brand red palette */
   --background: oklch(1 0 0);              /* #ffffff */
   --foreground: oklch(0.2 0.01 260);       /* near-charcoal */
   --cream: oklch(0.972 0.008 70);          /* #f7f2ee soft warm surface */
