@@ -9,8 +9,8 @@ export const WASEL_API_BASE =
     ? (window as any).__WASEL_API_URL__ ||
       (window.location.hostname === 'localhost'
         ? 'http://localhost:3000'
-        : 'https://framed-dean-ago-functional.trycloudflare.com')
-    : 'https://framed-dean-ago-functional.trycloudflare.com';
+        : 'https://directly-african-individuals-mailing.trycloudflare.com')
+    : 'https://directly-african-individuals-mailing.trycloudflare.com';
 
 export const RESTAURANT_SLUG = 'anfas';
 
