@@ -6,8 +6,11 @@
 
 export const WASEL_API_BASE =
   typeof window !== 'undefined'
-    ? (window as any).__WASEL_API_URL__ || 'http://localhost:3000'
-    : 'http://localhost:3000';
+    ? (window as any).__WASEL_API_URL__ ||
+      (window.location.hostname === 'localhost'
+        ? 'http://localhost:3000'
+        : 'https://framed-dean-ago-functional.trycloudflare.com')
+    : 'https://framed-dean-ago-functional.trycloudflare.com';
 
 export const RESTAURANT_SLUG = 'anfas';
 
