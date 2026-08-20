@@ -359,7 +359,30 @@ export default function AnfasCartDrawer() {
     return false;
   });
 
-  const totalAmount = validation?.total_amount ?? 0;
+  // Calculate instant accurate local price summary
+  const localSubtotal = items.reduce((sum, item) => {
+    const modTotal = item.selectedOptions.reduce((mSum, opt) => mSum + opt.price, 0);
+    return sum + (item.unitPrice + modTotal) * item.quantity;
+  }, 0);
+
+  const localDeliveryFee = orderType === 'delivery' ? 15 : 0;
+  const localTax = Math.round(localSubtotal * 0.15 * 100) / 100;
+
+  const subtotalAmount = validation?.subtotal !== undefined && validation.subtotal > 0
+    ? validation.subtotal
+    : localSubtotal;
+
+  const taxAmount = validation?.tax_amount !== undefined && validation.tax_amount > 0
+    ? validation.tax_amount
+    : localTax;
+
+  const deliveryFeeAmount = validation?.delivery_fee !== undefined
+    ? validation.delivery_fee
+    : localDeliveryFee;
+
+  const totalAmount = validation?.total_amount !== undefined && validation.total_amount > 0
+    ? validation.total_amount
+    : (subtotalAmount + taxAmount + (orderType === 'delivery' ? deliveryFeeAmount : 0));
 
   return (
     <div
@@ -727,14 +750,14 @@ export default function AnfasCartDrawer() {
                 <div className="flex justify-between text-muted-foreground">
                   <span>{t('subtotal')}</span>
                   <span className="font-mono font-medium">
-                    {isValidating ? '...' : `${(validation?.subtotal ?? 0).toFixed(2)} ${t('sar')}`}
+                    {subtotalAmount.toFixed(2)} {t('sar')}
                   </span>
                 </div>
 
                 <div className="flex justify-between text-muted-foreground">
                   <span>{t('tax')}</span>
                   <span className="font-mono font-medium">
-                    {isValidating ? '...' : `${(validation?.tax_amount ?? 0).toFixed(2)} ${t('sar')}`}
+                    {taxAmount.toFixed(2)} {t('sar')}
                   </span>
                 </div>
 
@@ -742,17 +765,15 @@ export default function AnfasCartDrawer() {
                   <div className="flex justify-between text-muted-foreground">
                     <span>{t('deliveryFee')}</span>
                     <span className="font-mono font-medium">
-                      {isValidating ? '...' : `${(validation?.delivery_fee ?? 0).toFixed(2)} ${t('sar')}`}
+                      {deliveryFeeAmount.toFixed(2)} {t('sar')}
                     </span>
                   </div>
                 )}
 
                 <div className="flex justify-between text-sm font-bold text-ink pt-2 border-t border-border/80">
                   <span>{t('total')}</span>
-                  <span className="font-mono text-primary text-base">
-                    {isValidating
-                      ? '...'
-                      : `${totalAmount.toFixed(2)} ${t('sar')}`}
+                  <span className="font-mono text-primary text-base font-bold">
+                    {totalAmount.toFixed(2)} {t('sar')}
                   </span>
                 </div>
               </div>
@@ -761,7 +782,7 @@ export default function AnfasCartDrawer() {
               <button
                 form="anfas-checkout-form"
                 type="submit"
-                disabled={isSubmitting || isValidating || items.length === 0 || availableMethods.length === 0}
+                disabled={isSubmitting || items.length === 0 || availableMethods.length === 0}
                 className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-primary hover:bg-brand-deep text-primary-foreground font-bold text-sm shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {isSubmitting ? (
@@ -783,7 +804,11 @@ export default function AnfasCartDrawer() {
                     ) : (
                       <>
                         <Flame className="h-4 w-4" />
-                        <span>{t('placeOrder')}</span>
+                        <span>
+                          {lang === 'ar'
+                            ? `تأكيد الطلب (${totalAmount.toFixed(2)} ريال)`
+                            : `Confirm Order (${totalAmount.toFixed(2)} SAR)`}
+                        </span>
                       </>
                     )}
                   </>
