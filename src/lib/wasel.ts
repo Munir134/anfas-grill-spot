@@ -9,8 +9,9 @@ export const WASEL_API_BASE =
     ? (window as any).__WASEL_API_URL__ ||
       (window.location.hostname === 'localhost'
         ? 'http://localhost:3000'
-        : 'https://tales-wires-depends-discs.trycloudflare.com')
-    : 'https://tales-wires-depends-discs.trycloudflare.com';
+        : 'https://foodus.boj87676.workers.dev')
+    : 'https://foodus.boj87676.workers.dev';
+
 
 export const RESTAURANT_SLUG = 'anfas';
 
