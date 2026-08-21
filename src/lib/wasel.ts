@@ -447,39 +447,15 @@ export const waselClient = {
         body: JSON.stringify(payload),
       });
 
-      if (res.ok) {
-        return await res.json();
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || data.message || `Checkout failed (HTTP ${res.status})`);
       }
-    } catch {}
-
-    // Resilient order creation fallback calculating exact cart amounts
-    const orderNum = Math.floor(100 + Math.random() * 900);
-    const token = `anfas_live_tok_${Date.now()}`;
-    const subtotal = payload.subtotal ?? payload.items.reduce((s, i: any) => s + ((i.unit_price || 65) * i.quantity), 0);
-    const delivery_fee = payload.delivery_fee ?? (payload.order_type === 'delivery' ? 15 : 0);
-    const tax_amount = payload.tax_amount ?? Math.round(subtotal * 0.15 * 100) / 100;
-    const total_amount = payload.total_amount ?? (subtotal + tax_amount + delivery_fee);
-
-    return {
-      order_id: `ord-anfas-${Date.now()}`,
-      order_number: orderNum,
-      display_order_number: `#${orderNum}`,
-      access_token: token,
-      tracking_url: `/track/${token}`,
-      subtotal,
-      tax_amount,
-      delivery_fee,
-      total_amount,
-      currency: 'SAR',
-      payment: {
-        status: payload.payment_method === 'online' ? 'pending' : 'unpaid',
-        payment_method: payload.payment_method,
-        transaction_id: `mock_txn_${Date.now()}`,
-      },
-      payment_status: payload.payment_method === 'online' ? 'pending' : 'unpaid',
-      order_status: 'placed',
-      estimated_ready_time_minutes: 25,
-    };
+      return data;
+    } catch (err: any) {
+      console.error('[Anfas -> FoodUs Checkout Error]', err);
+      throw err;
+    }
   },
 
   /**
@@ -493,20 +469,15 @@ export const waselClient = {
         body: JSON.stringify(payload),
       });
 
-      if (res.ok) {
-        return await res.json();
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || data.message || `Payment verification failed (HTTP ${res.status})`);
       }
-    } catch {}
-
-    return {
-      success: payload.outcome !== 'failure',
-      status: payload.outcome === 'failure' ? 'failed' : 'paid',
-      order_id: payload.order_id,
-      access_token: payload.access_token,
-      card_brand: payload.card_brand || 'Mada',
-      card_last_four: payload.card_last_four || '4821',
-      message: 'Payment verified successfully in Sandbox mode',
-    };
+      return data;
+    } catch (err: any) {
+      console.error('[Anfas -> FoodUs Payment Verification Error]', err);
+      throw err;
+    }
   },
 
   /**
@@ -519,41 +490,17 @@ export const waselClient = {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (res.ok) {
-        return await res.json();
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || data.message || `Order tracking failed (HTTP ${res.status})`);
       }
-    } catch {}
-
-    // Resilient local active order tracking state
-    return {
-      order_id: `ord-anfas-${token.slice(-6)}`,
-      order_number: `#${token.slice(-4)}`,
-      display_order_number: `#${token.slice(-4)}`,
-      restaurant_name: 'أنفاس — مشويات تركية (Anfas Turkish Grill)',
-      branch_name: 'فرع حي السلامة — شارع صقر قريش',
-      order_type: 'pickup',
-      order_status: 'preparing',
-      payment_status: 'paid',
-      payment_method: 'card',
-      subtotal: 65,
-      tax_amount: 9.75,
-      delivery_fee: 0,
-      total_amount: 74.75,
-      currency: 'SAR',
-      customer_name: 'عميل أنفاس',
-      customer_phone: '0534900038',
-      items: [
-        {
-          product_name: 'أضنة كباب — Adana Kebab',
-          quantity: 1,
-          item_total: 65,
-          modifiers: [{ name: 'Medium — متوسط الحرارة', price: 0 }],
-        },
-      ],
-      created_at: new Date().toISOString(),
-      estimated_ready_at: new Date(Date.now() + 20 * 60000).toISOString(),
-    };
+      return data;
+    } catch (err: any) {
+      console.error('[Anfas -> FoodUs Tracking Error]', err);
+      throw err;
+    }
   },
+
 
   /**
    * Fetch connected restaurant website theme configuration
