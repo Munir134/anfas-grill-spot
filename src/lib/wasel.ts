@@ -393,6 +393,13 @@ export const waselClient = {
       product_id: item.productId,
       quantity: item.quantity,
       modifier_option_ids: item.selectedOptions.map((o) => o.optionId),
+      selected_modifier_option_ids: item.selectedOptions.map((o) => o.optionId),
+      selected_options: item.selectedOptions.map((o) => ({
+        id: o.optionId,
+        optionId: o.optionId,
+        name: o.optionName,
+        price: o.price,
+      })),
       special_instructions: item.specialInstructions,
     }));
 
