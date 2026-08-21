@@ -252,12 +252,19 @@ export default function AnfasCartDrawer() {
         customer_notes: orderNotes.trim() || undefined,
         items: items.map((i) => ({
           product_id: i.productId,
+          product_name: i.name,
+          unit_price: i.unitPrice + i.selectedOptions.reduce((s, o) => s + o.price, 0),
           quantity: i.quantity,
           modifier_option_ids: i.selectedOptions.map((o) => o.optionId),
           special_instructions: i.specialInstructions,
         })),
+        subtotal: subtotalAmount,
+        tax_amount: taxAmount,
+        delivery_fee: orderType === 'delivery' ? deliveryFeeAmount : 0,
+        total_amount: totalAmount,
         idempotency_key: `anfas_ord_${Date.now()}_${Math.random().toString(36).substring(7)}`,
       };
+
 
       const result = await waselClient.checkout(payload);
 
