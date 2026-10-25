@@ -47,8 +47,8 @@ function ContactPage() {
               icon={Phone}
               title={t("contactPhone")}
               body={
-                <a href="tel:0534900038" dir="ltr" className="hover:text-primary">
-                  053 490 0038
+                <a href="tel:0530387458" dir="ltr" className="hover:text-primary">
+                  053 038 7458
                 </a>
               }
             />

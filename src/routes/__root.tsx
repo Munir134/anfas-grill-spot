@@ -331,7 +331,7 @@ function SiteHeader() {
           </button>
 
           <a
-            href="tel:0534900038"
+            href="tel:0530387458"
             className="hidden md:inline-flex items-center gap-2 rounded-full bg-cream border border-border px-4 py-2 text-sm font-medium text-ink shadow-2xs hover:bg-border/60 hover:-translate-y-0.5 transition-all duration-300"
           >
             <Phone className="h-4 w-4 text-primary" />
@@ -384,8 +384,8 @@ function SiteFooter() {
             </li>
             <li className="flex items-center gap-2">
               <Phone className="h-4 w-4 text-primary" />
-              <a href="tel:0534900038" dir="ltr" className="hover:text-primary transition-colors">
-                053 490 0038
+              <a href="tel:0530387458" dir="ltr" className="hover:text-primary transition-colors">
+                053 038 7458
               </a>
             </li>
             <li className="flex items-center gap-2">

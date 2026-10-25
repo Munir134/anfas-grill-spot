@@ -264,11 +264,11 @@ export default function AnfasOrderTrackerModal() {
             </div>
             <div className="flex items-center gap-4 pt-1 text-muted-foreground">
               <a
-                href="tel:0534900038"
+                href="tel:0530387458"
                 className="inline-flex items-center gap-1 text-primary hover:underline font-semibold"
               >
                 <Phone className="h-3 w-3" />
-                <span>0534900038</span>
+                <span>0530387458</span>
               </a>
               <a
                 href="https://www.google.com/maps/search/?api=1&query=%D9%85%D8%B7%D8%B9%D9%85+%D8%A3%D9%86%D9%81%D8%A7%D8%B3+%D8%B5%D9%82%D8%B1+%D9%82%D8%B1%D9%8A%D8%B4+%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%D8%A9+%D8%AC%D8%AF%D8%A9"

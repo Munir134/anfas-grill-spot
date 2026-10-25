@@ -7,17 +7,16 @@ import {
   Minus,
   Trash2,
   ShoppingBag,
-  Bike,
-  Store,
   MapPin,
   Flame,
   MessageCircle,
   AlertCircle,
   CheckCircle2,
   Banknote,
+  Store,
 } from 'lucide-react';
 
-const ANFAS_WHATSAPP_PHONE = '966534900038';
+const ANFAS_WHATSAPP_PHONE = '966530387458';
 
 export default function AnfasCartDrawer() {
   const {
@@ -30,10 +29,8 @@ export default function AnfasCartDrawer() {
   } = useCart();
   const { t, lang } = useLanguage();
 
-  const [orderType, setOrderType] = useState<'pickup' | 'delivery'>('pickup');
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
-  const [deliveryAddress, setDeliveryAddress] = useState('');
   const [orderNotes, setOrderNotes] = useState('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isSent, setIsSent] = useState(false);
@@ -63,8 +60,7 @@ export default function AnfasCartDrawer() {
     return sum + (item.unitPrice + modTotal) * item.quantity;
   }, 0);
 
-  const deliveryFee = orderType === 'delivery' ? 15 : 0;
-  const total = subtotal + deliveryFee;
+  const total = subtotal;
 
   const handleCheckoutWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,41 +77,20 @@ export default function AnfasCartDrawer() {
     if (!cleanPhone || cleanPhone.length < 9) {
       setErrorMsg(
         lang === 'ar'
-          ? 'يرجى إدخال رقم جوال صحيح (مثال: 0534900038)'
+          ? 'يرجى إدخال رقم جوال صحيح (مثال: 0530387458)'
           : 'Please enter a valid phone number'
       );
       return;
     }
 
-    if (orderType === 'delivery' && !deliveryAddress.trim()) {
-      setErrorMsg(
-        lang === 'ar'
-          ? 'يرجى كتابة عنوان التوصيل بالتفصيل'
-          : 'Please provide delivery address'
-      );
-      return;
-    }
-
-    // Build human-friendly WhatsApp message
-    const orderTypeText =
-      orderType === 'delivery'
-        ? lang === 'ar'
-          ? 'توصيل لباب البيت 🛵'
-          : 'Delivery to Door 🛵'
-        : lang === 'ar'
-          ? 'استلام من الفرع (حي السلامة) 🏪'
-          : 'Pickup from Al Salamah Branch 🏪';
-
+    // Build human-friendly WhatsApp message for Pickup
     let message = '';
     if (lang === 'ar') {
-      message += `*طلب جديد من مطعم أنفاس للمشويات التركية* 🔥\n`;
+      message += `*طلب استلام جديد من مطعم أنفاس للمشويات التركية* 🔥\n`;
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
-      message += `📍 *نوع الطلب:* ${orderTypeText}\n`;
+      message += `📍 *نوع الطلب:* استلام من الفرع (حي السلامة) 🏪\n`;
       message += `👤 *الاسم:* ${customerName.trim()}\n`;
       message += `📱 *الجوال:* ${cleanPhone}\n`;
-      if (orderType === 'delivery') {
-        message += `🏠 *العنوان:* ${deliveryAddress.trim()}\n`;
-      }
       if (orderNotes.trim()) {
         message += `📝 *ملاحظات:* ${orderNotes.trim()}\n`;
       }
@@ -137,23 +112,15 @@ export default function AnfasCartDrawer() {
       });
 
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
-      message += `💰 *الحساب:*\n`;
-      message += `• المجموع الفرعي: ${subtotal.toFixed(2)} ر.س\n`;
-      if (orderType === 'delivery') {
-        message += `• رسوم التوصيل: ${deliveryFee.toFixed(2)} ر.س\n`;
-      }
-      message += `*• الإجمالي الكلي: ${total.toFixed(2)} ر.س*\n`;
+      message += `💰 *الحساب:* *${total.toFixed(2)} ر.س*\n`;
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
-      message += `طريقة الدفع: الدفع عند الاستلام (كاش / شبكة مدى) 💳\n`;
+      message += `طريقة الدفع: الدفع عند الاستلام من الفرع (كاش / شبكة مدى) 💳\n`;
     } else {
-      message += `*New Order from Anfas Turkish Grill* 🔥\n`;
+      message += `*New Pickup Order from Anfas Turkish Grill* 🔥\n`;
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
-      message += `📍 *Order Type:* ${orderTypeText}\n`;
+      message += `📍 *Order Type:* Pickup from Al Salamah Branch 🏪\n`;
       message += `👤 *Name:* ${customerName.trim()}\n`;
       message += `📱 *Phone:* ${cleanPhone}\n`;
-      if (orderType === 'delivery') {
-        message += `🏠 *Address:* ${deliveryAddress.trim()}\n`;
-      }
       if (orderNotes.trim()) {
         message += `📝 *Notes:* ${orderNotes.trim()}\n`;
       }
@@ -175,14 +142,9 @@ export default function AnfasCartDrawer() {
       });
 
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
-      message += `💰 *Summary:*\n`;
-      message += `• Subtotal: ${subtotal.toFixed(2)} SAR\n`;
-      if (orderType === 'delivery') {
-        message += `• Delivery Fee: ${deliveryFee.toFixed(2)} SAR\n`;
-      }
-      message += `*• Total: ${total.toFixed(2)} SAR*\n`;
+      message += `💰 *Total Amount:* *${total.toFixed(2)} SAR*\n`;
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
-      message += `Payment: Pay on Delivery / Pickup (Cash / Card) 💳\n`;
+      message += `Payment: Pay upon pickup (Cash / Card) 💳\n`;
     }
 
     const whatsappUrl = `https://wa.me/${ANFAS_WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
@@ -294,47 +256,20 @@ export default function AnfasCartDrawer() {
               </div>
             ) : (
               <>
-                {/* Order Type Toggle */}
-                <div className="grid grid-cols-2 gap-2 p-1 bg-cream rounded-xl border border-border">
-                  <button
-                    type="button"
-                    onClick={() => setOrderType('pickup')}
-                    className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      orderType === 'pickup'
-                        ? 'bg-primary text-primary-foreground shadow-xs'
-                        : 'text-muted-foreground hover:text-ink'
-                    }`}
-                  >
+                {/* Pickup Branch Badge */}
+                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-primary/5 border border-primary/20 text-xs">
+                  <div className="p-2 rounded-lg bg-primary/10 text-primary shrink-0">
                     <Store className="h-4 w-4" />
-                    <span>{t('pickup')}</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setOrderType('delivery')}
-                    className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      orderType === 'delivery'
-                        ? 'bg-primary text-primary-foreground shadow-xs'
-                        : 'text-muted-foreground hover:text-ink'
-                    }`}
-                  >
-                    <Bike className="h-4 w-4" />
-                    <span>{t('delivery')}</span>
-                  </button>
-                </div>
-
-                {orderType === 'pickup' && (
-                  <div className="flex items-start gap-2.5 p-3 rounded-xl bg-primary/5 border border-primary/20 text-xs">
-                    <MapPin className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-bold text-ink">
-                        {lang === 'ar' ? 'فرع السلامة (صقر قريش)' : 'Al Salamah Branch (Saqr Quraish)'}
-                      </div>
-                      <div className="text-muted-foreground mt-0.5">
-                        {t('pickupBranchAddress')}
-                      </div>
+                  </div>
+                  <div>
+                    <div className="font-bold text-ink">
+                      {lang === 'ar' ? 'استلام من المطعم — فرع السلامة' : 'Pickup at Restaurant — Al Salamah Branch'}
+                    </div>
+                    <div className="text-muted-foreground mt-0.5 leading-relaxed">
+                      {t('pickupBranchAddress')}
                     </div>
                   </div>
-                )}
+                </div>
 
                 {/* Items List */}
                 <div className="space-y-3">
@@ -465,30 +400,10 @@ export default function AnfasCartDrawer() {
                       required
                       value={customerPhone}
                       onChange={(e) => setCustomerPhone(e.target.value)}
-                      placeholder="0534900038"
+                      placeholder="0530387458"
                       className="w-full text-xs px-3 py-2.5 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary font-mono"
                     />
                   </div>
-
-                  {orderType === 'delivery' && (
-                    <div>
-                      <label className="block text-xs font-medium text-foreground mb-1">
-                        {t('deliveryAddress')} *
-                      </label>
-                      <textarea
-                        required
-                        rows={2}
-                        value={deliveryAddress}
-                        onChange={(e) => setDeliveryAddress(e.target.value)}
-                        placeholder={
-                          lang === 'ar'
-                            ? 'حي السلامة، شارع صقر قريش، عمارة 12'
-                            : 'Al Salamah, Saqr Quraish St, Bldg 12'
-                        }
-                        className="w-full text-xs px-3 py-2 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary"
-                      />
-                    </div>
-                  )}
 
                   <div>
                     <label className="block text-xs font-medium text-foreground mb-1">
@@ -509,8 +424,8 @@ export default function AnfasCartDrawer() {
                       <Banknote className="w-4 h-4 shrink-0 text-primary" />
                       <span>
                         {lang === 'ar'
-                          ? 'الدفع عند الاستلام (كاش أو بطاقة مدى)'
-                          : 'Payment upon delivery/pickup (Cash or Mada card)'}
+                          ? 'الدفع عند الاستلام من الفرع (كاش أو شبكة مدى)'
+                          : 'Payment upon pickup at branch (Cash or Mada card)'}
                       </span>
                     </div>
                   </div>
@@ -531,23 +446,7 @@ export default function AnfasCartDrawer() {
 
               {/* Price summary */}
               <div className="space-y-1.5 text-xs">
-                <div className="flex justify-between text-muted-foreground">
-                  <span>{t('subtotal')}</span>
-                  <span className="font-mono font-medium">
-                    {subtotal.toFixed(2)} {t('sar')}
-                  </span>
-                </div>
-
-                {orderType === 'delivery' && (
-                  <div className="flex justify-between text-muted-foreground">
-                    <span>{t('deliveryFee')}</span>
-                    <span className="font-mono font-medium">
-                      {deliveryFee.toFixed(2)} {t('sar')}
-                    </span>
-                  </div>
-                )}
-
-                <div className="flex justify-between text-sm font-bold text-ink pt-2 border-t border-border/80">
+                <div className="flex justify-between text-sm font-bold text-ink pt-1">
                   <span>{t('total')}</span>
                   <span className="font-mono text-primary text-base font-bold">
                     {total.toFixed(2)} {t('sar')}

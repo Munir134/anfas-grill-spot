@@ -372,7 +372,7 @@ function MenuPage() {
               <span>{t("cart")}</span>
             </button>
             <a
-              href="tel:0534900038"
+              href="tel:0530387458"
               className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-background px-5 py-2.5 text-sm font-medium text-ink hover:border-primary hover:text-primary transition-colors"
             >
               <Phone className="h-4 w-4" />

@@ -370,7 +370,7 @@ export const waselClient = {
         name: 'فرع حي السلامة — جدة',
         address_line: '6889 صقر قريش، حي السلامة، جدة',
         city: 'Jeddah',
-        phone: '0534900038',
+        phone: '0530387458',
         latitude: 21.5833,
         longitude: 39.1558,
         pickup_enabled: true,

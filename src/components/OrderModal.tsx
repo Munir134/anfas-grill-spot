@@ -3,13 +3,13 @@ import { ArrowLeft, ShoppingBag, Bike, X, MapPin, Phone, MessageCircle, Navigati
 
 type Step = "choice" | "pickup" | "delivery";
 
-const PHONE = "0534900038";
-const PHONE_INTL = "+966534900038";
+const PHONE = "0530387458";
+const PHONE_INTL = "+966530387458";
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=%D9%85%D8%B7%D8%B9%D9%85+%D8%A3%D9%86%D9%81%D8%A7%D8%B3+%D8%B5%D9%82%D8%B1+%D9%82%D8%B1%D9%8A%D8%B4+%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%D8%A9+%D8%AC%D8%AF%D8%A9";
 const WHATSAPP =
-  "https://wa.me/966534900038?text=" +
-  encodeURIComponent("مرحباً، أرغب بطلب توصيل من مطعم أنفاس.");
+  "https://wa.me/966530387458?text=" +
+  encodeURIComponent("مرحباً، أرغب بالطلب من مطعم أنفاس.");
 
 export default function OrderModal({
   open,
@@ -131,7 +131,7 @@ export default function OrderModal({
                       href={`tel:${PHONE}`}
                       icon={<Phone className="h-4 w-4" />}
                       title="اتصل للحجز أو الطلب"
-                      hint="053 490 0038"
+                      hint="053 038 7458"
                     />
                     <ActionRow
                       href="/menu"
