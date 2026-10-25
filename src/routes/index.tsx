@@ -240,12 +240,6 @@ function Home() {
             >
               {t("viewMenu")}
             </Link>
-            <a
-              href="tel:0530387458"
-              className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/5 px-6 py-3 text-sm font-medium text-white backdrop-blur hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300"
-            >
-              {t("bookTable")}
-            </a>
           </div>
         </div>
       </section>

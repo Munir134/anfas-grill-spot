@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Phone, ShoppingBag, Plus, Sparkles, Flame } from "lucide-react";
+import { ShoppingBag, Plus, Sparkles, Flame } from "lucide-react";
 import { useLanguage } from "../lib/LanguageContext";
 import { useCart } from "../lib/CartContext";
 import { WaselProduct } from "../lib/wasel";
@@ -371,13 +371,6 @@ function MenuPage() {
               <ShoppingBag className="h-4 w-4" />
               <span>{t("cart")}</span>
             </button>
-            <a
-              href="tel:0530387458"
-              className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-background px-5 py-2.5 text-sm font-medium text-ink hover:border-primary hover:text-primary transition-colors"
-            >
-              <Phone className="h-4 w-4" />
-              <span>{t("orderDelivery")}</span>
-            </a>
           </div>
         </div>
       </section>

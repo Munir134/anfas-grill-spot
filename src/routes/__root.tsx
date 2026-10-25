@@ -330,14 +330,6 @@ function SiteHeader() {
             )}
           </button>
 
-          <a
-            href="tel:0530387458"
-            className="hidden md:inline-flex items-center gap-2 rounded-full bg-cream border border-border px-4 py-2 text-sm font-medium text-ink shadow-2xs hover:bg-border/60 hover:-translate-y-0.5 transition-all duration-300"
-          >
-            <Phone className="h-4 w-4 text-primary" />
-            <span>{t("bookTable")}</span>
-          </a>
-
           {/* Mobile lang toggle */}
           <button
             onClick={toggleLang}
