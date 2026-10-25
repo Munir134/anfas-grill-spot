@@ -117,6 +117,7 @@ export interface PaymentMethodOption {
   name_en: string;
   description_ar: string;
   description_en: string;
+  badge?: string;
   is_available: boolean;
 }
 
@@ -308,7 +309,7 @@ export const waselClient = {
           name_en: 'Apple Pay',
           type: 'online',
           sub_type: 'apple_pay',
-          is_active: true,
+          is_available: true,
           badge: '⚡ سريع وآمن',
           description_ar: 'دفع فوري وآمن بلمسة واحدة',
           description_en: 'Instant one-tap biometric checkout',
@@ -319,7 +320,7 @@ export const waselClient = {
           name_en: 'Mada / Credit Card',
           type: 'online',
           sub_type: 'card',
-          is_active: true,
+          is_available: true,
           badge: '🛡️ بوابة مشفرة',
           description_ar: 'بطاقات مدى والبطاقات الائتمانية السعودية',
           description_en: 'Direct Saudi payment card processing',
@@ -330,7 +331,7 @@ export const waselClient = {
           name_en: 'Pay at Counter (Pickup)',
           type: 'cash',
           sub_type: 'cash_on_pickup',
-          is_active: true,
+          is_available: true,
           description_ar: 'ادفع نقداً أو بالشبكة عند استلام طلبك من الفرع',
           description_en: 'Pay cash or POS upon pickup at restaurant',
         },
@@ -340,7 +341,7 @@ export const waselClient = {
           name_en: 'Cash / Card on Delivery',
           type: 'cash',
           sub_type: 'cash_on_delivery',
-          is_active: true,
+          is_available: true,
           description_ar: 'ادفع لمندوب التوصيل عند باب بيتك',
           description_en: 'Pay driver cash or mobile POS at doorstep',
         },
@@ -438,6 +439,7 @@ export const waselClient = {
       delivery_fee,
       discount_amount: 0,
       total_amount,
+      currency: 'SAR',
       item_count: items.length,
       estimated_time_minutes: 25,
     };

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, ShoppingBag, Bike, X, MapPin, Phone, MessageCircle, Navigation, Flame } from "lucide-react";
-import { useCart } from "../lib/CartContext";
+import { ArrowLeft, ShoppingBag, Bike, X, MapPin, Phone, MessageCircle, Navigation } from "lucide-react";
 
 type Step = "choice" | "pickup" | "delivery";
 
@@ -20,7 +19,6 @@ export default function OrderModal({
   onClose: () => void;
 }) {
   const [step, setStep] = useState<Step>("choice");
-  const { openCart } = useCart();
 
   useEffect(() => {
     if (!open) return;
@@ -42,11 +40,6 @@ export default function OrderModal({
       return () => clearTimeout(t);
     }
   }, [open]);
-
-  const handleOrderOnline = () => {
-    onClose();
-    openCart();
-  };
 
   return (
     <div
@@ -94,7 +87,7 @@ export default function OrderModal({
                 ? "استلم من الفرع، أو اطلب توصيلًا ساخنًا إلى بيتك."
                 : step === "pickup"
                   ? "6889 صقر قريش، السلامة، جدة 23436"
-                  : "اطلب أونلاين، عبر واتساب أو اتصل بنا مباشرة."}
+                  : "اطلب عبر واتساب أو اتصل بنا مباشرة."}
             </p>
           </div>
 
@@ -127,21 +120,6 @@ export default function OrderModal({
               <div className="w-1/2 shrink-0 pr-1">
                 {step === "pickup" ? (
                   <ul className="space-y-2.5">
-                    <li>
-                      <button
-                        onClick={handleOrderOnline}
-                        className="group flex w-full items-center gap-4 rounded-xl border border-primary bg-primary/5 px-4 py-3.5 transition-all duration-300 hover:bg-primary hover:text-white"
-                      >
-                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                          <ShoppingBag className="h-5 w-5" />
-                        </span>
-                        <span className="flex-1 text-right">
-                          <span className="block font-bold leading-tight">اطلب أونلاين واستلم فوراً</span>
-                          <span className="block text-xs opacity-80 mt-0.5">افتح السلة واختر أطباقك</span>
-                        </span>
-                        <ArrowLeft className="h-4 w-4" />
-                      </button>
-                    </li>
                     <ActionRow
                       href={MAPS_URL}
                       icon={<Navigation className="h-4 w-4" />}
@@ -164,21 +142,6 @@ export default function OrderModal({
                   </ul>
                 ) : (
                   <ul className="space-y-2.5">
-                    <li>
-                      <button
-                        onClick={handleOrderOnline}
-                        className="group flex w-full items-center gap-4 rounded-xl border border-primary bg-primary/5 px-4 py-3.5 transition-all duration-300 hover:bg-primary hover:text-white"
-                      >
-                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                          <Flame className="h-5 w-5" />
-                        </span>
-                        <span className="flex-1 text-right">
-                          <span className="block font-bold leading-tight">اطلب توصيل أونلاين الآن</span>
-                          <span className="block text-xs opacity-80 mt-0.5">توصيل ساخن مع تتبع مباشر</span>
-                        </span>
-                        <ArrowLeft className="h-4 w-4" />
-                      </button>
-                    </li>
                     <ActionRow
                       href={WHATSAPP}
                       icon={<MessageCircle className="h-4 w-4" />}
