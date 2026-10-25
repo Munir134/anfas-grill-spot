@@ -15,6 +15,7 @@ import {
   Banknote,
   Store,
 } from 'lucide-react';
+import anfasLogo from '../assets/anfas-emblem.png';
 
 const ANFAS_WHATSAPP_PHONE = '966530387458';
 
@@ -221,8 +222,8 @@ export default function AnfasCartDrawer() {
               </div>
             ) : items.length === 0 ? (
               <div className="py-16 text-center space-y-5">
-                <div className="w-16 h-16 rounded-full bg-cream mx-auto grid place-items-center text-muted-foreground">
-                  <Flame className="w-8 h-8 text-primary/50" />
+                <div className="w-16 h-16 rounded-full bg-cream mx-auto grid place-items-center">
+                  <img src={anfasLogo} alt="أنفاس" className="w-9 h-9 object-contain" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-ink">{t('emptyCart')}</h3>

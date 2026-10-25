@@ -8,7 +8,8 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import { Flame, Instagram, Phone, MapPin, Globe, ShoppingBag } from "lucide-react";
+import { Instagram, Phone, MapPin, Globe, ShoppingBag } from "lucide-react";
+import anfasLogo from "../assets/anfas-emblem.png";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -269,10 +270,14 @@ function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/90 backdrop-blur">
       <div className="container-anfas flex h-16 items-center justify-between md:h-20">
-        <Link to="/" className="flex items-center gap-2 group">
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-primary text-primary-foreground shadow-sm transition-transform group-hover:scale-105">
-            <Flame className="h-5 w-5" strokeWidth={2.4} />
-          </span>
+        <Link to="/" className="flex items-center gap-3 group">
+          <img
+            src={anfasLogo}
+            alt="أنفاس — Anfas Turkish Grill"
+            className="h-10 w-10 object-contain transition-transform duration-300 group-hover:scale-105"
+            width={40}
+            height={40}
+          />
           <div className="leading-tight">
             <div className="text-xl font-bold text-ink">{lang === "ar" ? "أنفاس" : "Anfas"}</div>
             <div className="text-[10px] tracking-[0.3em] text-primary font-latin">ANFAS</div>
@@ -353,10 +358,14 @@ function SiteFooter() {
     <footer className="mt-24 border-t border-border/60 bg-cream">
       <div className="container-anfas py-14 grid gap-10 md:grid-cols-3">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-primary text-primary-foreground">
-              <Flame className="h-5 w-5" strokeWidth={2.4} />
-            </span>
+          <div className="flex items-center gap-3">
+            <img
+              src={anfasLogo}
+              alt="أنفاس — Anfas Turkish Grill"
+              className="h-10 w-10 object-contain"
+              width={40}
+              height={40}
+            />
             <div className="leading-tight">
               <div className="text-xl font-bold text-ink">{lang === "ar" ? "أنفاس" : "Anfas"}</div>
               <div className="text-[10px] tracking-[0.3em] text-primary font-latin">ANFAS</div>
