@@ -3,11 +3,11 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import {
   ShoppingBag,
   Plus,
+  Minus,
   Flame,
   Search,
   X,
   Check,
-  SlidersHorizontal,
   Crown,
   Salad,
   Soup,
@@ -20,10 +20,10 @@ import {
   Leaf,
   Layers,
   Sparkles,
+  SlidersHorizontal,
 } from "lucide-react";
 import { useLanguage } from "../lib/LanguageContext";
 import { useCart } from "../lib/CartContext";
-import { WaselProduct } from "../lib/wasel";
 import {
   anfasCategories,
   MenuItem,
@@ -87,7 +87,8 @@ function CategoryIcon({ name, className = "h-4 w-4" }: { name: string; className
 
 function MenuPage() {
   const { t, lang } = useLanguage();
-  const { addItem, openCustomizer, openCart, totalItemCount, subtotal } = useCart();
+  const { items, addItem, updateQuantity, removeItem, openCart, totalItemCount, subtotal } =
+    useCart();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string>("all");
@@ -136,38 +137,20 @@ function MenuPage() {
     }
   }, [activeCategory]);
 
-  // Handle dish click
-  const handleItemClick = (item: MenuItem) => {
-    if (item.hasModifiers && item.modifierGroups) {
-      const waselProd: WaselProduct = {
-        id: item.id,
-        category_id: `c-anfas-${item.id}`,
-        name: lang === "ar" ? item.nameAr : item.nameEn,
-        description: lang === "ar" ? item.descAr : item.descEn,
-        base_price: item.priceNum,
-        image_url: item.img,
-        is_available: true,
-        preparation_time_minutes: 20,
-        calories: item.calories,
-        is_featured: !!item.isPopular,
-        modifier_groups: item.modifierGroups,
-      };
-      openCustomizer(waselProd);
-    } else {
-      addItem({
-        productId: item.id,
-        name: lang === "ar" ? item.nameAr : item.nameEn,
-        nameEn: item.nameEn,
-        image: item.img,
-        unitPrice: item.priceNum,
-        quantity: 1,
-        selectedOptions: [],
-      });
+  // Handle direct item addition without opening the bag
+  const handleAddItem = (item: MenuItem) => {
+    addItem({
+      productId: item.id,
+      name: lang === "ar" ? item.nameAr : item.nameEn,
+      nameEn: item.nameEn,
+      image: item.img,
+      unitPrice: item.priceNum,
+      quantity: 1,
+      selectedOptions: [],
+    });
 
-      // Visual feedback
-      setRecentlyAddedId(item.id);
-      setTimeout(() => setRecentlyAddedId(null), 1200);
-    }
+    setRecentlyAddedId(item.id);
+    setTimeout(() => setRecentlyAddedId(null), 1200);
   };
 
   // Filter categories and items based on search & active filter
@@ -235,7 +218,11 @@ function MenuPage() {
         <div className="container-anfas text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold mb-4">
             <Flame className="h-3.5 w-3.5 animate-pulse" />
-            <span>مشاوي تركية على الفحم الطبيعي • قائمة أصلية</span>
+            <span>
+              {lang === "ar"
+                ? "مشاوي تركية على الفحم الطبيعي • قائمة أصلية"
+                : "Authentic Turkish Charcoal Grills • Official Menu"}
+            </span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ink tracking-tight">
@@ -245,22 +232,22 @@ function MenuPage() {
           <p className="mt-3 max-w-2xl mx-auto text-sm sm:text-base text-muted-foreground leading-relaxed">
             {lang === "ar"
               ? "استمتع بأشهى أطباق المشاوي، كباب الأمتار، الطواجن الفخارية، الستيك الفاخر، والمقبلات الطازجة المحضرة يومياً بأنامل شيف تركي متمرس."
-              : "Savor prime charcoal grills, meter kebabs, slow-cooked clay pots, steaks, and fresh Turkish mezze crafted daily with authentic Ottoman hospitality."}
+              : "Savor prime charcoal grills, meter kebabs, slow-cooked clay pots, steaks, and fresh Turkish mezze crafted daily by our master Turkish chefs."}
           </p>
 
           {/* Quick Metrics Bar */}
           <div className="mt-6 flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-xs text-muted-foreground font-medium">
             <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background border border-border/60 shadow-xs">
               <Layers className="h-3.5 w-3.5 text-primary" />
-              <span>١٣ قسماً رئيسياً</span>
+              <span>{lang === "ar" ? "١٣ قسماً رئيسياً" : "13 Main Sections"}</span>
             </span>
             <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background border border-border/60 shadow-xs">
               <Sparkles className="h-3.5 w-3.5 text-primary" />
-              <span>أكثر من ٨٥ طبقاً طازجاً</span>
+              <span>{lang === "ar" ? "أكثر من ٨٥ طبقاً طازجاً" : "85+ Fresh Dishes"}</span>
             </span>
             <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background border border-border/60 shadow-xs">
               <Flame className="h-3.5 w-3.5 text-primary" />
-              <span>فحم طبيعي ١٠٠٪</span>
+              <span>{lang === "ar" ? "فحم طبيعي ١٠٠٪" : "100% Natural Charcoal"}</span>
             </span>
           </div>
 
@@ -274,8 +261,8 @@ function MenuPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={
                   lang === "ar"
-                    ? "ابحث عن طبقك المفضل (كباب، ستيك، حمص، عيران...)"
-                    : "Search dishes (kebab, steak, hummus, ayran...)"
+                    ? "ابحث عن طبقك المفضل (كباب، ستيك، حمص، برجر...)"
+                    : "Search dishes (kebab, steak, hummus, burger...)"
                 }
                 className="w-full h-12 rounded-2xl bg-background/90 backdrop-blur-md border border-border/80 pr-11 pl-11 rtl:pr-11 rtl:pl-10 ltr:pl-11 ltr:pr-10 text-sm placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm"
               />
@@ -283,7 +270,7 @@ function MenuPage() {
                 <button
                   onClick={() => setSearchQuery("")}
                   className="absolute left-3 rtl:left-3 ltr:right-3 p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
-                  aria-label="مسح البحث"
+                  aria-label={lang === "ar" ? "مسح البحث" : "Clear search"}
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -293,13 +280,21 @@ function MenuPage() {
             {searchQuery && (
               <div className="mt-2 text-xs text-muted-foreground flex justify-between px-2">
                 <span>
-                  تم العثور على <strong className="text-primary">{totalMatchingDishes}</strong> طبق
+                  {lang === "ar" ? (
+                    <>
+                      تم العثور على <strong className="text-primary">{totalMatchingDishes}</strong> طبق
+                    </>
+                  ) : (
+                    <>
+                      Found <strong className="text-primary">{totalMatchingDishes}</strong> dishes
+                    </>
+                  )}
                 </span>
                 <button
                   onClick={() => setSearchQuery("")}
                   className="text-primary hover:underline cursor-pointer"
                 >
-                  مسح الفلتر
+                  {lang === "ar" ? "مسح الفلتر" : "Clear filter"}
                 </button>
               </div>
             )}
@@ -309,7 +304,7 @@ function MenuPage() {
 
       {/* ── STICKY APPLE TRANSLUCENT CATEGORY PILL BAR ────────────────────────── */}
       <nav
-        aria-label="أقسام المنيو"
+        aria-label={lang === "ar" ? "أقسام المنيو" : "Menu Categories"}
         className="sticky top-0 z-30 bg-background/80 dark:bg-black/80 backdrop-blur-xl border-b border-border/50 py-3 shadow-xs"
       >
         <div className="container-anfas flex items-center gap-3">
@@ -319,10 +314,12 @@ function MenuPage() {
               <button
                 type="button"
                 className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-xl bg-cream border border-border/70 hover:border-primary/50 text-xs font-bold text-ink shadow-xs hover:bg-cream/80 active:scale-95 transition-all cursor-pointer"
-                aria-label="فتح قائمة الأقسام الكاملة"
+                aria-label={lang === "ar" ? "فتح قائمة الأقسام الكاملة" : "Open all categories drawer"}
               >
                 <Layers className="h-3.5 w-3.5 text-primary" />
-                <span className="hidden sm:inline">تصفح الأقسام</span>
+                <span className="hidden sm:inline">
+                  {lang === "ar" ? "تصفح الأقسام" : "Categories"}
+                </span>
                 <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
               </button>
             </DrawerTrigger>
@@ -333,10 +330,14 @@ function MenuPage() {
                 <DrawerHeader className="text-center pt-2 pb-4">
                   <DrawerTitle className="text-xl font-bold text-ink flex items-center justify-center gap-2">
                     <Flame className="h-5 w-5 text-primary" />
-                    <span>أقسام منيو أنفاس التركي</span>
+                    <span>
+                      {lang === "ar" ? "أقسام منيو أنفاس التركي" : "Anfas Menu Categories"}
+                    </span>
                   </DrawerTitle>
                   <DrawerDescription className="text-xs text-muted-foreground">
-                    اختر القسم للانتقال المباشر وتصفح الأطباق
+                    {lang === "ar"
+                      ? "اختر القسم للانتقال المباشر وتصفح الأطباق"
+                      : "Select a section to jump directly to its dishes"}
                   </DrawerDescription>
                 </DrawerHeader>
 
@@ -346,7 +347,7 @@ function MenuPage() {
                       scrollToCategory("all");
                       setIsDrawerOpen(false);
                     }}
-                    className={`flex items-center gap-3 p-3 rounded-2xl border text-right transition-all active:scale-[0.97] cursor-pointer ${
+                    className={`flex items-center gap-3 p-3 rounded-2xl border text-right rtl:text-right ltr:text-left transition-all active:scale-[0.97] cursor-pointer ${
                       activeCategory === "all"
                         ? "bg-primary text-primary-foreground border-primary shadow-sm"
                         : "bg-cream/60 border-border/60 hover:border-primary/40 text-ink"
@@ -356,8 +357,12 @@ function MenuPage() {
                       <Sparkles className="h-4 w-4 text-primary" />
                     </div>
                     <div>
-                      <div className="font-bold text-xs">كافة الأطباق</div>
-                      <div className="text-[10px] opacity-75">All Menu</div>
+                      <div className="font-bold text-xs">
+                        {lang === "ar" ? "كافة الأطباق" : "All Dishes"}
+                      </div>
+                      <div className="text-[10px] opacity-75">
+                        {lang === "ar" ? "All Menu" : "الكل"}
+                      </div>
                     </div>
                   </button>
 
@@ -368,7 +373,7 @@ function MenuPage() {
                         scrollToCategory(cat.id);
                         setIsDrawerOpen(false);
                       }}
-                      className={`flex items-center gap-3 p-3 rounded-2xl border text-right transition-all active:scale-[0.97] cursor-pointer ${
+                      className={`flex items-center gap-3 p-3 rounded-2xl border text-right rtl:text-right ltr:text-left transition-all active:scale-[0.97] cursor-pointer ${
                         activeCategory === cat.id
                           ? "bg-primary text-primary-foreground border-primary shadow-sm"
                           : "bg-cream/60 border-border/60 hover:border-primary/40 text-ink"
@@ -378,8 +383,12 @@ function MenuPage() {
                         <CategoryIcon name={cat.iconName} className="h-4 w-4 text-primary" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className="font-bold text-xs truncate">{cat.titleAr}</div>
-                        <div className="text-[10px] opacity-75 truncate">{cat.badgeAr}</div>
+                        <div className="font-bold text-xs truncate">
+                          {lang === "ar" ? cat.titleAr : cat.titleEn}
+                        </div>
+                        <div className="text-[10px] opacity-75 truncate">
+                          {cat.items.length} {lang === "ar" ? "أطباق" : "items"}
+                        </div>
                       </div>
                     </button>
                   ))}
@@ -388,7 +397,7 @@ function MenuPage() {
                 <div className="mt-6 text-center">
                   <DrawerClose asChild>
                     <button className="px-6 py-2 rounded-full bg-cream border border-border text-xs font-medium text-ink hover:bg-muted transition-colors cursor-pointer">
-                      إغلاق النافذة
+                      {lang === "ar" ? "إغلاق النافذة" : "Close"}
                     </button>
                   </DrawerClose>
                 </div>
@@ -412,7 +421,7 @@ function MenuPage() {
               }`}
             >
               <Sparkles className="h-3 w-3" />
-              <span>الكل</span>
+              <span>{lang === "ar" ? "الكل" : "All"}</span>
             </button>
 
             {anfasCategories.map((cat) => {
@@ -429,7 +438,7 @@ function MenuPage() {
                   }`}
                 >
                   <CategoryIcon name={cat.iconName} className="h-3.5 w-3.5" />
-                  <span>{cat.titleAr}</span>
+                  <span>{lang === "ar" ? cat.titleAr : cat.titleEn}</span>
                   <span
                     className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
                       isActive ? "bg-white/20 text-white" : "bg-border/60 text-muted-foreground"
@@ -452,10 +461,22 @@ function MenuPage() {
                 ? "bg-primary/10 border-primary text-primary"
                 : "bg-cream border-border/70 text-muted-foreground hover:text-ink"
             }`}
-            title="التبديل بين تصفح قسم واحد أو جميع الأقسام بالتتالي"
+            title={
+              lang === "ar"
+                ? "التبديل بين تصفح قسم واحد أو جميع الأقسام بالتتالي"
+                : "Toggle between single section filter or continuous view"
+            }
           >
             <SlidersHorizontal className="h-3.5 w-3.5" />
-            <span>{filterMode === "isolated" ? "تصفية قسم" : "عرض متتابع"}</span>
+            <span>
+              {lang === "ar"
+                ? filterMode === "isolated"
+                  ? "تصفية قسم"
+                  : "عرض متتابع"
+                : filterMode === "isolated"
+                  ? "Single Section"
+                  : "All Sections"}
+            </span>
           </button>
         </div>
       </nav>
@@ -467,9 +488,13 @@ function MenuPage() {
             <div className="h-16 w-16 mx-auto rounded-full bg-cream flex items-center justify-center text-muted-foreground mb-4">
               <Search className="h-8 w-8" />
             </div>
-            <h3 className="text-xl font-bold text-ink">لم يتم العثور على أطباق تطابق بحثك</h3>
+            <h3 className="text-xl font-bold text-ink">
+              {lang === "ar" ? "لم يتم العثور على أطباق تطابق بحثك" : "No dishes match your search"}
+            </h3>
             <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">
-              جرب البحث بكلمات أخرى مثل "كباب"، "حمص"، "ستيك"، أو استعرض الأقسام مباشرة.
+              {lang === "ar"
+                ? "جرب البحث بكلمات أخرى مثل 'كباب'، 'حمص'، 'ستيك'، أو استعرض الأقسام مباشرة."
+                : "Try searching for other keywords like 'kebab', 'hummus', 'steak', or browse categories."}
             </p>
             <button
               onClick={() => {
@@ -479,7 +504,7 @@ function MenuPage() {
               }}
               className="mt-5 px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-xs font-bold shadow-sm hover:bg-brand-deep transition-all cursor-pointer"
             >
-              عرض كافة أطباق المنيو
+              {lang === "ar" ? "عرض كافة أطباق المنيو" : "View All Menu Dishes"}
             </button>
           </div>
         ) : (
@@ -497,10 +522,10 @@ function MenuPage() {
                   </div>
                   <div>
                     <h2 className="text-2xl sm:text-3xl font-bold text-ink tracking-tight flex items-center gap-2">
-                      <span>{cat.titleAr}</span>
+                      <span>{lang === "ar" ? cat.titleAr : cat.titleEn}</span>
                     </h2>
                     <span className="text-xs text-muted-foreground font-latin tracking-wide">
-                      {cat.titleEn}
+                      {lang === "ar" ? cat.titleEn : cat.titleAr}
                     </span>
                   </div>
                 </div>
@@ -519,6 +544,8 @@ function MenuPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
                 {cat.items.map((item) => {
                   const isJustAdded = recentlyAddedId === item.id;
+                  const cartEntry = items.find((ci) => ci.productId === item.id);
+                  const quantityInCart = cartEntry ? cartEntry.quantity : 0;
 
                   return (
                     <article
@@ -533,7 +560,6 @@ function MenuPage() {
                           loading="lazy"
                           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-106"
                           onError={(e) => {
-                            // Fallback in case of any network glitch
                             const target = e.target as HTMLImageElement;
                             target.src = "/dishes/anfas-kebab.jpg";
                           }}
@@ -543,23 +569,35 @@ function MenuPage() {
                         <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none">
                           <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-mono font-medium flex items-center gap-1 shadow-xs">
                             <Flame className="h-3 w-3 text-amber-400" />
-                            <span>{item.calories} سعرة</span>
+                            <span>
+                              {item.calories} {lang === "ar" ? "سعرة" : "Kcal"}
+                            </span>
                           </span>
 
                           <div className="flex gap-1">
                             {item.isChefSpecial && (
                               <span className="px-2 py-0.8 rounded-full bg-amber-500/90 backdrop-blur-md text-white text-[10px] font-bold shadow-xs flex items-center gap-1">
                                 <Crown className="h-2.5 w-2.5" />
-                                <span>خاص بأنفاس</span>
+                                <span>{lang === "ar" ? "خاص بأنفاس" : "Anfas VIP"}</span>
                               </span>
                             )}
                             {item.isPopular && (
                               <span className="px-2 py-0.8 rounded-full bg-primary/90 backdrop-blur-md text-white text-[10px] font-bold shadow-xs">
-                                الأكثر طلباً
+                                {lang === "ar" ? "الأكثر طلباً" : "Popular"}
                               </span>
                             )}
                           </div>
                         </div>
+
+                        {/* In-Cart Pill on Image Top Corner if added */}
+                        {quantityInCart > 0 && (
+                          <div className="absolute bottom-3 right-3 rtl:right-3 ltr:left-3 px-2.5 py-1 rounded-full bg-emerald-600/95 backdrop-blur-md text-white text-xs font-bold flex items-center gap-1.5 shadow-md animate-in fade-in zoom-in-90 duration-200">
+                            <Check className="h-3.5 w-3.5" />
+                            <span>
+                              {lang === "ar" ? `في الطلب (${quantityInCart})` : `Added (${quantityInCart})`}
+                            </span>
+                          </div>
+                        )}
                       </div>
 
                       {/* Content Area */}
@@ -568,16 +606,16 @@ function MenuPage() {
                           {/* Dish Title */}
                           <div className="flex items-baseline justify-between gap-2">
                             <h3 className="font-bold text-lg text-ink group-hover:text-primary transition-colors">
-                              {item.nameAr}
+                              {lang === "ar" ? item.nameAr : item.nameEn}
                             </h3>
                           </div>
                           <div className="text-[11px] font-latin text-muted-foreground tracking-wider mb-2">
-                            {item.nameEn}
+                            {lang === "ar" ? item.nameEn : item.nameAr}
                           </div>
 
                           {/* Dish Description */}
                           <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
-                            {item.descAr}
+                            {lang === "ar" ? item.descAr : item.descEn}
                           </p>
                         </div>
 
@@ -592,34 +630,63 @@ function MenuPage() {
                             </span>
                           </div>
 
-                          <button
-                            type="button"
-                            onClick={() => handleItemClick(item)}
-                            className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-bold shadow-sm active:scale-95 transition-all duration-200 cursor-pointer ${
-                              isJustAdded
-                                ? "bg-emerald-600 text-white"
-                                : item.hasModifiers
-                                  ? "bg-cream border border-border text-ink hover:border-primary hover:text-primary hover:bg-cream/80"
+                          {/* Interactive Quantity Stepper or Add Button */}
+                          {quantityInCart > 0 && cartEntry ? (
+                            <div className="flex items-center gap-1.5 p-1 rounded-full bg-cream border border-border/80 shadow-xs">
+                              {/* Minus Button */}
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (cartEntry.quantity === 1) {
+                                    removeItem(cartEntry.cartItemId);
+                                  } else {
+                                    updateQuantity(cartEntry.cartItemId, -1);
+                                  }
+                                }}
+                                className="h-7 w-7 rounded-full bg-background border border-border/80 flex items-center justify-center text-ink hover:text-primary active:scale-90 transition-transform cursor-pointer"
+                                aria-label={lang === "ar" ? "تقليل الكمية" : "Decrease quantity"}
+                              >
+                                <Minus className="h-3 w-3" />
+                              </button>
+
+                              {/* Quantity Display */}
+                              <span className="px-2 font-mono font-bold text-xs text-ink min-w-[20px] text-center">
+                                {quantityInCart}
+                              </span>
+
+                              {/* Plus Button */}
+                              <button
+                                type="button"
+                                onClick={() => updateQuantity(cartEntry.cartItemId, 1)}
+                                className="h-7 w-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-brand-deep active:scale-90 transition-transform cursor-pointer"
+                                aria-label={lang === "ar" ? "زيادة الكمية" : "Increase quantity"}
+                              >
+                                <Plus className="h-3 w-3" />
+                              </button>
+                            </div>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => handleAddItem(item)}
+                              className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-bold shadow-sm active:scale-95 transition-all duration-200 cursor-pointer ${
+                                isJustAdded
+                                  ? "bg-emerald-600 text-white"
                                   : "bg-primary text-primary-foreground hover:bg-brand-deep hover:shadow-md"
-                            }`}
-                          >
-                            {isJustAdded ? (
-                              <>
-                                <Check className="h-3.5 w-3.5" />
-                                <span>تمت الإضافة</span>
-                              </>
-                            ) : item.hasModifiers ? (
-                              <>
-                                <SlidersHorizontal className="h-3.5 w-3.5 text-primary" />
-                                <span>تخصيص الطبق</span>
-                              </>
-                            ) : (
-                              <>
-                                <Plus className="h-3.5 w-3.5" />
-                                <span>أضف للسلة</span>
-                              </>
-                            )}
-                          </button>
+                              }`}
+                            >
+                              {isJustAdded ? (
+                                <>
+                                  <Check className="h-3.5 w-3.5" />
+                                  <span>{lang === "ar" ? "تمت الإضافة" : "Added"}</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Plus className="h-3.5 w-3.5" />
+                                  <span>{t("addToCart")}</span>
+                                </>
+                              )}
+                            </button>
+                          )}
                         </div>
                       </div>
                     </article>
@@ -637,10 +704,10 @@ function MenuPage() {
         <button
           onClick={() => setIsDrawerOpen(true)}
           className="flex items-center gap-2 px-5 py-3 rounded-full bg-ink/90 text-white dark:bg-white/90 dark:text-black backdrop-blur-xl border border-white/20 shadow-2xl text-xs font-bold active:scale-95 hover:scale-105 transition-all cursor-pointer"
-          aria-label="تصفح جميع أقسام المنيو"
+          aria-label={lang === "ar" ? "تصفح جميع أقسام المنيو" : "Browse all categories"}
         >
           <Layers className="h-4 w-4 text-primary" />
-          <span>الأقسام (١٣)</span>
+          <span>{lang === "ar" ? "الأقسام (١٣)" : "Categories (13)"}</span>
         </button>
 
         {/* Floating Cart Launcher if Items exist */}
@@ -648,7 +715,7 @@ function MenuPage() {
           <button
             onClick={openCart}
             className="flex items-center gap-2 px-5 py-3 rounded-full bg-primary text-primary-foreground backdrop-blur-xl shadow-2xl text-xs font-bold active:scale-95 hover:scale-105 transition-all cursor-pointer animate-in fade-in zoom-in-95 duration-300"
-            aria-label="عرض سلة الطلبات"
+            aria-label={lang === "ar" ? "عرض سلة الطلبات" : "View shopping bag"}
           >
             <ShoppingBag className="h-4 w-4" />
             <span>
@@ -662,7 +729,7 @@ function MenuPage() {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="h-10 w-10 rounded-full bg-cream border border-border/80 text-ink shadow-lg flex items-center justify-center hover:bg-muted active:scale-90 transition-all cursor-pointer"
-            aria-label="العودة لأعلى الصفحة"
+            aria-label={lang === "ar" ? "العودة لأعلى الصفحة" : "Back to top"}
           >
             <ArrowUp className="h-4 w-4" />
           </button>

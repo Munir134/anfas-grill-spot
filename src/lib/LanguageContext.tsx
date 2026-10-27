@@ -106,7 +106,7 @@ const translations = {
 
     // ── Cart & Ordering ───────────────────────────
     cart: "السلة",
-    addToCart: "إضافة للطلب",
+    addToCart: "أضف للسلة",
     emptyCart: "سلة طلباتك فارغة",
     emptyCartDesc: "تصفح قائمتنا واختر أشهى المشاوي والمقبلات والحلويات التركية.",
     checkout: "إتمام الطلب",
@@ -246,8 +246,8 @@ const translations = {
     contactWebsite: "Website",
 
     // ── Cart & Ordering ───────────────────────────
-    cart: "Cart",
-    addToCart: "Add to Cart",
+    cart: "Bag",
+    addToCart: "Add to Bag",
     emptyCart: "Your cart is empty",
     emptyCartDesc: "Browse our menu and pick delicious Turkish grills, mezze and sweets.",
     checkout: "Checkout",
