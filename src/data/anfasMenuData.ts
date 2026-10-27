@@ -1427,7 +1427,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 150,
-        img: "/dishes/cold-drinks.jpg",
+        img: "/dishes/drink-pepsi.jpg",
       },
       {
         id: "p-anfas-pepsi-diet",
@@ -1438,7 +1438,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 0,
-        img: "/dishes/cold-drinks.jpg",
+        img: "/dishes/drink-pepsi-diet.jpg",
       },
       {
         id: "p-anfas-citrus",
@@ -1449,7 +1449,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 150,
-        img: "/dishes/cold-drinks.jpg",
+        img: "/dishes/drink-citrus.jpg",
       },
       {
         id: "p-anfas-mirinda",
@@ -1460,7 +1460,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 150,
-        img: "/dishes/cold-drinks.jpg",
+        img: "/dishes/drink-mirinda.jpg",
       },
       {
         id: "p-anfas-7up",
@@ -1471,7 +1471,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 150,
-        img: "/dishes/cold-drinks.jpg",
+        img: "/dishes/drink-7up.jpg",
       },
       {
         id: "p-anfas-7up-diet",
@@ -1482,7 +1482,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 0,
-        img: "/dishes/cold-drinks.jpg",
+        img: "/dishes/drink-7up-diet.jpg",
       },
       {
         id: "p-anfas-dew",
@@ -1493,7 +1493,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 150,
-        img: "/dishes/cold-drinks.jpg",
+        img: "/dishes/drink-dew.jpg",
       },
       {
         id: "p-anfas-water",
@@ -1504,7 +1504,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 0,
-        img: "/dishes/cold-drinks.jpg",
+        img: "/dishes/drink-water.jpg",
       },
     ],
   },
