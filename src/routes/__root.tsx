@@ -7,7 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Instagram, Phone, MapPin, Globe, ShoppingBag } from "lucide-react";
 import anfasLogo from "../assets/anfas-emblem.png";
 
@@ -18,6 +18,7 @@ import { CartProvider, useCart } from "../lib/CartContext";
 import AnfasCartDrawer from "../components/AnfasCartDrawer";
 import AnfasProductCustomizerModal from "../components/AnfasProductCustomizerModal";
 import AnfasOrderTrackerModal from "../components/AnfasOrderTrackerModal";
+import { AnfasPrivacyPolicyModal } from "../components/AnfasPrivacyPolicyModal";
 import { WaselClient } from "../lib/wasel";
 
 function NotFoundComponent() {
@@ -353,75 +354,87 @@ function SiteHeader() {
 function SiteFooter() {
   const { t, lang } = useLanguage();
   const year = new Date().getFullYear();
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
 
   return (
-    <footer className="mt-24 border-t border-border/60 bg-cream">
-      <div className="container-anfas py-14 grid gap-10 md:grid-cols-3">
-        <div>
-          <div className="flex items-center gap-3">
-            <img
-              src={anfasLogo}
-              alt="أنفاس — Anfas Turkish Grill"
-              className="h-10 w-10 object-contain"
-              width={40}
-              height={40}
-            />
-            <div className="leading-tight">
-              <div className="text-xl font-bold text-ink">{lang === "ar" ? "أنفاس" : "Anfas"}</div>
-              <div className="text-[10px] tracking-[0.3em] text-primary font-latin">ANFAS</div>
+    <>
+      <footer className="mt-24 border-t border-border/60 bg-cream">
+        <div className="container-anfas py-14 grid gap-10 md:grid-cols-3">
+          <div>
+            <div className="flex items-center gap-3">
+              <img
+                src={anfasLogo}
+                alt="أنفاس — Anfas Turkish Grill"
+                className="h-10 w-10 object-contain"
+                width={40}
+                height={40}
+              />
+              <div className="leading-tight">
+                <div className="text-xl font-bold text-ink">{lang === "ar" ? "أنفاس" : "Anfas"}</div>
+                <div className="text-[10px] tracking-[0.3em] text-primary font-latin">ANFAS</div>
+              </div>
             </div>
+            <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
+              {t("footerDesc")}
+            </p>
           </div>
-          <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
-            {t("footerDesc")}
-          </p>
-        </div>
 
-        <div>
-          <h3 className="text-sm font-semibold text-ink tracking-widest">{t("footerContactTitle")}</h3>
-          <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2">
-              <MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" />
-              <span>{t("footerAddress")}</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-primary" />
-              <a href="tel:0530387458" dir="ltr" className="hover:text-primary transition-colors">
-                053 038 7458
-              </a>
-            </li>
-            <li className="flex items-center gap-2">
-              <Instagram className="h-4 w-4 text-primary" />
-              <a
-                href="https://instagram.com/anfasrestaurant"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-primary transition-colors"
-              >
-                @anfasrestaurant
-              </a>
-            </li>
-          </ul>
-        </div>
+          <div>
+            <h3 className="text-sm font-semibold text-ink tracking-widest">{t("footerContactTitle")}</h3>
+            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <MapPin className="h-4 w-4 mt-0.5 text-primary shrink-0" />
+                <span>{t("footerAddress")}</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="h-4 w-4 text-primary" />
+                <a href="tel:0530387458" dir="ltr" className="hover:text-primary transition-colors">
+                  053 038 7458
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Instagram className="h-4 w-4 text-primary" />
+                <a
+                  href="https://instagram.com/anfasrestaurant"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-primary transition-colors"
+                >
+                  @anfasrestaurant
+                </a>
+              </li>
+            </ul>
+          </div>
 
-        <div>
-          <h3 className="text-sm font-semibold text-ink tracking-widest">{t("footerHoursTitle")}</h3>
-          <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <li className="flex justify-between border-b border-border/60 pb-2">
-              <span>{t("footerDaily")}</span>
-              <span dir="ltr">1:00 PM – 4:00 AM</span>
-            </li>
-            <li className="text-xs text-muted-foreground/80 mt-2">{t("footerHoursNote")}</li>
-          </ul>
+          <div>
+            <h3 className="text-sm font-semibold text-ink tracking-widest">{t("footerHoursTitle")}</h3>
+            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+              <li className="flex justify-between border-b border-border/60 pb-2">
+                <span>{t("footerDaily")}</span>
+                <span dir="ltr">1:00 PM – 4:00 AM</span>
+              </li>
+              <li className="text-xs text-muted-foreground/80 mt-2">{t("footerHoursNote")}</li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div className="border-t border-border/60">
-        <div className="container-anfas py-5 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
-          <span>
-            © {year} {t("footerCopyright")}
-          </span>
-          <span className="font-latin tracking-widest">ANFAS · JEDDAH</span>
+        <div className="border-t border-border/60">
+          <div className="container-anfas py-5 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+            <span>
+              © {year} {t("footerCopyright")}
+            </span>
+            <button
+              type="button"
+              onClick={() => setIsPrivacyOpen(true)}
+              className="text-xs text-muted-foreground hover:text-primary transition-colors underline-offset-4 hover:underline cursor-pointer"
+            >
+              سياسة الخصوصية | Privacy Policy
+            </button>
+            <span className="font-latin tracking-widest">ANFAS · JEDDAH</span>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+
+      <AnfasPrivacyPolicyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
+    </>
   );
 }
