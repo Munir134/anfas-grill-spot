@@ -14,6 +14,7 @@ import {
   CheckCircle2,
   Banknote,
   Store,
+  Utensils,
 } from 'lucide-react';
 import anfasLogo from '../assets/anfas-emblem.png';
 
@@ -31,7 +32,8 @@ export default function AnfasCartDrawer() {
   const { t, lang } = useLanguage();
 
   const [customerName, setCustomerName] = useState('');
-  const [customerPhone, setCustomerPhone] = useState('');
+  const [diningLocation, setDiningLocation] = useState<'inside' | 'outside'>('inside');
+  const [tableNumber, setTableNumber] = useState('');
   const [orderNotes, setOrderNotes] = useState('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isSent, setIsSent] = useState(false);
@@ -74,24 +76,26 @@ export default function AnfasCartDrawer() {
       return;
     }
 
-    const cleanPhone = customerPhone.replace(/\s+/g, '');
-    if (!cleanPhone || cleanPhone.length < 9) {
-      setErrorMsg(
-        lang === 'ar'
-          ? 'يرجى إدخال رقم جوال صحيح (مثال: 0530387458)'
-          : 'Please enter a valid phone number'
-      );
+    if (diningLocation === 'inside' && !tableNumber.trim()) {
+      setErrorMsg(lang === 'ar' ? 'يرجى إدخال رقم الطاولة' : 'Please enter your table number');
       return;
     }
 
-    // Build human-friendly WhatsApp message for Pickup
+    // Build human-friendly WhatsApp message
     let message = '';
     if (lang === 'ar') {
-      message += `*طلب استلام جديد من مطعم أنفاس للمشويات التركية* 🔥\n`;
+      message += `*طلب جديد من مطعم أنفاس للمشويات التركية* 🔥\n`;
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
-      message += `📍 *نوع الطلب:* استلام من الفرع (حي السلامة) 🏪\n`;
+      if (diningLocation === 'inside') {
+        message += `📍 *نوع الطلب:* تناول محلي داخل المطعم 🍽️\n`;
+        message += `🪑 *رقم الطاولة:* ${tableNumber.trim()}\n`;
+      } else {
+        message += `📍 *نوع الطلب:* استلام سفري (خارج المطعم) 🛍️\n`;
+        if (tableNumber.trim()) {
+          message += `🪑 *رقم الطاولة / الجلسة:* ${tableNumber.trim()}\n`;
+        }
+      }
       message += `👤 *الاسم:* ${customerName.trim()}\n`;
-      message += `📱 *الجوال:* ${cleanPhone}\n`;
       if (orderNotes.trim()) {
         message += `📝 *ملاحظات:* ${orderNotes.trim()}\n`;
       }
@@ -115,13 +119,22 @@ export default function AnfasCartDrawer() {
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
       message += `💰 *الحساب:* *${total.toFixed(2)} ر.س*\n`;
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
-      message += `طريقة الدفع: الدفع عند الاستلام من الفرع (كاش / شبكة مدى) 💳\n`;
+      message += diningLocation === 'inside'
+        ? `طريقة الدفع: الدفع عند الطاولة (كاش / شبكة مدى) 💳\n`
+        : `طريقة الدفع: الدفع عند الاستلام من الفرع (كاش / شبكة مدى) 💳\n`;
     } else {
-      message += `*New Pickup Order from Anfas Turkish Grill* 🔥\n`;
+      message += `*New Order from Anfas Turkish Grill* 🔥\n`;
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
-      message += `📍 *Order Type:* Pickup from Al Salamah Branch 🏪\n`;
+      if (diningLocation === 'inside') {
+        message += `📍 *Order Type:* Dine-in (Inside Restaurant) 🍽️\n`;
+        message += `🪑 *Table Number:* ${tableNumber.trim()}\n`;
+      } else {
+        message += `📍 *Order Type:* Takeaway / Pickup (Outside Restaurant) 🛍️\n`;
+        if (tableNumber.trim()) {
+          message += `🪑 *Table / Area:* ${tableNumber.trim()}\n`;
+        }
+      }
       message += `👤 *Name:* ${customerName.trim()}\n`;
-      message += `📱 *Phone:* ${cleanPhone}\n`;
       if (orderNotes.trim()) {
         message += `📝 *Notes:* ${orderNotes.trim()}\n`;
       }
@@ -145,7 +158,9 @@ export default function AnfasCartDrawer() {
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
       message += `💰 *Total Amount:* *${total.toFixed(2)} SAR*\n`;
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
-      message += `Payment: Pay upon pickup (Cash / Card) 💳\n`;
+      message += diningLocation === 'inside'
+        ? `Payment: Pay at table (Cash / Card) 💳\n`
+        : `Payment: Pay upon pickup (Cash / Card) 💳\n`;
     }
 
     const whatsappUrl = `https://wa.me/${ANFAS_WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
@@ -257,14 +272,24 @@ export default function AnfasCartDrawer() {
               </div>
             ) : (
               <>
-                {/* Pickup Branch Badge */}
+                {/* Dining / Pickup Service Badge */}
                 <div className="flex items-start gap-3 p-3.5 rounded-xl bg-primary/5 border border-primary/20 text-xs">
                   <div className="p-2 rounded-lg bg-primary/10 text-primary shrink-0">
-                    <Store className="h-4 w-4" />
+                    {diningLocation === 'inside' ? (
+                      <Utensils className="h-4 w-4" />
+                    ) : (
+                      <Store className="h-4 w-4" />
+                    )}
                   </div>
                   <div>
                     <div className="font-bold text-ink">
-                      {lang === 'ar' ? 'استلام من المطعم — فرع السلامة' : 'Pickup at Restaurant — Al Salamah Branch'}
+                      {diningLocation === 'inside'
+                        ? lang === 'ar'
+                          ? 'طلب محلي — مطعم أنفاس (فرع السلامة)'
+                          : 'Dine-in Order — Anfas Grill (Al Salamah)'
+                        : lang === 'ar'
+                          ? 'استلام سفري — مطعم أنفاس (فرع السلامة)'
+                          : 'Takeaway / Pickup — Anfas Grill (Al Salamah)'}
                     </div>
                     <div className="text-muted-foreground mt-0.5 leading-relaxed">
                       {t('pickupBranchAddress')}
@@ -373,11 +398,51 @@ export default function AnfasCartDrawer() {
                 </div>
 
                 {/* Customer Details Form */}
-                <form id="anfas-whatsapp-checkout-form" onSubmit={handleCheckoutWhatsApp} className="space-y-3 pt-2">
+                <form id="anfas-whatsapp-checkout-form" onSubmit={handleCheckoutWhatsApp} className="space-y-3.5 pt-2">
                   <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     {t('customerInfo')}
                   </div>
 
+                  {/* Inside vs Outside Quick Selector */}
+                  <div>
+                    <label className="block text-xs font-bold text-foreground mb-1.5">
+                      {lang === 'ar' ? 'هل أنت داخل المطعم أم خارجه؟ *' : 'Are you inside or outside the restaurant? *'}
+                    </label>
+                    <div className="grid grid-cols-2 gap-2 p-1 rounded-xl bg-cream border border-border">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setDiningLocation('inside');
+                          setErrorMsg(null);
+                        }}
+                        className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          diningLocation === 'inside'
+                            ? 'bg-primary text-primary-foreground shadow-sm'
+                            : 'text-muted-foreground hover:text-foreground'
+                        }`}
+                      >
+                        <Utensils className="h-3.5 w-3.5" />
+                        <span>{lang === 'ar' ? 'داخل المطعم (محلي)' : 'Inside (Dine-in)'}</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setDiningLocation('outside');
+                          setErrorMsg(null);
+                        }}
+                        className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          diningLocation === 'outside'
+                            ? 'bg-primary text-primary-foreground shadow-sm'
+                            : 'text-muted-foreground hover:text-foreground'
+                        }`}
+                      >
+                        <Store className="h-3.5 w-3.5" />
+                        <span>{lang === 'ar' ? 'خارج المطعم (سفري)' : 'Outside (Takeaway)'}</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Customer Name */}
                   <div>
                     <label className="block text-xs font-medium text-foreground mb-1">
                       {t('customerName')} *
@@ -392,20 +457,47 @@ export default function AnfasCartDrawer() {
                     />
                   </div>
 
+                  {/* Table Number (Required if inside, optional if outside) */}
                   <div>
-                    <label className="block text-xs font-medium text-foreground mb-1">
-                      {t('customerPhone')} *
+                    <label className="block text-xs font-medium text-foreground mb-1 flex items-center justify-between">
+                      <span>
+                        {diningLocation === 'inside'
+                          ? lang === 'ar'
+                            ? 'رقم الطاولة *'
+                            : 'Table Number *'
+                          : lang === 'ar'
+                            ? 'رقم الطاولة (اختياري)'
+                            : 'Table Number (Optional)'}
+                      </span>
+                      {diningLocation === 'inside' ? (
+                        <span className="text-[10px] text-primary font-semibold">
+                          {lang === 'ar' ? 'مطلوب للمحلي' : 'Required for dine-in'}
+                        </span>
+                      ) : (
+                        <span className="text-[10px] text-muted-foreground">
+                          {lang === 'ar' ? 'اختياري' : 'Optional'}
+                        </span>
+                      )}
                     </label>
                     <input
-                      type="tel"
-                      required
-                      value={customerPhone}
-                      onChange={(e) => setCustomerPhone(e.target.value)}
-                      placeholder="0530387458"
+                      type="text"
+                      required={diningLocation === 'inside'}
+                      value={tableNumber}
+                      onChange={(e) => setTableNumber(e.target.value)}
+                      placeholder={
+                        diningLocation === 'inside'
+                          ? lang === 'ar'
+                            ? 'مثال: طاولة 5 أو رقم الجلسة'
+                            : 'e.g. Table 5'
+                          : lang === 'ar'
+                            ? 'اختياري (إذا كنت في الجلسات الخارجية)'
+                            : 'Optional (if seated in outdoor area)'
+                      }
                       className="w-full text-xs px-3 py-2.5 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary font-mono"
                     />
                   </div>
 
+                  {/* Order Notes */}
                   <div>
                     <label className="block text-xs font-medium text-foreground mb-1">
                       {t('orderNotes')}
@@ -424,9 +516,13 @@ export default function AnfasCartDrawer() {
                     <div className="p-3 rounded-xl bg-cream border border-border text-xs flex items-center gap-2.5 text-muted-foreground">
                       <Banknote className="w-4 h-4 shrink-0 text-primary" />
                       <span>
-                        {lang === 'ar'
-                          ? 'الدفع عند الاستلام من الفرع (كاش أو شبكة مدى)'
-                          : 'Payment upon pickup at branch (Cash or Mada card)'}
+                        {diningLocation === 'inside'
+                          ? lang === 'ar'
+                            ? 'الدفع عند الطاولة (كاش أو شبكة مدى)'
+                            : 'Payment at table (Cash or Mada card)'
+                          : lang === 'ar'
+                            ? 'الدفع عند الاستلام من الفرع (كاش أو شبكة مدى)'
+                            : 'Payment upon pickup at branch (Cash or Mada card)'}
                       </span>
                     </div>
                   </div>
