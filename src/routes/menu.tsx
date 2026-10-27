@@ -101,41 +101,85 @@ function MenuPage() {
 
   const pillContainerRef = useRef<HTMLDivElement>(null);
 
-  // Monitor scroll for back-to-top and active section highlight
+  // High-performance scroll spy using IntersectionObserver (0 forced reflows, native 60/120fps)
   useEffect(() => {
+    // 1. RAF-throttled back-to-top and top-hero state
+    let ticking = false;
     const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 400);
-
-      if (filterMode === "continuous" && !searchQuery.trim()) {
-        const sections = anfasCategories.map((c) => document.getElementById(`section-${c.id}`));
-        const scrollPosition = window.scrollY + 200;
-
-        for (let i = sections.length - 1; i >= 0; i--) {
-          const sec = sections[i];
-          if (sec && sec.offsetTop <= scrollPosition) {
-            setActiveCategory(anfasCategories[i].id);
-            break;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const sy = window.scrollY;
+          setShowBackToTop(sy > 400);
+          if (sy < 260 && filterMode === "continuous" && !searchQuery.trim()) {
+            setActiveCategory("all");
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // 2. IntersectionObserver for active section highlight (runs off main thread)
+    let observer: IntersectionObserver | null = null;
+    if (filterMode === "continuous" && !searchQuery.trim()) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries.filter((e) => e.isIntersecting);
+          if (visible.length > 0) {
+            visible.sort(
+              (a, b) =>
+                Math.abs(a.boundingClientRect.top - 100) -
+                Math.abs(b.boundingClientRect.top - 100)
+            );
+            const targetId = visible[0].target.id.replace("section-", "");
+            setActiveCategory(targetId);
+          }
+        },
+        {
+          rootMargin: "-90px 0px -65% 0px",
+          threshold: 0,
+        }
+      );
+
+      anfasCategories.forEach((cat) => {
+        const el = document.getElementById(`section-${cat.id}`);
+        if (el) observer?.observe(el);
+      });
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer?.disconnect();
+    };
   }, [filterMode, searchQuery]);
 
-  // Center active pill in pill container
+  // Center active pill in pill container only if off-screen (never hijacks vertical scrolling)
   useEffect(() => {
-    if (!pillContainerRef.current) return;
-    const activeBtn = pillContainerRef.current.querySelector(
+    const container = pillContainerRef.current;
+    if (!container) return;
+
+    const activeBtn = container.querySelector(
       `[data-category-id="${activeCategory}"]`
     ) as HTMLElement;
+
     if (activeBtn) {
-      activeBtn.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
+      const containerRect = container.getBoundingClientRect();
+      const btnRect = activeBtn.getBoundingClientRect();
+
+      // Only scroll horizontally if button is outside or nearing edge of container
+      const isOutLeft = btnRect.left < containerRect.left + 16;
+      const isOutRight = btnRect.right > containerRect.right - 16;
+
+      if (isOutLeft || isOutRight) {
+        const targetScroll =
+          activeBtn.offsetLeft - container.offsetWidth / 2 + activeBtn.offsetWidth / 2;
+        container.scrollTo({
+          left: Math.max(0, targetScroll),
+          behavior: "smooth",
+        });
+      }
     }
   }, [activeCategory]);
 
@@ -185,7 +229,7 @@ function MenuPage() {
         };
       })
       .filter(Boolean) as MenuCategory[];
-  }, [searchQuery, filterMode, activeCategory]);
+  }, [searchQuery, filterMode, filterMode === "isolated" ? activeCategory : null]);
 
   const totalMatchingDishes = useMemo(() => {
     return filteredCategories.reduce((acc, cat) => acc + cat.items.length, 0);
@@ -229,14 +273,14 @@ function MenuPage() {
         </div>
 
         {/* Multi-layered Cinematic Dark Gradients & Ambient Ember Vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/90 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/90" />
         <div className="absolute inset-0 bg-radial from-transparent via-black/35 to-black/85 pointer-events-none" />
 
         {/* Center Content */}
         <div className="container-anfas text-center relative z-10 max-w-4xl mx-auto">
           {/* Authentic Restaurant Logo Emblem */}
           <div className="flex justify-center mb-4 animate-in fade-in zoom-in-90 duration-300">
-            <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-3xl bg-black/55 backdrop-blur-xl border border-white/20 p-2.5 shadow-2xl flex items-center justify-center transition-transform hover:scale-105 duration-300">
+            <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-3xl bg-black/65 border border-white/20 p-2.5 shadow-2xl flex items-center justify-center transition-transform hover:scale-105 duration-300">
               <img
                 src={anfasLogo}
                 alt={lang === "ar" ? "مطعم أنفاس للمشويات التركية" : "Anfas Turkish Grill"}
@@ -265,15 +309,15 @@ function MenuPage() {
 
           {/* Quick Metrics Bar */}
           <div className="mt-6 flex flex-wrap justify-center items-center gap-2.5 sm:gap-4 text-xs font-medium">
-            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-stone-200 shadow-sm">
+            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/75 border border-white/15 text-stone-200 shadow-sm">
               <Layers className="h-3.5 w-3.5 text-orange-400" />
               <span>{lang === "ar" ? "١٣ قسماً رئيسياً" : "13 Main Sections"}</span>
             </span>
-            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-stone-200 shadow-sm">
+            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/75 border border-white/15 text-stone-200 shadow-sm">
               <Sparkles className="h-3.5 w-3.5 text-orange-400" />
               <span>{lang === "ar" ? "أكثر من ٨٥ طبقاً طازجاً" : "85+ Fresh Dishes"}</span>
             </span>
-            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-stone-200 shadow-sm">
+            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/75 border border-white/15 text-stone-200 shadow-sm">
               <Flame className="h-3.5 w-3.5 text-orange-400" />
               <span>{lang === "ar" ? "فحم طبيعي ١٠٠٪" : "100% Natural Charcoal"}</span>
             </span>
@@ -292,7 +336,7 @@ function MenuPage() {
                     ? "ابحث عن طبقك المفضل (كباب، ستيك، حمص، برجر...)"
                     : "Search dishes (kebab, steak, hummus, burger...)"
                 }
-                className="w-full h-12 sm:h-13 rounded-2xl bg-black/60 backdrop-blur-xl border border-white/25 pr-11 pl-11 rtl:pr-11 rtl:pl-10 ltr:pl-11 ltr:pr-10 text-sm text-white placeholder:text-stone-300/60 focus:outline-none focus:ring-2 focus:ring-primary/60 focus:border-primary transition-all shadow-xl"
+                className="w-full h-12 sm:h-13 rounded-2xl bg-black/75 border border-white/25 pr-11 pl-11 rtl:pr-11 rtl:pl-10 ltr:pl-11 ltr:pr-10 text-sm text-white placeholder:text-stone-300/60 focus:outline-none focus:ring-2 focus:ring-primary/60 focus:border-primary transition-all shadow-xl"
               />
               {searchQuery && (
                 <button
@@ -306,7 +350,7 @@ function MenuPage() {
             </div>
 
             {searchQuery && (
-              <div className="mt-2.5 text-xs text-stone-300 flex justify-between px-3 bg-black/50 backdrop-blur-md rounded-xl py-1.5 border border-white/10">
+              <div className="mt-2.5 text-xs text-stone-300 flex justify-between px-3 bg-black/75 rounded-xl py-1.5 border border-white/10">
                 <span>
                   {lang === "ar" ? (
                     <>
@@ -333,7 +377,7 @@ function MenuPage() {
       {/* ── STICKY APPLE TRANSLUCENT CATEGORY PILL BAR ────────────────────────── */}
       <nav
         aria-label={lang === "ar" ? "أقسام المنيو" : "Menu Categories"}
-        className="sticky top-0 z-30 bg-background/80 dark:bg-black/80 backdrop-blur-xl border-b border-border/50 py-3 shadow-xs"
+        className="sticky top-0 z-30 bg-background/95 backdrop-blur-md border-b border-border/50 py-3 shadow-xs"
       >
         <div className="container-anfas flex items-center gap-3">
           {/* Quick Drawer Launcher Button */}
@@ -579,6 +623,7 @@ function MenuPage() {
                     <article
                       key={item.id}
                       className="group flex flex-col justify-between rounded-3xl bg-card border border-border/70 hover:border-primary/40 shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                      style={{ contentVisibility: "auto", containIntrinsicSize: "0 380px" }}
                     >
                       {/* Image Frame with Badges */}
                       <div className="relative aspect-[16/10] overflow-hidden bg-cream">
@@ -586,6 +631,7 @@ function MenuPage() {
                           src={item.img}
                           alt={lang === "ar" ? item.nameAr : item.nameEn}
                           loading="lazy"
+                          decoding="async"
                           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-106"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
@@ -595,7 +641,7 @@ function MenuPage() {
 
                         {/* Top Badges */}
                         <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none">
-                          <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-mono font-medium flex items-center gap-1 shadow-xs">
+                          <span className="px-2.5 py-1 rounded-full bg-black/80 text-white text-[11px] font-mono font-medium flex items-center gap-1 shadow-xs">
                             <Flame className="h-3 w-3 text-amber-400" />
                             <span>
                               {item.calories} {lang === "ar" ? "سعرة" : "Kcal"}
@@ -604,13 +650,13 @@ function MenuPage() {
 
                           <div className="flex gap-1">
                             {item.isChefSpecial && (
-                              <span className="px-2 py-0.8 rounded-full bg-amber-500/90 backdrop-blur-md text-white text-[10px] font-bold shadow-xs flex items-center gap-1">
+                              <span className="px-2 py-0.8 rounded-full bg-amber-600 text-white text-[10px] font-bold shadow-xs flex items-center gap-1">
                                 <Crown className="h-2.5 w-2.5" />
                                 <span>{lang === "ar" ? "خاص بأنفاس" : "Anfas VIP"}</span>
                               </span>
                             )}
                             {item.isPopular && (
-                              <span className="px-2 py-0.8 rounded-full bg-primary/90 backdrop-blur-md text-white text-[10px] font-bold shadow-xs">
+                              <span className="px-2 py-0.8 rounded-full bg-primary text-white text-[10px] font-bold shadow-xs">
                                 {lang === "ar" ? "الأكثر طلباً" : "Popular"}
                               </span>
                             )}
@@ -619,7 +665,7 @@ function MenuPage() {
 
                         {/* In-Cart Pill on Image Top Corner if added */}
                         {quantityInCart > 0 && (
-                          <div className="absolute bottom-3 right-3 rtl:right-3 ltr:left-3 px-2.5 py-1 rounded-full bg-emerald-600/95 backdrop-blur-md text-white text-xs font-bold flex items-center gap-1.5 shadow-md animate-in fade-in zoom-in-90 duration-200">
+                          <div className="absolute bottom-3 right-3 rtl:right-3 ltr:left-3 px-2.5 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold flex items-center gap-1.5 shadow-md animate-in fade-in zoom-in-90 duration-200">
                             <Check className="h-3.5 w-3.5" />
                             <span>
                               {lang === "ar" ? `في الطلب (${quantityInCart})` : `Added (${quantityInCart})`}

@@ -149,11 +149,6 @@
   100% { opacity: 1; }
 }
 
-@keyframes anfas-kenburns {
-  0% { transform: scale(1.08) translateY(0); }
-  100% { transform: scale(1.16) translateY(-1.5%); }
-}
-
 @utility anim-fade-up {
   animation: anfas-fade-up 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -162,8 +157,22 @@
   animation: anfas-fade-in 1200ms ease-out both;
 }
 
+@keyframes anfas-kenburns {
+  0% { transform: scale(1.04) translateY(0); }
+  100% { transform: scale(1.10) translateY(-1%); }
+}
+
 @utility anim-kenburns {
-  animation: anfas-kenburns 18s ease-in-out infinite alternate;
+  animation: anfas-kenburns 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .anim-kenburns {
+    animation: none !important;
+    transform: scale(1.04) !important;
+    will-change: auto !important;
+  }
 }
 
 [data-reveal] {
