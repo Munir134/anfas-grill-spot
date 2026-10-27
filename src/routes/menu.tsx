@@ -722,7 +722,7 @@ function MenuPage() {
         )}
       </main>
 
-      {/* ── FLOATING QUICK-JUMP CAPSULE & CART STATUS (Mobile & Tablet) ────────── */}
+      {/* ── FLOATING QUICK-JUMP CAPSULE (Mobile & Tablet) ────────────────────── */}
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2">
         {/* Sections Drawer Button */}
         <button
@@ -733,20 +733,6 @@ function MenuPage() {
           <Layers className="h-4 w-4 text-primary" />
           <span>{lang === "ar" ? "الأقسام (١٣)" : "Categories (13)"}</span>
         </button>
-
-        {/* Floating Cart Launcher if Items exist */}
-        {totalItemCount > 0 && (
-          <button
-            onClick={openCart}
-            className="flex items-center gap-2 px-5 py-3 rounded-full bg-primary text-primary-foreground backdrop-blur-xl shadow-2xl text-xs font-bold active:scale-95 hover:scale-105 transition-all cursor-pointer animate-in fade-in zoom-in-95 duration-300"
-            aria-label={lang === "ar" ? "عرض سلة الطلبات" : "View shopping bag"}
-          >
-            <ShoppingBag className="h-4 w-4" />
-            <span>
-              {totalItemCount} {lang === "ar" ? "أطباق" : "items"} • {subtotal} {t("sar")}
-            </span>
-          </button>
-        )}
 
         {/* Back to top button */}
         {showBackToTop && (

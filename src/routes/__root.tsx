@@ -218,49 +218,13 @@ function RootComponent() {
             </main>
             <SiteFooter />
           </div>
-          {/* Wasel Global Ordering Modals & Floating Red Cart */}
-          <FloatingCartButton />
+          {/* Wasel Global Ordering Modals */}
           <AnfasCartDrawer />
           <AnfasProductCustomizerModal />
           <AnfasOrderTrackerModal />
         </CartProvider>
       </LanguageProvider>
     </QueryClientProvider>
-  );
-}
-
-function FloatingCartButton() {
-  const { openCart, totalItemCount, subtotal } = useCart();
-  const { t } = useLanguage();
-
-  return (
-    <aside aria-label={t("cart")} className="fixed bottom-6 end-6 z-40 pointer-events-auto">
-      <button
-        onClick={openCart}
-        type="button"
-        aria-label={t("cart")}
-        className="group relative flex items-center gap-3 rounded-full bg-primary px-5 py-3.5 text-primary-foreground shadow-2xl hover:bg-brand-deep hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer border-2 border-white/20"
-      >
-        <div className="relative flex items-center justify-center">
-          <ShoppingBag className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
-          {totalItemCount > 0 && (
-            <span className="absolute -top-2.5 -end-3 flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 font-mono text-[11px] font-black text-primary shadow-md">
-              {totalItemCount}
-            </span>
-          )}
-        </div>
-        <div className="flex flex-col text-start leading-tight">
-          <span className="text-xs font-bold">{t("cart")}</span>
-          {subtotal > 0 ? (
-            <span className="font-mono text-[11px] font-semibold text-white/90">
-              {subtotal} {t("sar")}
-            </span>
-          ) : (
-            <span className="text-[10px] text-white/80">{t("orderNow")}</span>
-          )}
-        </div>
-      </button>
-    </aside>
   );
 }
 
