@@ -38,6 +38,7 @@ import {
   DrawerTrigger,
   DrawerClose,
 } from "../components/ui/drawer";
+import menuHeroImg from "../assets/menu-hero-feast.webp";
 
 export const Route = createFileRoute("/menu")({
   head: () => ({
@@ -213,40 +214,63 @@ function MenuPage() {
 
   return (
     <div className="bg-background min-h-screen text-foreground selection:bg-primary/20 selection:text-primary pb-28">
-      {/* ── HERO BANNER ────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-cream via-cream/80 to-background pt-12 pb-10 border-b border-border/50">
-        <div className="container-anfas text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold mb-4">
-            <Flame className="h-3.5 w-3.5 animate-pulse" />
+      {/* ── CINEMATIC MENU HERO BANNER ───────────────────────────────────────── */}
+      <section className="relative isolate overflow-hidden py-14 sm:py-18 md:py-20 border-b border-border/50 text-white">
+        {/* Background Panoramic Photo with Slow Ken-Burns Motion */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <img
+            src={menuHeroImg}
+            alt={lang === "ar" ? "وليمة مشويات أنفاس الفاخرة" : "Anfas Turkish Dining Feast"}
+            width={1920}
+            height={1080}
+            className="h-full w-full object-cover anim-kenburns scale-105"
+          />
+        </div>
+
+        {/* Multi-layered Cinematic Dark Gradients & Ambient Ember Vignette */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/90 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-radial from-transparent via-black/35 to-black/85 pointer-events-none" />
+
+        {/* Center Content */}
+        <div className="container-anfas text-center relative z-10 max-w-4xl mx-auto">
+          {/* Flame Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/25 backdrop-blur-md border border-primary/40 text-orange-400 text-xs font-semibold mb-4 shadow-sm animate-in fade-in duration-300">
+            <Flame className="h-4 w-4 animate-pulse text-orange-400" />
             <span>
               {lang === "ar"
-                ? "مشاوي تركية على الفحم الطبيعي • قائمة أصلية"
-                : "Authentic Turkish Charcoal Grills • Official Menu"}
+                ? "مشاوي تركية على الفحم الطبيعي • قائمة الطعام الكاملة"
+                : "Authentic Turkish Charcoal Grills • Complete Dining Menu"}
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ink tracking-tight">
+          {/* Title */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md">
             {lang === "ar" ? "قائمة أطباق أنفاس" : "Anfas Dining Menu"}
           </h1>
 
-          <p className="mt-3 max-w-2xl mx-auto text-sm sm:text-base text-muted-foreground leading-relaxed">
+          <div className="mt-2 text-xs md:text-sm tracking-[0.45em] text-primary/90 font-latin font-semibold uppercase">
+            ANFAS · CULINARY DINING EXPERIENCE
+          </div>
+
+          {/* Description */}
+          <p className="mt-4 max-w-2xl mx-auto text-sm sm:text-base text-stone-200/90 leading-relaxed drop-shadow-xs">
             {lang === "ar"
               ? "استمتع بأشهى أطباق المشاوي، كباب الأمتار، الطواجن الفخارية، الستيك الفاخر، والمقبلات الطازجة المحضرة يومياً بأنامل شيف تركي متمرس."
               : "Savor prime charcoal grills, meter kebabs, slow-cooked clay pots, steaks, and fresh Turkish mezze crafted daily by our master Turkish chefs."}
           </p>
 
           {/* Quick Metrics Bar */}
-          <div className="mt-6 flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-xs text-muted-foreground font-medium">
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background border border-border/60 shadow-xs">
-              <Layers className="h-3.5 w-3.5 text-primary" />
+          <div className="mt-6 flex flex-wrap justify-center items-center gap-2.5 sm:gap-4 text-xs font-medium">
+            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-stone-200 shadow-sm">
+              <Layers className="h-3.5 w-3.5 text-orange-400" />
               <span>{lang === "ar" ? "١٣ قسماً رئيسياً" : "13 Main Sections"}</span>
             </span>
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background border border-border/60 shadow-xs">
-              <Sparkles className="h-3.5 w-3.5 text-primary" />
+            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-stone-200 shadow-sm">
+              <Sparkles className="h-3.5 w-3.5 text-orange-400" />
               <span>{lang === "ar" ? "أكثر من ٨٥ طبقاً طازجاً" : "85+ Fresh Dishes"}</span>
             </span>
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background border border-border/60 shadow-xs">
-              <Flame className="h-3.5 w-3.5 text-primary" />
+            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-stone-200 shadow-sm">
+              <Flame className="h-3.5 w-3.5 text-orange-400" />
               <span>{lang === "ar" ? "فحم طبيعي ١٠٠٪" : "100% Natural Charcoal"}</span>
             </span>
           </div>
@@ -254,7 +278,7 @@ function MenuPage() {
           {/* Instant Search Bar */}
           <div className="mt-8 max-w-xl mx-auto">
             <div className="relative flex items-center">
-              <Search className="absolute right-4 rtl:right-4 ltr:left-4 h-4 w-4 text-muted-foreground pointer-events-none" />
+              <Search className="absolute right-4 rtl:right-4 ltr:left-4 h-4 w-4 text-orange-400 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
@@ -264,12 +288,12 @@ function MenuPage() {
                     ? "ابحث عن طبقك المفضل (كباب، ستيك، حمص، برجر...)"
                     : "Search dishes (kebab, steak, hummus, burger...)"
                 }
-                className="w-full h-12 rounded-2xl bg-background/90 backdrop-blur-md border border-border/80 pr-11 pl-11 rtl:pr-11 rtl:pl-10 ltr:pl-11 ltr:pr-10 text-sm placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all shadow-sm"
+                className="w-full h-12 sm:h-13 rounded-2xl bg-black/60 backdrop-blur-xl border border-white/25 pr-11 pl-11 rtl:pr-11 rtl:pl-10 ltr:pl-11 ltr:pr-10 text-sm text-white placeholder:text-stone-300/60 focus:outline-none focus:ring-2 focus:ring-primary/60 focus:border-primary transition-all shadow-xl"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute left-3 rtl:left-3 ltr:right-3 p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+                  className="absolute left-3 rtl:left-3 ltr:right-3 p-1 rounded-full text-stone-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                   aria-label={lang === "ar" ? "مسح البحث" : "Clear search"}
                 >
                   <X className="h-4 w-4" />
@@ -278,21 +302,21 @@ function MenuPage() {
             </div>
 
             {searchQuery && (
-              <div className="mt-2 text-xs text-muted-foreground flex justify-between px-2">
+              <div className="mt-2.5 text-xs text-stone-300 flex justify-between px-3 bg-black/50 backdrop-blur-md rounded-xl py-1.5 border border-white/10">
                 <span>
                   {lang === "ar" ? (
                     <>
-                      تم العثور على <strong className="text-primary">{totalMatchingDishes}</strong> طبق
+                      تم العثور على <strong className="text-orange-400">{totalMatchingDishes}</strong> طبق
                     </>
                   ) : (
                     <>
-                      Found <strong className="text-primary">{totalMatchingDishes}</strong> dishes
+                      Found <strong className="text-orange-400">{totalMatchingDishes}</strong> dishes
                     </>
                   )}
                 </span>
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="text-primary hover:underline cursor-pointer"
+                  className="text-orange-400 hover:underline cursor-pointer"
                 >
                   {lang === "ar" ? "مسح الفلتر" : "Clear filter"}
                 </button>
