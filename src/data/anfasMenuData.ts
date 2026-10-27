@@ -111,7 +111,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٢",
         priceNum: 22,
         calories: 310,
-        img: "/dishes/appetizer-small.jpg",
+        img: "/dishes/appetizer-small.webp",
       },
       {
         id: "p-anfas-appetizer-large",
@@ -122,7 +122,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٤",
         priceNum: 44,
         calories: 580,
-        img: "/dishes/appetizer-large.jpg",
+        img: "/dishes/appetizer-large.webp",
         isPopular: true,
       },
       {
@@ -134,7 +134,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨",
         priceNum: 18,
         calories: 280,
-        img: "/dishes/hummus.jpg",
+        img: "/dishes/hummus.webp",
       },
       {
         id: "p-anfas-hummus-meat",
@@ -145,7 +145,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٠",
         priceNum: 30,
         calories: 450,
-        img: "/dishes/hummus-meat.jpg",
+        img: "/dishes/hummus-meat.webp",
         isPopular: true,
       },
       {
@@ -157,7 +157,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨",
         priceNum: 18,
         calories: 210,
-        img: "/dishes/mutabbal.jpg",
+        img: "/dishes/mutabbal.webp",
       },
       {
         id: "p-anfas-ali-nazik",
@@ -168,7 +168,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٠",
         priceNum: 20,
         calories: 240,
-        img: "/dishes/ali-nazik.jpg",
+        img: "/dishes/ali-nazik.webp",
       },
       {
         id: "p-anfas-baba-ghanoush",
@@ -179,7 +179,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨",
         priceNum: 18,
         calories: 190,
-        img: "/dishes/baba-ghanoush.jpg",
+        img: "/dishes/baba-ghanoush.webp",
       },
       {
         id: "p-anfas-muhammara",
@@ -190,7 +190,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨",
         priceNum: 18,
         calories: 260,
-        img: "/dishes/muhammara.jpg",
+        img: "/dishes/muhammara.webp",
       },
       {
         id: "p-anfas-brinsees",
@@ -201,7 +201,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨",
         priceNum: 18,
         calories: 220,
-        img: "/dishes/brinsees.jpg",
+        img: "/dishes/brinsees.webp",
       },
       {
         id: "p-anfas-cucumber-yogurt",
@@ -212,7 +212,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨",
         priceNum: 18,
         calories: 120,
-        img: "/dishes/cucumber-yogurt.jpg",
+        img: "/dishes/cucumber-yogurt.webp",
       },
       {
         id: "p-anfas-grape-leaves",
@@ -223,7 +223,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٢",
         priceNum: 22,
         calories: 260,
-        img: "/dishes/grape-leaves.jpg",
+        img: "/dishes/grape-leaves.webp",
       },
       {
         id: "p-anfas-tartur",
@@ -234,7 +234,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨",
         priceNum: 18,
         calories: 195,
-        img: "/dishes/tartur.jpg",
+        img: "/dishes/tartur.webp",
       },
     ],
   },
@@ -257,7 +257,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٦",
         priceNum: 46,
         calories: 320,
-        img: "/dishes/anfas-salad.jpg",
+        img: "/dishes/anfas-salad.webp",
         isPopular: true,
         isChefSpecial: true,
       },
@@ -270,7 +270,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٤",
         priceNum: 24,
         calories: 180,
-        img: "/dishes/fattoush.jpg",
+        img: "/dishes/fattoush.webp",
       },
       {
         id: "p-anfas-tabbouleh",
@@ -281,7 +281,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٤",
         priceNum: 24,
         calories: 165,
-        img: "/dishes/tabbouleh.jpg",
+        img: "/dishes/tabbouleh.webp",
       },
       {
         id: "p-anfas-armenian-salad",
@@ -292,7 +292,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٤",
         priceNum: 24,
         calories: 190,
-        img: "/dishes/armenian-salad.jpg",
+        img: "/dishes/armenian-salad.webp",
       },
       {
         id: "p-anfas-caesar-salad",
@@ -303,7 +303,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٤",
         priceNum: 34,
         calories: 350,
-        img: "/dishes/caesar-salad.jpg",
+        img: "/dishes/caesar-salad.webp",
       },
       {
         id: "p-anfas-arugula-salad",
@@ -314,7 +314,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٤",
         priceNum: 24,
         calories: 130,
-        img: "/dishes/arugula-salad.jpg",
+        img: "/dishes/arugula-salad.webp",
       },
       {
         id: "p-anfas-green-salad",
@@ -325,7 +325,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٢",
         priceNum: 22,
         calories: 110,
-        img: "/dishes/green-salad.jpg",
+        img: "/dishes/green-salad.webp",
       },
     ],
   },
@@ -333,8 +333,8 @@ export const anfasCategories: MenuCategory[] = [
   // 3. المشويات الفردية
   {
     id: "grills",
-    titleAr: "المشويات الفردية",
-    titleEn: "Signature Charcoal Grills",
+    titleAr: "مشاوي الفحم الطبيعي",
+    titleEn: "Charcoal Grills",
     enCode: "GRILLS",
     iconName: "Flame",
     badgeAr: "١٦ طبق",
@@ -348,7 +348,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥٥",
         priceNum: 55,
         calories: 620,
-        img: "/dishes/anfas-kebab.jpg",
+        img: "/dishes/anfas-kebab.webp",
                         isPopular: true,
         isChefSpecial: true,
       },
@@ -361,7 +361,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٧",
         priceNum: 47,
         calories: 520,
-        img: "/dishes/meat-awsal.jpg",
+        img: "/dishes/meat-awsal.webp",
                         isPopular: true,
       },
       {
@@ -373,7 +373,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٥",
         priceNum: 45,
         calories: 540,
-        img: "/dishes/meat-kebab.jpg",
+        img: "/dishes/meat-kebab.webp",
                         isPopular: true,
       },
       {
@@ -385,7 +385,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٧٥",
         priceNum: 75,
         calories: 680,
-        img: "/dishes/lamb-chops.jpg",
+        img: "/dishes/lamb-chops.webp",
                         isPopular: true,
       },
       {
@@ -397,7 +397,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٧",
         priceNum: 37,
         calories: 460,
-        img: "/dishes/chicken-awsal.jpg",
+        img: "/dishes/chicken-awsal.webp",
                       },
       {
         id: "p-anfas-chicken-kebab",
@@ -408,7 +408,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٧",
         priceNum: 37,
         calories: 420,
-        img: "/dishes/chicken-kebab.jpg",
+        img: "/dishes/chicken-kebab.webp",
                       },
       {
         id: "p-anfas-eggplant-kebab",
@@ -419,7 +419,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٥",
         priceNum: 45,
         calories: 490,
-        img: "/dishes/eggplant-kebab.jpg",
+        img: "/dishes/eggplant-kebab.webp",
                       },
       {
         id: "p-anfas-saraya-kebab",
@@ -430,7 +430,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٧",
         priceNum: 47,
         calories: 560,
-        img: "/dishes/saraya-kebab.jpg",
+        img: "/dishes/saraya-kebab.webp",
                       },
       {
         id: "p-anfas-meat-chateau",
@@ -441,7 +441,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٦٥",
         priceNum: 65,
         calories: 590,
-        img: "/dishes/meat-chateau.jpg",
+        img: "/dishes/meat-chateau.webp",
                       },
       {
         id: "p-anfas-butchers-kofta",
@@ -452,7 +452,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٥",
         priceNum: 45,
         calories: 510,
-        img: "/dishes/butchers-kofta.jpg",
+        img: "/dishes/butchers-kofta.webp",
                       },
       {
         id: "p-anfas-mozzarella-kofta",
@@ -463,7 +463,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٧",
         priceNum: 47,
         calories: 580,
-        img: "/dishes/mozzarella-kofta.jpg",
+        img: "/dishes/mozzarella-kofta.webp",
                         isPopular: true,
       },
       {
@@ -475,7 +475,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٩",
         priceNum: 49,
         calories: 640,
-        img: "/dishes/iskender-kebab.jpg",
+        img: "/dishes/iskender-kebab.webp",
                         isPopular: true,
       },
       {
@@ -487,7 +487,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٠",
         priceNum: 30,
         calories: 480,
-        img: "/dishes/chicken-musahab.jpg",
+        img: "/dishes/chicken-musahab.webp",
                       },
       {
         id: "p-anfas-musahab-rice",
@@ -498,7 +498,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٤",
         priceNum: 34,
         calories: 690,
-        img: "/dishes/musahab-rice.jpg",
+        img: "/dishes/musahab-rice.webp",
       },
       {
         id: "p-anfas-chicken-awsal-rice",
@@ -509,7 +509,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤١",
         priceNum: 41,
         calories: 650,
-        img: "/dishes/chicken-awsal-rice.jpg",
+        img: "/dishes/chicken-awsal-rice.webp",
       },
       {
         id: "p-anfas-mixed-grill-portion",
@@ -520,7 +520,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٩",
         priceNum: 49,
         calories: 610,
-        img: "/dishes/mixed-grill-portion.jpg",
+        img: "/dishes/mixed-grill-portion.webp",
         isPopular: true,
       },
     ],
@@ -529,8 +529,8 @@ export const anfasCategories: MenuCategory[] = [
   // 4. المشاوي بالأمتار والأوزان
   {
     id: "platters",
-    titleAr: "المشاوي بالأوزان والأمتار",
-    titleEn: "Kilos, Meters & Family Platters",
+    titleAr: "الأوزان والأمتار",
+    titleEn: "Platters & Meters",
     enCode: "PLATTERS",
     iconName: "Crown",
     badgeAr: "٩ أطباق",
@@ -544,7 +544,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٢٠",
         priceNum: 220,
         calories: 2350,
-        img: "/dishes/one-kg-anfas-dome.jpg",
+        img: "/dishes/one-kg-anfas-dome.webp",
         isPopular: true,
         isChefSpecial: true,
       },
@@ -557,7 +557,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٧٥",
         priceNum: 175,
         calories: 2150,
-        img: "/dishes/one-meter-meat.jpg",
+        img: "/dishes/one-meter-meat.webp",
         isPopular: true,
       },
       {
@@ -569,7 +569,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٥٠",
         priceNum: 150,
         calories: 1890,
-        img: "/dishes/one-meter-chicken.jpg",
+        img: "/dishes/one-meter-chicken.webp",
       },
       {
         id: "p-anfas-one-kg-meat",
@@ -580,7 +580,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٩٥",
         priceNum: 195,
         calories: 2240,
-        img: "/dishes/one-kg-meat.jpg",
+        img: "/dishes/one-kg-meat.webp",
       },
       {
         id: "p-anfas-one-kg-chicken",
@@ -591,7 +591,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٧٠",
         priceNum: 170,
         calories: 1960,
-        img: "/dishes/one-kg-chicken.jpg",
+        img: "/dishes/one-kg-chicken.webp",
       },
       {
         id: "p-anfas-one-kg-mix",
@@ -602,7 +602,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨٥",
         priceNum: 185,
         calories: 2100,
-        img: "/dishes/one-kg-mix.jpg",
+        img: "/dishes/one-kg-mix.webp",
         isPopular: true,
       },
       {
@@ -614,7 +614,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٩٨",
         priceNum: 98,
         calories: 1120,
-        img: "/dishes/half-kg-meat.jpg",
+        img: "/dishes/half-kg-meat.webp",
       },
       {
         id: "p-anfas-half-kg-chicken",
@@ -625,7 +625,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٨٨",
         priceNum: 88,
         calories: 980,
-        img: "/dishes/half-kg-chicken.jpg",
+        img: "/dishes/half-kg-chicken.webp",
       },
       {
         id: "p-anfas-half-kg-mix",
@@ -636,7 +636,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٩٤",
         priceNum: 94,
         calories: 1050,
-        img: "/dishes/half-kg-mix.jpg",
+        img: "/dishes/half-kg-mix.webp",
         isPopular: true,
       },
     ],
@@ -646,7 +646,7 @@ export const anfasCategories: MenuCategory[] = [
   {
     id: "casseroles",
     titleAr: "طواجن وصواني الفرن",
-    titleEn: "Clay Pots & Oven Trays",
+    titleEn: "Clay Pots & Oven",
     enCode: "CASSEROLES",
     iconName: "Soup",
     badgeAr: "١١ طبق",
@@ -660,7 +660,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٩",
         priceNum: 49,
         calories: 480,
-        img: "/dishes/casserole-meat-small.jpg",
+        img: "/dishes/casserole-meat-small.webp",
                       },
       {
         id: "p-anfas-casserole-meat-large",
@@ -671,7 +671,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٨٩",
         priceNum: 89,
         calories: 890,
-        img: "/dishes/casserole-beef-large.jpg",
+        img: "/dishes/casserole-beef-large.webp",
                         isPopular: true,
       },
       {
@@ -683,7 +683,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٢",
         priceNum: 42,
         calories: 420,
-        img: "/dishes/casserole-chicken-small.jpg",
+        img: "/dishes/casserole-chicken-small.webp",
                       },
       {
         id: "p-anfas-casserole-chicken-large",
@@ -694,7 +694,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٧٩",
         priceNum: 79,
         calories: 780,
-        img: "/dishes/casserole-chicken-large.jpg",
+        img: "/dishes/casserole-chicken-large.webp",
                       },
       {
         id: "p-anfas-casserole-kofta-potato",
@@ -705,7 +705,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٧",
         priceNum: 47,
         calories: 520,
-        img: "/dishes/casserole-kofta-potato.jpg",
+        img: "/dishes/casserole-kofta-potato.webp",
                       },
       {
         id: "p-anfas-casserole-shrimp-small",
@@ -716,7 +716,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥٢",
         priceNum: 52,
         calories: 390,
-        img: "/dishes/casserole-shrimp-small.jpg",
+        img: "/dishes/casserole-shrimp-small.webp",
                       },
       {
         id: "p-anfas-casserole-shrimp-large",
@@ -727,7 +727,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٩٩",
         priceNum: 99,
         calories: 720,
-        img: "/dishes/casserole-shrimp-large.jpg",
+        img: "/dishes/casserole-shrimp-large.webp",
                         isPopular: true,
       },
       {
@@ -739,7 +739,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٩",
         priceNum: 49,
         calories: 530,
-        img: "/dishes/meat-tray-small.jpg",
+        img: "/dishes/meat-tray-small.webp",
       },
       {
         id: "p-anfas-meat-tray-large",
@@ -750,7 +750,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٨٩",
         priceNum: 89,
         calories: 960,
-        img: "/dishes/meat-tray-large.jpg",
+        img: "/dishes/meat-tray-large.webp",
       },
       {
         id: "p-anfas-meat-leaf",
@@ -761,7 +761,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٩",
         priceNum: 49,
         calories: 510,
-        img: "/dishes/meat-leaf.jpg",
+        img: "/dishes/meat-leaf.webp",
         isChefSpecial: true,
       },
       {
@@ -773,7 +773,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 110,
-        img: "/dishes/add-cheese.jpg",
+        img: "/dishes/add-cheese.webp",
       },
     ],
   },
@@ -781,8 +781,8 @@ export const anfasCategories: MenuCategory[] = [
   // 6. المطبخ العالمي والباستا
   {
     id: "international",
-    titleAr: "المطبخ العالمي والباستا",
-    titleEn: "International Cuisine & Pasta",
+    titleAr: "الباستا والمطبخ العالمي",
+    titleEn: "Pasta & Specials",
     enCode: "PASTA",
     iconName: "Utensils",
     badgeAr: "١٥ طبق",
@@ -796,7 +796,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٢",
         priceNum: 42,
         calories: 680,
-        img: "/dishes/chicken-fettuccine.jpg",
+        img: "/dishes/chicken-fettuccine.webp",
         isPopular: true,
       },
       {
@@ -808,7 +808,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٩",
         priceNum: 49,
         calories: 630,
-        img: "/dishes/shrimp-fettuccine.jpg",
+        img: "/dishes/shrimp-fettuccine.webp",
       },
       {
         id: "p-anfas-meat-kawarma-saj",
@@ -819,7 +819,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٩",
         priceNum: 49,
         calories: 560,
-        img: "/dishes/meat-kawarma-saj.jpg",
+        img: "/dishes/meat-kawarma-saj.webp",
         isPopular: true,
       },
       {
@@ -831,7 +831,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥٥",
         priceNum: 55,
         calories: 540,
-        img: "/dishes/beef-teriyaki.jpg",
+        img: "/dishes/beef-teriyaki.webp",
       },
       {
         id: "p-anfas-chicken-teriyaki",
@@ -842,7 +842,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٥",
         priceNum: 45,
         calories: 480,
-        img: "/dishes/chicken-teriyaki.jpg",
+        img: "/dishes/chicken-teriyaki.webp",
       },
       {
         id: "p-anfas-cajun-chicken",
@@ -853,7 +853,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٥",
         priceNum: 45,
         calories: 490,
-        img: "/dishes/cajun-chicken.jpg",
+        img: "/dishes/cajun-chicken.webp",
       },
       {
         id: "p-anfas-mexican-chicken",
@@ -864,7 +864,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٥",
         priceNum: 45,
         calories: 510,
-        img: "/dishes/mexican-chicken.jpg",
+        img: "/dishes/mexican-chicken.webp",
       },
       {
         id: "p-anfas-curry-chicken",
@@ -875,7 +875,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٥",
         priceNum: 45,
         calories: 520,
-        img: "/dishes/curry-chicken.jpg",
+        img: "/dishes/curry-chicken.webp",
       },
       {
         id: "p-anfas-chicken-quesadilla",
@@ -886,7 +886,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٩",
         priceNum: 39,
         calories: 580,
-        img: "/dishes/chicken-quesadilla.jpg",
+        img: "/dishes/chicken-quesadilla.webp",
         isPopular: true,
       },
       {
@@ -898,7 +898,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٤",
         priceNum: 44,
         calories: 610,
-        img: "/dishes/breaded-escalope.jpg",
+        img: "/dishes/breaded-escalope.webp",
       },
       {
         id: "p-anfas-beef-fajita",
@@ -909,7 +909,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥٥",
         priceNum: 55,
         calories: 580,
-        img: "/dishes/beef-fajita.jpg",
+        img: "/dishes/beef-fajita.webp",
       },
       {
         id: "p-anfas-chicken-fajita",
@@ -920,7 +920,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٥",
         priceNum: 45,
         calories: 510,
-        img: "/dishes/chicken-fajita.jpg",
+        img: "/dishes/chicken-fajita.webp",
       },
       {
         id: "p-anfas-spaghetti-napolitan",
@@ -931,7 +931,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٩",
         priceNum: 29,
         calories: 410,
-        img: "/dishes/spaghetti-napolitan.jpg",
+        img: "/dishes/spaghetti-napolitan.webp",
       },
       {
         id: "p-anfas-spaghetti-bolognese",
@@ -942,7 +942,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٤",
         priceNum: 34,
         calories: 520,
-        img: "/dishes/spaghetti-bolognese.jpg",
+        img: "/dishes/spaghetti-bolognese.webp",
       },
       {
         id: "p-anfas-penne-arabiata",
@@ -953,7 +953,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٢",
         priceNum: 32,
         calories: 390,
-        img: "/dishes/penne-arabiata.jpg",
+        img: "/dishes/penne-arabiata.webp",
       },
     ],
   },
@@ -962,7 +962,7 @@ export const anfasCategories: MenuCategory[] = [
   {
     id: "steak",
     titleAr: "ستيك اللحم الفاخر",
-    titleEn: "Prime Steak Cuts",
+    titleEn: "Prime Steaks",
     enCode: "STEAKS",
     iconName: "Flame",
     badgeAr: "طبقين فاخرين",
@@ -976,7 +976,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٧٩",
         priceNum: 79,
         calories: 620,
-        img: "/dishes/steak-pepper.jpg",
+        img: "/dishes/steak-pepper.webp",
                         isPopular: true,
         isChefSpecial: true,
       },
@@ -989,7 +989,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٨٤",
         priceNum: 84,
         calories: 660,
-        img: "/dishes/steak-mushroom.jpg",
+        img: "/dishes/steak-mushroom.webp",
                         isPopular: true,
         isChefSpecial: true,
       },
@@ -999,7 +999,7 @@ export const anfasCategories: MenuCategory[] = [
   // 8. البيتزا
   {
     id: "pizza",
-    titleAr: "البيتزا الإيطالية والتركية",
+    titleAr: "بيتزا الفرن الحجري",
     titleEn: "Stone Oven Pizza",
     enCode: "PIZZA",
     iconName: "Pizza",
@@ -1014,7 +1014,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٠",
         priceNum: 40,
         calories: 780,
-        img: "/dishes/pizza-anfas.jpg",
+        img: "/dishes/pizza-anfas.webp",
         isPopular: true,
         isChefSpecial: true,
       },
@@ -1027,7 +1027,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٤",
         priceNum: 34,
         calories: 740,
-        img: "/dishes/pizza-sojuk.jpg",
+        img: "/dishes/pizza-sojuk.webp",
         isPopular: true,
       },
       {
@@ -1039,7 +1039,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٤",
         priceNum: 34,
         calories: 720,
-        img: "/dishes/pizza-beef.jpg",
+        img: "/dishes/pizza-beef.webp",
       },
       {
         id: "p-anfas-pizza-chicken",
@@ -1050,7 +1050,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٢",
         priceNum: 32,
         calories: 670,
-        img: "/dishes/pizza-chicken.jpg",
+        img: "/dishes/pizza-chicken.webp",
       },
       {
         id: "p-anfas-pizza-shrimp",
@@ -1061,7 +1061,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٩",
         priceNum: 39,
         calories: 650,
-        img: "/dishes/pizza-shrimp.jpg",
+        img: "/dishes/pizza-shrimp.webp",
       },
       {
         id: "p-anfas-pizza-vegetable",
@@ -1072,7 +1072,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٦",
         priceNum: 26,
         calories: 560,
-        img: "/dishes/pizza-vegetable.jpg",
+        img: "/dishes/pizza-vegetable.webp",
       },
       {
         id: "p-anfas-pizza-margherita",
@@ -1083,7 +1083,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٦",
         priceNum: 26,
         calories: 540,
-        img: "/dishes/pizza-margherita.jpg",
+        img: "/dishes/pizza-margherita.webp",
       },
     ],
   },
@@ -1091,8 +1091,8 @@ export const anfasCategories: MenuCategory[] = [
   // 9. الفطائر والمعجنات
   {
     id: "fatayer",
-    titleAr: "الفطائر والمعجنات التركية",
-    titleEn: "Turkish Pide & Fatayer",
+    titleAr: "فطائر ومعجنات تركية",
+    titleEn: "Turkish Fatayer",
     enCode: "PIDE",
     iconName: "Croissant",
     badgeAr: "٧ أصناف",
@@ -1106,7 +1106,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨",
         priceNum: 18,
         calories: 410,
-        img: "/dishes/fatayer-meat.jpg",
+        img: "/dishes/fatayer-meat.webp",
         isPopular: true,
       },
       {
@@ -1118,7 +1118,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٦",
         priceNum: 16,
         calories: 380,
-        img: "/dishes/fatayer-cheese.jpg",
+        img: "/dishes/fatayer-cheese.webp",
         isPopular: true,
       },
       {
@@ -1130,7 +1130,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٧",
         priceNum: 17,
         calories: 390,
-        img: "/dishes/fatayer-chicken.jpg",
+        img: "/dishes/fatayer-chicken.webp",
       },
       {
         id: "p-anfas-fatayer-labneh-honey",
@@ -1141,7 +1141,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨",
         priceNum: 18,
         calories: 380,
-        img: "/dishes/fatayer-labneh-honey.jpg",
+        img: "/dishes/fatayer-labneh-honey.webp",
         isPopular: true,
       },
       {
@@ -1153,7 +1153,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٦",
         priceNum: 16,
         calories: 350,
-        img: "/dishes/fatayer-labneh-thyme.jpg",
+        img: "/dishes/fatayer-labneh-thyme.webp",
       },
       {
         id: "p-anfas-fatayer-labneh",
@@ -1164,7 +1164,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٥",
         priceNum: 15,
         calories: 320,
-        img: "/dishes/fatayer-labneh.jpg",
+        img: "/dishes/fatayer-labneh.webp",
       },
       {
         id: "p-anfas-fatayer-thyme",
@@ -1175,7 +1175,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٥",
         priceNum: 15,
         calories: 290,
-        img: "/dishes/fatayer-thyme.jpg",
+        img: "/dishes/fatayer-thyme.webp",
       },
     ],
   },
@@ -1184,7 +1184,7 @@ export const anfasCategories: MenuCategory[] = [
   {
     id: "burgers",
     titleAr: "البرجر والبطاطس",
-    titleEn: "Artisan Burgers & Fries",
+    titleEn: "Burgers & Fries",
     enCode: "BURGERS",
     iconName: "Utensils",
     badgeAr: "٨ أصناف",
@@ -1198,7 +1198,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٩",
         priceNum: 39,
         calories: 690,
-        img: "/dishes/burger-anfas.jpg",
+        img: "/dishes/burger-anfas.webp",
         isPopular: true,
         isChefSpecial: true,
       },
@@ -1211,7 +1211,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٢",
         priceNum: 32,
         calories: 590,
-        img: "/dishes/burger-beef.jpg",
+        img: "/dishes/burger-beef.webp",
       },
       {
         id: "p-anfas-burger-chicken",
@@ -1222,7 +1222,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٣٠",
         priceNum: 30,
         calories: 540,
-        img: "/dishes/burger-chicken.jpg",
+        img: "/dishes/burger-chicken.webp",
       },
       {
         id: "p-anfas-burger-mini-4pcs",
@@ -1233,7 +1233,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٥",
         priceNum: 45,
         calories: 720,
-        img: "/dishes/burger-mini-4pcs.jpg",
+        img: "/dishes/burger-mini-4pcs.webp",
         isPopular: true,
       },
       {
@@ -1245,7 +1245,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤٢",
         priceNum: 42,
         calories: 670,
-        img: "/dishes/burger-mini-chicken.jpg",
+        img: "/dishes/burger-mini-chicken.webp",
       },
       {
         id: "p-anfas-french-fries",
@@ -1256,7 +1256,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٥",
         priceNum: 15,
         calories: 310,
-        img: "/dishes/french-fries.jpg",
+        img: "/dishes/french-fries.webp",
       },
       {
         id: "p-anfas-potato-wedges",
@@ -1267,7 +1267,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨",
         priceNum: 18,
         calories: 340,
-        img: "/dishes/potato-wedges.jpg",
+        img: "/dishes/potato-wedges.webp",
       },
       {
         id: "p-anfas-potato-wedges-mushroom",
@@ -1278,7 +1278,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٤",
         priceNum: 24,
         calories: 480,
-        img: "/dishes/potato-wedges-mushroom.jpg",
+        img: "/dishes/potato-wedges-mushroom.webp",
         isPopular: true,
       },
     ],
@@ -1287,8 +1287,8 @@ export const anfasCategories: MenuCategory[] = [
   // 11. السندوتشات والدوروم
   {
     id: "sandwiches",
-    titleAr: "السندوتشات والدوروم التركي",
-    titleEn: "Sandwiches & Turkish Dürüm",
+    titleAr: "سندوتشات ودوروم",
+    titleEn: "Sandwiches & Dürüm",
     enCode: "WRAPS",
     iconName: "Utensils",
     badgeAr: "٤ سندوتشات",
@@ -1302,7 +1302,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٢",
         priceNum: 22,
         calories: 420,
-        img: "/dishes/sandwich-beef-kebab.jpg",
+        img: "/dishes/sandwich-beef-kebab.webp",
         isPopular: true,
       },
       {
@@ -1314,7 +1314,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٢",
         priceNum: 22,
         calories: 380,
-        img: "/dishes/sandwich-chicken-kebab.jpg",
+        img: "/dishes/sandwich-chicken-kebab.webp",
       },
       {
         id: "p-anfas-sandwich-meat-awsal",
@@ -1325,7 +1325,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٢",
         priceNum: 22,
         calories: 430,
-        img: "/dishes/sandwich-meat-awsal.jpg",
+        img: "/dishes/sandwich-meat-awsal.webp",
       },
       {
         id: "p-anfas-sandwich-chicken-awsal",
@@ -1336,7 +1336,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٢",
         priceNum: 22,
         calories: 390,
-        img: "/dishes/sandwich-chicken-awsal.jpg",
+        img: "/dishes/sandwich-chicken-awsal.webp",
       },
     ],
   },
@@ -1345,7 +1345,7 @@ export const anfasCategories: MenuCategory[] = [
   {
     id: "sides_soups",
     titleAr: "الشوربات والأطباق الجانبية",
-    titleEn: "Soups & Side Dishes",
+    titleEn: "Soups & Sides",
     enCode: "SOUPS",
     iconName: "Soup",
     badgeAr: "٥ أطباق",
@@ -1359,7 +1359,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٦",
         priceNum: 16,
         calories: 180,
-        img: "/dishes/soup-lentil.jpg",
+        img: "/dishes/soup-lentil.webp",
         isPopular: true,
       },
       {
@@ -1371,7 +1371,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٦",
         priceNum: 16,
         calories: 190,
-        img: "/dishes/soup-of-day.jpg",
+        img: "/dishes/soup-of-day.webp",
       },
       {
         id: "p-anfas-turkish-rice",
@@ -1382,7 +1382,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٤",
         priceNum: 14,
         calories: 250,
-        img: "/dishes/turkish-rice.jpg",
+        img: "/dishes/turkish-rice.webp",
       },
       {
         id: "p-anfas-bamia",
@@ -1393,7 +1393,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٠",
         priceNum: 20,
         calories: 280,
-        img: "/dishes/bamia.jpg",
+        img: "/dishes/bamia.webp",
       },
       {
         id: "p-anfas-moussaka",
@@ -1404,7 +1404,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٠",
         priceNum: 20,
         calories: 310,
-        img: "/dishes/moussaka.jpg",
+        img: "/dishes/moussaka.webp",
       },
     ],
   },
@@ -1413,7 +1413,7 @@ export const anfasCategories: MenuCategory[] = [
   {
     id: "drinks",
     titleAr: "المشروبات الباردة",
-    titleEn: "Cold Beverages",
+    titleEn: "Cold Drinks",
     enCode: "COLD DRINKS",
     iconName: "Coffee",
     badgeAr: "٩ أصناف",
@@ -1427,7 +1427,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 150,
-        img: "/dishes/drink-pepsi.jpg",
+        img: "/dishes/drink-pepsi.webp",
       },
       {
         id: "p-anfas-pepsi-diet",
@@ -1438,7 +1438,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 0,
-        img: "/dishes/drink-pepsi-diet.jpg",
+        img: "/dishes/drink-pepsi-diet.webp",
       },
       {
         id: "p-anfas-citrus",
@@ -1449,7 +1449,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 150,
-        img: "/dishes/drink-citrus.jpg",
+        img: "/dishes/drink-citrus.webp",
       },
       {
         id: "p-anfas-mirinda",
@@ -1460,7 +1460,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 150,
-        img: "/dishes/drink-mirinda.jpg",
+        img: "/dishes/drink-mirinda.webp",
       },
       {
         id: "p-anfas-7up",
@@ -1471,7 +1471,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 150,
-        img: "/dishes/drink-7up.jpg",
+        img: "/dishes/drink-7up.webp",
       },
       {
         id: "p-anfas-7up-diet",
@@ -1482,7 +1482,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 0,
-        img: "/dishes/drink-7up-diet.jpg",
+        img: "/dishes/drink-7up-diet.webp",
       },
       {
         id: "p-anfas-dew",
@@ -1493,7 +1493,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 150,
-        img: "/dishes/drink-dew.jpg",
+        img: "/dishes/drink-dew.webp",
       },
       {
         id: "p-anfas-water",
@@ -1504,7 +1504,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 0,
-        img: "/dishes/drink-water.jpg",
+        img: "/dishes/drink-water.webp",
       },
     ],
   },

@@ -52,7 +52,7 @@ export const Route = createFileRoute("/")({
 const signatureDishes = [
   {
     id: "p-anfas-anfas-kebab",
-    img: "/dishes/anfas-kebab.jpg",
+    img: "/dishes/anfas-kebab.webp",
     nameAr: "كباب أنفاس الخاص",
     nameEn: "Anfas Signature Kebab",
     descAr: "ابتكار شيف أنفاس من اللحم البلدي الطازج مع الخلطة السرية والجبن المذاب على الجمر.",
@@ -64,7 +64,7 @@ const signatureDishes = [
   },
   {
     id: "p-anfas-meat-awsal",
-    img: "/dishes/meat-awsal.jpg",
+    img: "/dishes/meat-awsal.webp",
     nameAr: "أوصال لحم طازج",
     nameEn: "Meat Awsal Skewers",
     descAr: "مكعبات لحم ضأن طازج متبلة بالبهارات التركية ومشوية على الفحم مع الطماطم والفلفل.",
@@ -76,7 +76,7 @@ const signatureDishes = [
   },
   {
     id: "p-anfas-lamb-chops",
-    img: "/dishes/lamb-chops.jpg",
+    img: "/dishes/lamb-chops.webp",
     nameAr: "ريش لحم غنم مشوية",
     nameEn: "Grilled Lamb Chops",
     descAr: "ريش غنم طازجة متبلة بالبهارات التركية ومشوية بإتقان على الفحم مع الخضار المشوية.",
@@ -88,7 +88,7 @@ const signatureDishes = [
   },
   {
     id: "p-anfas-one-meter-meat",
-    img: "/dishes/one-meter-meat.jpg",
+    img: "/dishes/one-meter-meat.webp",
     nameAr: "متر كباب لحم تركي",
     nameEn: "1 Meter Meat Kebab",
     descAr: "سيخ كباب لحم ضأن بلدي ممتد بطول متر كامل على خبز البيدا التركي مع الخضار المشوية.",
@@ -100,7 +100,7 @@ const signatureDishes = [
   },
   {
     id: "p-anfas-one-kg-anfas-dome",
-    img: "/dishes/one-kg-anfas-dome.jpg",
+    img: "/dishes/one-kg-anfas-dome.webp",
     nameAr: "كيلو أنفاس بالقبة النحاسية VIP",
     nameEn: "1 KG Anfas VIP Copper Dome",
     descAr: "الطبق الاستعراضي الملكي بأنفاس يقدم تحت قبة نحاسية مبخرة بالفحم العطري مع المشاوي الفاخرة.",
@@ -112,7 +112,7 @@ const signatureDishes = [
   },
   {
     id: "p-anfas-iskender-kebab",
-    img: "/dishes/iskender-kebab.jpg",
+    img: "/dishes/iskender-kebab.webp",
     nameAr: "إسكندر كباب الأصلي",
     nameEn: "Original Iskender Kebab",
     descAr: "كباب مقطع على خبز البيدا المقرمش مع صلصة الطماطم الغنية والزبدة الساخنة والزبادي.",

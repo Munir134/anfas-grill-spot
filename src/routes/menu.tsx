@@ -373,7 +373,7 @@ function MenuPage() {
                         scrollToCategory(cat.id);
                         setIsDrawerOpen(false);
                       }}
-                      className={`flex items-center gap-3 p-3 rounded-2xl border text-right rtl:text-right ltr:text-left transition-all active:scale-[0.97] cursor-pointer ${
+                      className={`flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl border text-right rtl:text-right ltr:text-left transition-all active:scale-[0.97] cursor-pointer ${
                         activeCategory === cat.id
                           ? "bg-primary text-primary-foreground border-primary shadow-sm"
                           : "bg-cream/60 border-border/60 hover:border-primary/40 text-ink"
@@ -383,10 +383,10 @@ function MenuPage() {
                         <CategoryIcon name={cat.iconName} className="h-4 w-4 text-primary" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className="font-bold text-xs truncate">
+                        <div className="font-bold text-xs leading-snug break-words">
                           {lang === "ar" ? cat.titleAr : cat.titleEn}
                         </div>
-                        <div className="text-[10px] opacity-75 truncate">
+                        <div className="text-[10px] opacity-75 mt-0.5">
                           {cat.items.length} {lang === "ar" ? "أطباق" : "items"}
                         </div>
                       </div>
@@ -561,7 +561,7 @@ function MenuPage() {
                           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-106"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            target.src = "/dishes/anfas-kebab.jpg";
+                            target.src = "/dishes/anfas-kebab.webp";
                           }}
                         />
 
