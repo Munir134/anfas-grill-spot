@@ -39,6 +39,7 @@ import {
   DrawerClose,
 } from "../components/ui/drawer";
 import menuHeroImg from "../assets/menu-hero-feast.webp";
+import anfasLogo from "../assets/anfas-emblem.png";
 
 export const Route = createFileRoute("/menu")({
   head: () => ({
@@ -233,14 +234,17 @@ function MenuPage() {
 
         {/* Center Content */}
         <div className="container-anfas text-center relative z-10 max-w-4xl mx-auto">
-          {/* Flame Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/25 backdrop-blur-md border border-primary/40 text-orange-400 text-xs font-semibold mb-4 shadow-sm animate-in fade-in duration-300">
-            <Flame className="h-4 w-4 animate-pulse text-orange-400" />
-            <span>
-              {lang === "ar"
-                ? "مشاوي تركية على الفحم الطبيعي • قائمة الطعام الكاملة"
-                : "Authentic Turkish Charcoal Grills • Complete Dining Menu"}
-            </span>
+          {/* Authentic Restaurant Logo Emblem */}
+          <div className="flex justify-center mb-4 animate-in fade-in zoom-in-90 duration-300">
+            <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-3xl bg-black/55 backdrop-blur-xl border border-white/20 p-2.5 shadow-2xl flex items-center justify-center transition-transform hover:scale-105 duration-300">
+              <img
+                src={anfasLogo}
+                alt={lang === "ar" ? "مطعم أنفاس للمشويات التركية" : "Anfas Turkish Grill"}
+                className="h-full w-full object-contain filter drop-shadow(0 2px 10px rgba(0,0,0,0.6))"
+                width={96}
+                height={96}
+              />
+            </div>
           </div>
 
           {/* Title */}
@@ -722,23 +726,37 @@ function MenuPage() {
         )}
       </main>
 
-      {/* ── FLOATING QUICK-JUMP CAPSULE (Mobile & Tablet) ────────────────────── */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2">
+      {/* ── FLOATING QUICK-JUMP CAPSULE & CART STATUS (Mobile & Tablet) ────────── */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 max-w-[92vw]">
         {/* Sections Drawer Button */}
         <button
           onClick={() => setIsDrawerOpen(true)}
-          className="flex items-center gap-2 px-5 py-3 rounded-full bg-ink/90 text-white dark:bg-white/90 dark:text-black backdrop-blur-xl border border-white/20 shadow-2xl text-xs font-bold active:scale-95 hover:scale-105 transition-all cursor-pointer"
+          className="shrink-0 flex items-center gap-2 px-4 sm:px-5 py-3 rounded-full bg-ink/90 text-white dark:bg-white/90 dark:text-black backdrop-blur-xl border border-white/20 shadow-2xl text-xs font-bold active:scale-95 hover:scale-105 transition-all cursor-pointer"
           aria-label={lang === "ar" ? "تصفح جميع أقسام المنيو" : "Browse all categories"}
         >
           <Layers className="h-4 w-4 text-primary" />
           <span>{lang === "ar" ? "الأقسام (١٣)" : "Categories (13)"}</span>
         </button>
 
+        {/* Floating Items Count & Price Pill */}
+        {totalItemCount > 0 && (
+          <button
+            onClick={openCart}
+            className="shrink-0 flex items-center gap-2 px-4 sm:px-5 py-3 rounded-full bg-primary text-primary-foreground backdrop-blur-xl border border-white/20 shadow-2xl text-xs font-bold active:scale-95 hover:scale-105 transition-all cursor-pointer animate-in fade-in zoom-in-95 duration-300"
+            aria-label={lang === "ar" ? "عرض سلة الطلبات" : "View shopping bag"}
+          >
+            <ShoppingBag className="h-4 w-4" />
+            <span>
+              {totalItemCount} {lang === "ar" ? "أطباق" : "items"} • {subtotal} {t("sar")}
+            </span>
+          </button>
+        )}
+
         {/* Back to top button */}
         {showBackToTop && (
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="h-10 w-10 rounded-full bg-cream border border-border/80 text-ink shadow-lg flex items-center justify-center hover:bg-muted active:scale-90 transition-all cursor-pointer"
+            className="shrink-0 h-10 w-10 rounded-full bg-cream border border-border/80 text-ink shadow-lg flex items-center justify-center hover:bg-muted active:scale-90 transition-all cursor-pointer"
             aria-label={lang === "ar" ? "العودة لأعلى الصفحة" : "Back to top"}
           >
             <ArrowUp className="h-4 w-4" />
