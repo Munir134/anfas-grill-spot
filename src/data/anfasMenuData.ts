@@ -81,11 +81,12 @@ export const steakModifiers: WaselModifierGroup[] = [
 export const casseroleModifiers: WaselModifierGroup[] = [
   {
     id: "mg-casserole-cheese",
-    name: "إضافة جبنة — Cheese Add-on",
-    min_selections: 0,
+    name: "إضافة الجبن — Cheese Choice",
+    min_selections: 1,
     max_selections: 1,
     options: [
-      { id: "m-add-mozzarella", name: "إضافة جبنة موزاريلا ذائبة — Add Mozzarella Cheese", price: 5, is_available: true },
+      { id: "m-without-cheese", name: "بدون جبنة — Without Cheese", price: 0, is_available: true },
+      { id: "m-with-cheese", name: "مع إضافة جبنة — With Cheese", price: 5, is_available: true },
     ],
   },
 ];
@@ -426,8 +427,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 48,
         calories: 490,
         img: "/dishes/meat-awsal.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isPopular: true,
       },
       {
@@ -440,8 +439,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 45,
         calories: 510,
         img: "/dishes/meat-kebab.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isPopular: true,
       },
       {
@@ -454,8 +451,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 75,
         calories: 680,
         img: "/dishes/lamb-chops.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isChefSpecial: true,
       },
       {
@@ -468,8 +463,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 42,
         calories: 430,
         img: "/dishes/chicken-awsal.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isPopular: true,
       },
       {
@@ -482,8 +475,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 42,
         calories: 460,
         img: "/dishes/chicken-kebab.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isPopular: true,
       },
       {
@@ -496,8 +487,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 48,
         calories: 490,
         img: "/dishes/eggplant-kebab.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
       },
       {
         id: "p-anfas-saraya-kebab",
@@ -509,8 +498,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 55,
         calories: 620,
         img: "/dishes/saraya-kebab.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isPopular: true,
       },
       {
@@ -523,8 +510,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 58,
         calories: 590,
         img: "/dishes/anfas-kebab.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isChefSpecial: true,
       },
       {
@@ -537,8 +522,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 55,
         calories: 640,
         img: "/dishes/meat-chateau.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
       },
       {
         id: "p-anfas-butchers-kofta",
@@ -550,8 +533,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 45,
         calories: 560,
         img: "/dishes/butchers-kofta.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
       },
       {
         id: "p-anfas-mozzarella-kofta",
@@ -563,8 +544,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 58,
         calories: 610,
         img: "/dishes/mozzarella-kofta.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
       },
       {
         id: "p-anfas-beyti-kebab",
@@ -576,8 +555,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 55,
         calories: 590,
         img: "/dishes/saraya-kebab.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
       },
       {
         id: "p-anfas-iskender-kebab",
@@ -634,8 +611,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 69,
         calories: 720,
         img: "/dishes/mixed-grill-portion.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isPopular: true,
       },
       {
@@ -648,8 +623,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 220,
         calories: 2350,
         img: "/dishes/one-kg-anfas-dome.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isChefSpecial: true,
         isPopular: true,
       },
@@ -663,8 +636,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 180,
         calories: 2100,
         img: "/dishes/one-kg-meat.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
       },
       {
         id: "p-anfas-half-kg-meat",
@@ -676,8 +647,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 98,
         calories: 1050,
         img: "/dishes/half-kg-meat.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
       },
       {
         id: "p-anfas-kg-mix",
@@ -689,8 +658,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 160,
         calories: 1950,
         img: "/dishes/one-kg-mix.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isPopular: true,
       },
       {
@@ -703,8 +670,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 88,
         calories: 980,
         img: "/dishes/half-kg-mix.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
       },
       {
         id: "p-anfas-kg-chicken",
@@ -716,8 +681,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 160,
         calories: 1800,
         img: "/dishes/one-kg-chicken.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
       },
       {
         id: "p-anfas-half-kg-chicken",
@@ -729,8 +692,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 88,
         calories: 900,
         img: "/dishes/half-kg-chicken.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
       },
       {
         id: "p-anfas-meter-meat",
@@ -742,8 +703,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 160,
         calories: 2200,
         img: "/dishes/one-meter-meat.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isChefSpecial: true,
       },
       {
@@ -756,8 +715,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 150,
         calories: 1950,
         img: "/dishes/one-meter-chicken.webp",
-        hasModifiers: true,
-        modifierGroups: grillModifiers,
         isPopular: true,
       },
     ],
@@ -1126,8 +1083,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 79,
         calories: 590,
         img: "/dishes/steak-pepper.webp",
-        hasModifiers: true,
-        modifierGroups: steakModifiers,
         isChefSpecial: true,
       },
       {
@@ -1140,8 +1095,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 79,
         calories: 640,
         img: "/dishes/steak-pepper.webp",
-        hasModifiers: true,
-        modifierGroups: steakModifiers,
       },
       {
         id: "p-anfas-steak-mushroom",
@@ -1153,8 +1106,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 84,
         calories: 680,
         img: "/dishes/steak-mushroom.webp",
-        hasModifiers: true,
-        modifierGroups: steakModifiers,
         isPopular: true,
       },
     ],

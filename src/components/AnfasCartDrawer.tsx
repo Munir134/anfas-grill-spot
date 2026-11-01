@@ -108,7 +108,10 @@ export default function AnfasCartDrawer() {
         message += `${index + 1}. *${item.name}* × ${item.quantity} (${itemLinePrice} ر.س)\n`;
         if (item.selectedOptions && item.selectedOptions.length > 0) {
           item.selectedOptions.forEach((opt) => {
-            message += `   • ${opt.optionName}${opt.price > 0 ? ` (+${opt.price} ر.س)` : ''}\n`;
+            const label = opt.optionName.includes('—')
+              ? (lang === 'ar' ? opt.optionName.split('—')[0].trim() : opt.optionName.split('—')[1].trim())
+              : opt.optionName;
+            message += `   • (${label})${opt.price > 0 ? ` (+${opt.price} ر.س)` : ''}\n`;
           });
         }
         if (item.specialInstructions) {
@@ -147,7 +150,10 @@ export default function AnfasCartDrawer() {
         message += `${index + 1}. *${item.nameEn || item.name}* x ${item.quantity} (${itemLinePrice} SAR)\n`;
         if (item.selectedOptions && item.selectedOptions.length > 0) {
           item.selectedOptions.forEach((opt) => {
-            message += `   • ${opt.optionName}${opt.price > 0 ? ` (+${opt.price} SAR)` : ''}\n`;
+            const label = opt.optionName.includes('—')
+              ? opt.optionName.split('—')[1].trim()
+              : opt.optionName;
+            message += `   • (${label})${opt.price > 0 ? ` (+${opt.price} SAR)` : ''}\n`;
           });
         }
         if (item.specialInstructions) {
@@ -339,15 +345,20 @@ export default function AnfasCartDrawer() {
                             {/* Options tags */}
                             {item.selectedOptions.length > 0 && (
                               <div className="flex flex-wrap gap-1 mt-1">
-                                {item.selectedOptions.map((opt) => (
-                                  <span
-                                    key={opt.optionId}
-                                    className="inline-flex items-center text-[10px] px-1.5 py-0.5 rounded bg-cream border border-border text-muted-foreground"
-                                  >
-                                    {opt.optionName}
-                                    {opt.price > 0 && ` (+${opt.price} ${t('sar')})`}
-                                  </span>
-                                ))}
+                                {item.selectedOptions.map((opt) => {
+                                  const label = opt.optionName.includes('—')
+                                    ? (lang === 'ar' ? opt.optionName.split('—')[0].trim() : opt.optionName.split('—')[1].trim())
+                                    : opt.optionName;
+                                  return (
+                                    <span
+                                      key={opt.optionId}
+                                      className="inline-flex items-center text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 font-bold"
+                                    >
+                                      ({label})
+                                      {opt.price > 0 && ` (+${opt.price} ${t('sar')})`}
+                                    </span>
+                                  );
+                                })}
                               </div>
                             )}
 

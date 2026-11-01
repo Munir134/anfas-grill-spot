@@ -89,8 +89,16 @@ function CategoryIcon({ name, className = "h-4 w-4" }: { name: string; className
 
 function MenuPage() {
   const { t, lang } = useLanguage();
-  const { items, addItem, updateQuantity, removeItem, openCart, totalItemCount, subtotal } =
-    useCart();
+  const {
+    items,
+    addItem,
+    updateQuantity,
+    removeItem,
+    openCart,
+    totalItemCount,
+    subtotal,
+    openCustomizer,
+  } = useCart();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string>("all");
@@ -183,8 +191,26 @@ function MenuPage() {
     }
   }, [activeCategory]);
 
-  // Handle direct item addition without opening the bag
-  const handleAddItem = (item: MenuItem) => {
+  // Handle item addition or opening customization modal
+  const handleAddItem = (item: MenuItem, categoryId?: string) => {
+    // If dish has modifier choices (e.g. casseroles with cheese choice), open the customizer
+    if (item.hasModifiers && item.modifierGroups && item.modifierGroups.length > 0) {
+      openCustomizer({
+        id: item.id,
+        category_id: categoryId || "casseroles",
+        name: lang === "ar" ? item.nameAr : item.nameEn,
+        description: lang === "ar" ? item.descAr : item.descEn,
+        base_price: item.priceNum,
+        image_url: item.img,
+        is_available: true,
+        preparation_time_minutes: 15,
+        calories: item.calories,
+        is_featured: !!item.isPopular,
+        modifier_groups: item.modifierGroups,
+      });
+      return;
+    }
+
     addItem({
       productId: item.id,
       name: lang === "ar" ? item.nameAr : item.nameEn,
@@ -712,8 +738,8 @@ function MenuPage() {
                             )}
                           </div>
 
-                          {/* Interactive Quantity Stepper or Add Button */}
-                          {quantityInCart > 0 && cartEntry ? (
+                          {/* Interactive Quantity Stepper or Add/Customize Button */}
+                          {quantityInCart > 0 && cartEntry && !item.hasModifiers ? (
                             <div className="flex items-center gap-1.5 p-1 rounded-full bg-cream border border-border/80 shadow-xs">
                               {/* Minus Button */}
                               <button
@@ -749,10 +775,12 @@ function MenuPage() {
                           ) : (
                             <button
                               type="button"
-                              onClick={() => handleAddItem(item)}
+                              onClick={() => handleAddItem(item, cat.id)}
                               className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-bold shadow-sm active:scale-95 transition-all duration-200 cursor-pointer ${
                                 isJustAdded
                                   ? "bg-emerald-600 text-white"
+                                  : item.hasModifiers
+                                  ? "bg-amber-600 hover:bg-amber-700 text-white shadow-sm shadow-amber-600/30"
                                   : "bg-primary text-primary-foreground hover:bg-brand-deep hover:shadow-md"
                               }`}
                             >
@@ -760,6 +788,11 @@ function MenuPage() {
                                 <>
                                   <Check className="h-3.5 w-3.5" />
                                   <span>{lang === "ar" ? "تمت الإضافة" : "Added"}</span>
+                                </>
+                              ) : item.hasModifiers ? (
+                                <>
+                                  <SlidersHorizontal className="h-3.5 w-3.5" />
+                                  <span>{lang === "ar" ? "تخصيص" : "Customize"}</span>
                                 </>
                               ) : (
                                 <>
