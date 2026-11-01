@@ -783,8 +783,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 60,
         calories: 380,
         img: "/dishes/casserole-shrimp-small.webp",
-        hasModifiers: true,
-        modifierGroups: casseroleModifiers,
       },
       {
         id: "p-anfas-casserole-shrimp-large",
@@ -796,8 +794,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 99,
         calories: 710,
         img: "/dishes/casserole-shrimp-large.webp",
-        hasModifiers: true,
-        modifierGroups: casseroleModifiers,
         isChefSpecial: true,
       },
       {
@@ -810,8 +806,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 45,
         calories: 520,
         img: "/dishes/meat-tray-small.webp",
-        hasModifiers: true,
-        modifierGroups: casseroleModifiers,
       },
       {
         id: "p-anfas-meat-tray-large",
@@ -823,8 +817,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 99,
         calories: 950,
         img: "/dishes/meat-tray-large.webp",
-        hasModifiers: true,
-        modifierGroups: casseroleModifiers,
       },
       {
         id: "p-anfas-meat-leaf",
@@ -836,8 +828,6 @@ export const anfasCategories: MenuCategory[] = [
         priceNum: 45,
         calories: 490,
         img: "/dishes/meat-leaf.webp",
-        hasModifiers: true,
-        modifierGroups: casseroleModifiers,
       },
     ],
   },
