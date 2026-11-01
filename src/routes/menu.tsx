@@ -734,18 +734,13 @@ function MenuPage() {
                               {lang === "ar" ? item.nameAr : item.nameEn}
                             </h3>
                           </div>
-                          <div className="text-[11px] font-latin text-muted-foreground tracking-wider mb-2">
+                          <div className="text-[11px] font-latin text-muted-foreground tracking-wider">
                             {lang === "ar" ? item.nameEn : item.nameAr}
                           </div>
-
-                          {/* Dish Description */}
-                          <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
-                            {lang === "ar" ? item.descAr : item.descEn}
-                          </p>
                         </div>
 
                         {/* Price and Action Bar */}
-                        <div className="mt-5 pt-3 border-t border-border/50 flex items-center justify-between gap-3">
+                        <div className="mt-4 pt-3 border-t border-border/50 flex items-center justify-between gap-3">
                           <div className="flex items-baseline gap-1">
                             {item.priceNum === 0 ? (
                               <span className="text-xl font-bold text-emerald-600">

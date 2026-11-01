@@ -55,8 +55,8 @@ const signatureDishes = [
     img: "/dishes/anfas-kebab.webp",
     nameAr: "كباب أنفاس الخاص",
     nameEn: "Anfas Signature Kebab",
-    descAr: "ابتكار شيف أنفاس من اللحم البلدي الطازج مع الخلطة السرية والجبن المذاب على الجمر.",
-    descEn: "Anfas signature handmade charcoal kebab stuffed with melted cheese and secret spices.",
+    descAr: "",
+    descEn: "",
     price: 58,
     calories: 620,
     badgeAr: "توقيع الشيف",
@@ -67,8 +67,8 @@ const signatureDishes = [
     img: "/dishes/meat-awsal.webp",
     nameAr: "أوصال لحم طازج",
     nameEn: "Meat Awsal Skewers",
-    descAr: "مكعبات لحم ضأن طازج متبلة بالبهارات التركية ومشوية على الفحم مع الطماطم والفلفل.",
-    descEn: "Succulent cubes of marinated fresh lamb grilled over natural wood charcoal.",
+    descAr: "",
+    descEn: "",
     price: 48,
     calories: 520,
     badgeAr: "الأكثر طلباً",
@@ -79,8 +79,8 @@ const signatureDishes = [
     img: "/dishes/lamb-chops.webp",
     nameAr: "ريش لحم غنم مشوية",
     nameEn: "Grilled Lamb Chops",
-    descAr: "ريش غنم طازجة متبلة بالبهارات التركية ومشوية بإتقان على الفحم مع الخضار المشوية.",
-    descEn: "Prime tender lamb rib chops marinated in Turkish thyme and charbroiled to perfection.",
+    descAr: "",
+    descEn: "",
     price: 75,
     calories: 680,
     badgeAr: "لحم طازج",
@@ -91,8 +91,8 @@ const signatureDishes = [
     img: "/dishes/one-meter-meat.webp",
     nameAr: "متر كباب لحم تركي",
     nameEn: "1 Meter Meat Kebab",
-    descAr: "سيخ كباب لحم ضأن بلدي ممتد بطول متر كامل على خبز البيدا التركي مع الخضار المشوية.",
-    descEn: "One full meter continuous charcoal lamb kebab presented on warm pide flatbread with dips.",
+    descAr: "",
+    descEn: "",
     price: 160,
     calories: 2150,
     badgeAr: "وليمة عائلية",
@@ -103,8 +103,8 @@ const signatureDishes = [
     img: "/dishes/one-kg-anfas-dome.webp",
     nameAr: "كيلو أنفاس بالقبة النحاسية VIP",
     nameEn: "1 KG Anfas VIP Copper Dome",
-    descAr: "الطبق الاستعراضي الملكي بأنفاس يقدم تحت قبة نحاسية مبخرة بالفحم العطري مع المشاوي الفاخرة.",
-    descEn: "Our royal showstopper served under a grand heated copper dome filled with aromatic wood smoke.",
+    descAr: "",
+    descEn: "",
     price: 220,
     calories: 2350,
     badgeAr: "VIP الملكي",
@@ -115,8 +115,8 @@ const signatureDishes = [
     img: "/dishes/iskender-kebab.webp",
     nameAr: "إسكندر كباب الأصلي",
     nameEn: "Original Iskender Kebab",
-    descAr: "كباب مقطع على خبز البيدا المقرمش مع صلصة الطماطم الغنية والزبدة الساخنة والزبادي.",
-    descEn: "Sliced kebab over toasted pide bread, smothered with warm tomato sauce, browned butter & yogurt.",
+    descAr: "",
+    descEn: "",
     price: 55,
     calories: 640,
     badgeAr: "تركي أصيل",
@@ -320,12 +320,9 @@ function Home() {
                           {lang === "ar" ? d.nameAr : d.nameEn}
                         </h3>
                       </div>
-                      <div className="text-[11px] font-latin text-muted-foreground tracking-wider mb-2">
+                      <div className="text-[11px] font-latin text-muted-foreground tracking-wider">
                         {lang === "ar" ? d.nameEn : d.nameAr}
                       </div>
-                      <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                        {lang === "ar" ? d.descAr : d.descEn}
-                      </p>
                     </div>
                   </div>
 

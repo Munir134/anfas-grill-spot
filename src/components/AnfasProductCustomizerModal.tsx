@@ -141,18 +141,12 @@ export default function AnfasProductCustomizerModal() {
               <h3 className="text-xl font-bold text-white drop-shadow-sm">
                 {activeModalProduct.name}
               </h3>
-              <p className="text-xs text-white/80 line-clamp-2 mt-1 drop-shadow-xs">
-                {activeModalProduct.description}
-              </p>
             </div>
           </div>
         ) : (
           <div className="p-6 border-b border-border flex items-center justify-between bg-card">
             <div>
               <h3 className="text-xl font-bold text-foreground">{activeModalProduct.name}</h3>
-              <p className="text-xs text-muted-foreground mt-1">
-                {activeModalProduct.description}
-              </p>
             </div>
             <button
               onClick={closeCustomizer}
