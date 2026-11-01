@@ -20,6 +20,7 @@ import AnfasProductCustomizerModal from "../components/AnfasProductCustomizerMod
 import AnfasOrderTrackerModal from "../components/AnfasOrderTrackerModal";
 import { AnfasPrivacyPolicyModal } from "../components/AnfasPrivacyPolicyModal";
 import { WaselClient } from "../lib/wasel";
+import { usePostOrderReviewRedirect } from "../lib/orderReviewRedirect";
 
 function NotFoundComponent() {
   const { t } = useLanguage();
@@ -208,6 +209,11 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function PostOrderReviewWatcher() {
+  usePostOrderReviewRedirect();
+  return null;
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -215,6 +221,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
         <CartProvider>
+          <PostOrderReviewWatcher />
           <div className="flex min-h-screen flex-col bg-background text-foreground">
             <SiteHeader />
             <main className="flex-1">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../lib/CartContext';
 import { useLanguage } from '../lib/LanguageContext';
+import { markOrderSentForReview, ANFAS_REVIEW_URL } from '../lib/orderReviewRedirect';
 import {
   X,
   Plus,
@@ -15,6 +16,7 @@ import {
   Banknote,
   Store,
   Utensils,
+  Star,
 } from 'lucide-react';
 import anfasLogo from '../assets/anfas-emblem.png';
 
@@ -171,6 +173,10 @@ export default function AnfasCartDrawer() {
 
     const whatsappUrl = `https://wa.me/${ANFAS_WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
 
+    // Mark order as sent so that when customer returns to the restaurant website,
+    // they are automatically teleported to Google Reviews (Taqyeemi)
+    markOrderSentForReview();
+
     // Open WhatsApp
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 
@@ -233,13 +239,22 @@ export default function AnfasCartDrawer() {
                   <CheckCircle2 className="w-9 h-9" />
                 </div>
                 <h3 className="text-xl font-bold text-ink">
-                  {lang === 'ar' ? 'جارٍ تحويلك إلى واتساب...' : 'Redirecting to WhatsApp...'}
+                  {lang === 'ar' ? 'تم إرسال طلبك بنجاح! 🔥' : 'Order Sent Successfully! 🔥'}
                 </h3>
                 <p className="text-sm text-muted-foreground max-w-xs mx-auto">
                   {lang === 'ar'
-                    ? 'تم تجهيز طلبك بكل تفاصيله لإرساله فوراً إلى طاقم مطعم أنفاس.'
-                    : 'Your order details have been prepared and sent directly to Anfas Grill.'}
+                    ? 'شكراً لطلبك من مطعم أنفاس. عند عودتك للموقع سيتم توجيهك مباشرة لتقييم تجربتك عبر قوقل.'
+                    : 'Thank you for ordering from Anfas. When you return to the site, you will be directed to review your experience on Google.'}
                 </p>
+                <div className="pt-2">
+                  <a
+                    href={ANFAS_REVIEW_URL}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 text-xs font-bold transition-all"
+                  >
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                    <span>{lang === 'ar' ? 'تقييم المطعم على قوقل' : 'Review on Google'}</span>
+                  </a>
+                </div>
               </div>
             ) : items.length === 0 ? (
               <div className="py-16 text-center space-y-5">
