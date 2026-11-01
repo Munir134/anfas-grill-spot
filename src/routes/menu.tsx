@@ -258,6 +258,10 @@ function MenuPage() {
       .filter(Boolean) as MenuCategory[];
   }, [searchQuery, filterMode, filterMode === "isolated" ? activeCategory : null]);
 
+  const totalAllDishes = useMemo(() => {
+    return anfasCategories.reduce((acc, cat) => acc + cat.items.length, 0);
+  }, []);
+
   const totalMatchingDishes = useMemo(() => {
     return filteredCategories.reduce((acc, cat) => acc + cat.items.length, 0);
   }, [filteredCategories]);
@@ -342,7 +346,11 @@ function MenuPage() {
             </span>
             <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/75 border border-white/15 text-stone-200 shadow-sm">
               <UtensilsCrossed className="h-3.5 w-3.5 text-orange-400" />
-              <span>{lang === "ar" ? "أكثر من ١١٨ طبقاً طازجاً" : "118+ Fresh Dishes"}</span>
+              <span>
+                {lang === "ar"
+                  ? `أكثر من ${totalAllDishes} طبقاً طازجاً`
+                  : `${totalAllDishes}+ Fresh Dishes`}
+              </span>
             </span>
             <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/75 border border-white/15 text-stone-200 shadow-sm">
               <Flame className="h-3.5 w-3.5 text-orange-400" />
