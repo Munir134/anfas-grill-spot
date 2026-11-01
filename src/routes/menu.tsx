@@ -696,12 +696,20 @@ function MenuPage() {
                         {/* Price and Action Bar */}
                         <div className="mt-5 pt-3 border-t border-border/50 flex items-center justify-between gap-3">
                           <div className="flex items-baseline gap-1">
-                            <span className="text-2xl font-black text-primary font-mono tracking-tight">
-                              {item.priceNum}
-                            </span>
-                            <span className="text-xs font-bold text-muted-foreground">
-                              {t("sar")}
-                            </span>
+                            {item.priceNum === 0 ? (
+                              <span className="text-xl font-bold text-emerald-600">
+                                {lang === "ar" ? "مجاناً" : "Free"}
+                              </span>
+                            ) : (
+                              <>
+                                <span className="text-2xl font-black text-primary font-mono tracking-tight">
+                                  {item.priceNum}
+                                </span>
+                                <span className="text-xs font-bold text-muted-foreground">
+                                  {t("sar")}
+                                </span>
+                              </>
+                            )}
                           </div>
 
                           {/* Interactive Quantity Stepper or Add Button */}
@@ -781,7 +789,7 @@ function MenuPage() {
           aria-label={lang === "ar" ? "تصفح جميع أقسام المنيو" : "Browse all categories"}
         >
           <Layers className="h-4 w-4 text-primary" />
-          <span>{lang === "ar" ? "الأقسام (١٣)" : "Categories (13)"}</span>
+          <span>{lang === "ar" ? `الأقسام (${anfasCategories.length})` : `Categories (${anfasCategories.length})`}</span>
         </button>
 
         {/* Floating Items Count & Price Pill */}
