@@ -103,20 +103,20 @@ export default function AnfasCartDrawer() {
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
       message += `📋 *الأصناف المطلوبة:*\n`;
 
-      items.forEach((item, index) => {
+      items.forEach((item) => {
         const modTotal = item.selectedOptions.reduce((s, o) => s + o.price, 0);
         const itemLinePrice = (item.unitPrice + modTotal) * item.quantity;
-        message += `${index + 1}. *${item.name}* × ${item.quantity} (${itemLinePrice} ر.س)\n`;
+        message += `• *${item.name}* × ${item.quantity} (${itemLinePrice} ر.س)\n`;
         if (item.selectedOptions && item.selectedOptions.length > 0) {
           item.selectedOptions.forEach((opt) => {
             const label = opt.optionName.includes('—')
               ? (lang === 'ar' ? opt.optionName.split('—')[0].trim() : opt.optionName.split('—')[1].trim())
               : opt.optionName;
-            message += `   • (${label})${opt.price > 0 ? ` (+${opt.price} ر.س)` : ''}\n`;
+            message += `   ▫️ (${label})${opt.price > 0 ? ` (+${opt.price} ر.س)` : ''}\n`;
           });
         }
         if (item.specialInstructions) {
-          message += `   • ملاحظة الصنف: ${item.specialInstructions}\n`;
+          message += `   📝 ملاحظة: ${item.specialInstructions}\n`;
         }
       });
 
@@ -145,20 +145,20 @@ export default function AnfasCartDrawer() {
       message += `━━━━━━━━━━━━━━━━━━━━\n`;
       message += `📋 *Items:*\n`;
 
-      items.forEach((item, index) => {
+      items.forEach((item) => {
         const modTotal = item.selectedOptions.reduce((s, o) => s + o.price, 0);
         const itemLinePrice = (item.unitPrice + modTotal) * item.quantity;
-        message += `${index + 1}. *${item.nameEn || item.name}* x ${item.quantity} (${itemLinePrice} SAR)\n`;
+        message += `• *${item.nameEn || item.name}* x ${item.quantity} (${itemLinePrice} SAR)\n`;
         if (item.selectedOptions && item.selectedOptions.length > 0) {
           item.selectedOptions.forEach((opt) => {
             const label = opt.optionName.includes('—')
               ? opt.optionName.split('—')[1].trim()
               : opt.optionName;
-            message += `   • (${label})${opt.price > 0 ? ` (+${opt.price} SAR)` : ''}\n`;
+            message += `   ▫️ (${label})${opt.price > 0 ? ` (+${opt.price} SAR)` : ''}\n`;
           });
         }
         if (item.specialInstructions) {
-          message += `   • Note: ${item.specialInstructions}\n`;
+          message += `   📝 Note: ${item.specialInstructions}\n`;
         }
       });
 
