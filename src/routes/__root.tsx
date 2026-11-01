@@ -386,18 +386,47 @@ function SiteFooter() {
           </div>
         </div>
         <div className="border-t border-border/60">
-          <div className="container-anfas py-5 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+          <div className="container-anfas py-5 flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
             <span>
               © {year} {t("footerCopyright")}
             </span>
-            <button
-              type="button"
-              onClick={() => setIsPrivacyOpen(true)}
-              className="text-xs text-muted-foreground hover:text-primary transition-colors underline-offset-4 hover:underline cursor-pointer"
+
+            {/* Powered by MUHAB with official logo */}
+            <a
+              href="https://muhab.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cream/90 hover:bg-cream border border-border/70 hover:border-border text-ink/80 hover:text-ink transition-all duration-200 group shadow-2xs hover:shadow-xs active:scale-95"
+              title="MUHAB Studio — صُنّاع المواقع والأنظمة الرقمية"
             >
-              سياسة الخصوصية | Privacy Policy
-            </button>
-            <span className="font-latin tracking-widest">ANFAS · JEDDAH</span>
+              <span className="text-[11px] text-muted-foreground font-medium">
+                {lang === "ar" ? "تطوير وتشغيل:" : "Powered by"}
+              </span>
+              <div className="flex items-center gap-1.5 font-latin font-bold">
+                <img
+                  src="/muhab-emblem.webp"
+                  alt="MUHAB"
+                  className="h-4 w-auto object-contain group-hover:scale-105 transition-transform duration-200"
+                  loading="lazy"
+                  width={21}
+                  height={16}
+                />
+                <span className="tracking-wider uppercase text-[11px] text-ink group-hover:text-primary transition-colors">
+                  MUHAB
+                </span>
+              </div>
+            </a>
+
+            <div className="flex items-center gap-4">
+              <button
+                type="button"
+                onClick={() => setIsPrivacyOpen(true)}
+                className="text-xs text-muted-foreground hover:text-primary transition-colors underline-offset-4 hover:underline cursor-pointer"
+              >
+                سياسة الخصوصية | Privacy Policy
+              </button>
+              <span className="font-latin tracking-widest text-[11px] opacity-75">ANFAS · JEDDAH</span>
+            </div>
           </div>
         </div>
       </footer>
