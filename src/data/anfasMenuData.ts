@@ -1545,7 +1545,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٦",
         priceNum: 6,
         calories: 0,
-        img: "/dishes/drink-water.webp",
+        img: "/dishes/drink-soda-water.webp",
       },
       {
         id: "p-anfas-pepsi-extra",
@@ -1567,7 +1567,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥",
         priceNum: 5,
         calories: 0,
-        img: "/dishes/drink-water.webp",
+        img: "/dishes/drink-water-glass.webp",
       },
       {
         id: "p-anfas-water-600ml",
@@ -1578,7 +1578,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٤",
         priceNum: 4,
         calories: 0,
-        img: "/dishes/drink-water.webp",
+        img: "/dishes/drink-water-600ml.webp",
       },
     ],
   },
