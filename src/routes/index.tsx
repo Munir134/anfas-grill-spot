@@ -507,7 +507,7 @@ function Home() {
                 <div>
                   <div className="font-semibold text-white">{t("hoursLabel")}</div>
                   <div className="text-sm mt-1" dir="ltr">
-                    Daily · 1:00 PM – 4:00 AM
+                    Daily · 12:00 PM – 3:00 AM
                   </div>
                 </div>
               </li>

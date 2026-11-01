@@ -164,8 +164,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                 "Friday",
                 "Saturday",
               ],
-              opens: "13:00",
-              closes: "02:00",
+              opens: "12:00",
+              closes: "03:00",
             },
           ],
         }),
@@ -379,7 +379,7 @@ function SiteFooter() {
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
               <li className="flex justify-between border-b border-border/60 pb-2">
                 <span>{t("footerDaily")}</span>
-                <span dir="ltr">1:00 PM – 4:00 AM</span>
+                <span dir="ltr">12:00 PM – 3:00 AM</span>
               </li>
               <li className="text-xs text-muted-foreground/80 mt-2">{t("footerHoursNote")}</li>
             </ul>

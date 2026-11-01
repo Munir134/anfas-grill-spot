@@ -55,7 +55,7 @@ function ContactPage() {
             <InfoCard
               icon={Clock}
               title={t("contactHours")}
-              body={<span dir="ltr">Daily · 1:00 PM – 4:00 AM</span>}
+              body={<span dir="ltr">Daily · 12:00 PM – 3:00 AM</span>}
             />
             <InfoCard
               icon={Instagram}
