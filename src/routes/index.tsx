@@ -521,11 +521,11 @@ function Home() {
                 <span>{t("orderNow")}</span>
               </Link>
               <a
-                href="tel:0530387458"
+                href="tel:0534900038"
                 className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-medium text-white hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300"
               >
                 <Phone className="h-4 w-4" />
-                <span>053 038 7458</span>
+                <span>053 490 0038</span>
               </a>
             </div>
           </div>

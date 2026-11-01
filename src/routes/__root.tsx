@@ -356,8 +356,8 @@ function SiteFooter() {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-primary" />
-                <a href="tel:0530387458" dir="ltr" className="hover:text-primary transition-colors">
-                  053 038 7458
+                <a href="tel:0534900038" dir="ltr" className="hover:text-primary transition-colors">
+                  053 490 0038
                 </a>
               </li>
               <li className="flex items-center gap-2">

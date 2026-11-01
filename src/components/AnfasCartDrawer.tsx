@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import anfasLogo from '../assets/anfas-emblem.png';
 
-const ANFAS_WHATSAPP_PHONE = '966530387458';
+const ANFAS_WHATSAPP_PHONE = '966534900038';
 
 export default function AnfasCartDrawer() {
   const {

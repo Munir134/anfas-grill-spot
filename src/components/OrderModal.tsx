@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { ArrowLeft, X, MapPin, Phone, MessageCircle, Navigation } from "lucide-react";
 
-const PHONE = "0530387458";
+const PHONE = "0534900038";
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=%D9%85%D8%B7%D8%B9%D9%85+%D8%A3%D9%86%D9%81%D8%A7%D8%B3+%D8%B5%D9%82%D8%B1+%D9%82%D8%B1%D9%8A%D8%B4+%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%D8%A9+%D8%AC%D8%AF%D8%A9";
 const WHATSAPP =
-  "https://wa.me/966530387458?text=" +
+  "https://wa.me/966534900038?text=" +
   encodeURIComponent("مرحباً، أرغب بالطلب من مطعم أنفاس.");
 
 export default function OrderModal({
@@ -75,14 +75,14 @@ export default function OrderModal({
                 href={WHATSAPP}
                 icon={<MessageCircle className="h-4 w-4" />}
                 title="اطلب عبر واتساب"
-                hint="053 038 7458"
+                hint="053 490 0038"
                 external
               />
               <ActionRow
                 href={`tel:${PHONE}`}
                 icon={<Phone className="h-4 w-4" />}
                 title="اتصل بالفرع"
-                hint="053 038 7458"
+                hint="053 490 0038"
               />
               <ActionRow
                 href={MAPS_URL}
