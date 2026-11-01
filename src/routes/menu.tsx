@@ -109,6 +109,8 @@ function MenuPage() {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   const pillContainerRef = useRef<HTMLDivElement>(null);
+  const isProgrammaticScrollRef = useRef(false);
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // High-performance scroll spy using IntersectionObserver (0 forced reflows, native 60/120fps)
   useEffect(() => {
@@ -119,7 +121,12 @@ function MenuPage() {
         window.requestAnimationFrame(() => {
           const sy = window.scrollY;
           setShowBackToTop(sy > 400);
-          if (sy < 260 && filterMode === "continuous" && !searchQuery.trim()) {
+          if (
+            !isProgrammaticScrollRef.current &&
+            sy < 260 &&
+            filterMode === "continuous" &&
+            !searchQuery.trim()
+          ) {
             setActiveCategory("all");
           }
           ticking = false;
@@ -135,6 +142,7 @@ function MenuPage() {
     if (filterMode === "continuous" && !searchQuery.trim()) {
       observer = new IntersectionObserver(
         (entries) => {
+          if (isProgrammaticScrollRef.current) return;
           const visible = entries.filter((e) => e.isIntersecting);
           if (visible.length > 0) {
             visible.sort(
@@ -161,6 +169,7 @@ function MenuPage() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       observer?.disconnect();
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
   }, [filterMode, searchQuery]);
 
@@ -266,8 +275,14 @@ function MenuPage() {
     return filteredCategories.reduce((acc, cat) => acc + cat.items.length, 0);
   }, [filteredCategories]);
 
-  // Jump smoothly to a category
+  // Jump smoothly to a category with programmatic scroll lock
   const scrollToCategory = (catId: string) => {
+    isProgrammaticScrollRef.current = true;
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    scrollTimeoutRef.current = setTimeout(() => {
+      isProgrammaticScrollRef.current = false;
+    }, 950);
+
     setActiveCategory(catId);
     if (filterMode === "isolated") {
       window.scrollTo({ top: 380, behavior: "smooth" });
@@ -279,13 +294,16 @@ function MenuPage() {
     }
     const elem = document.getElementById(`section-${catId}`);
     if (elem) {
-      const topOffset = 110;
-      const elementPosition = elem.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: elementPosition - topOffset,
-        behavior: "smooth",
-      });
+      elem.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+  };
+
+  // Safe category selection from drawer that allows drawer teardown without focus hijack
+  const handleCategorySelectFromDrawer = (catId: string) => {
+    setIsDrawerOpen(false);
+    setTimeout(() => {
+      scrollToCategory(catId);
+    }, 120);
   };
 
   return (
@@ -432,7 +450,12 @@ function MenuPage() {
             </DrawerTrigger>
 
             {/* Apple Native Bottom Sheet Drawer */}
-            <DrawerContent className="max-h-[85vh] bg-background/95 backdrop-blur-2xl border-t border-border/60">
+            <DrawerContent
+              onCloseAutoFocus={(e) => {
+                e.preventDefault();
+              }}
+              className="max-h-[85vh] bg-background/95 backdrop-blur-2xl border-t border-border/60"
+            >
               <div className="mx-auto w-full max-w-2xl px-4 pb-8">
                 <DrawerHeader className="text-center pt-2 pb-4">
                   <DrawerTitle className="text-xl font-bold text-ink flex items-center justify-center gap-2">
@@ -450,10 +473,7 @@ function MenuPage() {
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-[60vh] overflow-y-auto pr-1">
                   <button
-                    onClick={() => {
-                      scrollToCategory("all");
-                      setIsDrawerOpen(false);
-                    }}
+                    onClick={() => handleCategorySelectFromDrawer("all")}
                     className={`flex items-center gap-3 p-3 rounded-2xl border text-right rtl:text-right ltr:text-left transition-all active:scale-[0.97] cursor-pointer ${
                       activeCategory === "all"
                         ? "bg-primary text-primary-foreground border-primary shadow-sm"
@@ -476,10 +496,7 @@ function MenuPage() {
                   {anfasCategories.map((cat) => (
                     <button
                       key={cat.id}
-                      onClick={() => {
-                        scrollToCategory(cat.id);
-                        setIsDrawerOpen(false);
-                      }}
+                      onClick={() => handleCategorySelectFromDrawer(cat.id)}
                       className={`flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl border text-right rtl:text-right ltr:text-left transition-all active:scale-[0.97] cursor-pointer ${
                         activeCategory === cat.id
                           ? "bg-primary text-primary-foreground border-primary shadow-sm"
@@ -619,7 +636,7 @@ function MenuPage() {
             <section
               key={cat.id}
               id={`section-${cat.id}`}
-              className="scroll-mt-24 transition-opacity duration-300"
+              className="scroll-mt-28 transition-opacity duration-300"
             >
               {/* Category Header Card */}
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-border/70 pb-4 mb-6">
@@ -658,7 +675,6 @@ function MenuPage() {
                     <article
                       key={item.id}
                       className="group flex flex-col justify-between rounded-3xl bg-card border border-border/70 hover:border-primary/40 shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
-                      style={{ contentVisibility: "auto", containIntrinsicSize: "0 380px" }}
                     >
                       {/* Image Frame with Badges */}
                       <div className="relative aspect-[16/10] overflow-hidden bg-cream">
