@@ -464,7 +464,7 @@ export default function AnfasCartDrawer() {
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
                       placeholder={lang === 'ar' ? 'مثال: محمد العمري' : 'e.g. Mohammed Al-Amri'}
-                      className="w-full text-xs px-3 py-2.5 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary"
+                      className="w-full text-base sm:text-xs px-3.5 py-2.5 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary touch-manipulation"
                     />
                   </div>
 
@@ -504,7 +504,7 @@ export default function AnfasCartDrawer() {
                             ? 'اختياري (إذا كنت في الجلسات الخارجية)'
                             : 'Optional (if seated in outdoor area)'
                       }
-                      className="w-full text-xs px-3 py-2.5 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary font-mono"
+                      className="w-full text-base sm:text-xs px-3.5 py-2.5 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary font-mono touch-manipulation"
                     />
                   </div>
 
@@ -518,7 +518,7 @@ export default function AnfasCartDrawer() {
                       value={orderNotes}
                       onChange={(e) => setOrderNotes(e.target.value)}
                       placeholder={t('specialInstructionsPlaceholder')}
-                      className="w-full text-xs px-3 py-2 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary"
+                      className="w-full text-base sm:text-xs px-3.5 py-2.5 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary touch-manipulation"
                     />
                   </div>
 

@@ -19,7 +19,8 @@ import {
   ArrowUp,
   Leaf,
   Layers,
-  Sparkles,
+  LayoutGrid,
+  UtensilsCrossed,
   SlidersHorizontal,
 } from "lucide-react";
 import { useLanguage } from "../lib/LanguageContext";
@@ -340,8 +341,8 @@ function MenuPage() {
               <span>{lang === "ar" ? "١٣ قسماً رئيسياً" : "13 Main Sections"}</span>
             </span>
             <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/75 border border-white/15 text-stone-200 shadow-sm">
-              <Sparkles className="h-3.5 w-3.5 text-orange-400" />
-              <span>{lang === "ar" ? "أكثر من ٨٥ طبقاً طازجاً" : "85+ Fresh Dishes"}</span>
+              <UtensilsCrossed className="h-3.5 w-3.5 text-orange-400" />
+              <span>{lang === "ar" ? "أكثر من ١١٨ طبقاً طازجاً" : "118+ Fresh Dishes"}</span>
             </span>
             <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/75 border border-white/15 text-stone-200 shadow-sm">
               <Flame className="h-3.5 w-3.5 text-orange-400" />
@@ -362,7 +363,7 @@ function MenuPage() {
                     ? "ابحث عن طبقك المفضل (كباب، ستيك، حمص، برجر...)"
                     : "Search dishes (kebab, steak, hummus, burger...)"
                 }
-                className="w-full h-12 sm:h-13 rounded-2xl bg-black/75 border border-white/25 pr-11 pl-11 rtl:pr-11 rtl:pl-10 ltr:pl-11 ltr:pr-10 text-sm text-white placeholder:text-stone-300/60 focus:outline-none focus:ring-2 focus:ring-primary/60 focus:border-primary transition-all shadow-xl"
+                className="w-full h-12 sm:h-13 rounded-2xl bg-black/75 border border-white/25 pr-11 pl-11 rtl:pr-11 rtl:pl-10 ltr:pl-11 ltr:pr-10 text-base sm:text-sm text-white placeholder:text-stone-300/60 focus:outline-none focus:ring-2 focus:ring-primary/60 focus:border-primary transition-all shadow-xl touch-manipulation"
               />
               {searchQuery && (
                 <button
@@ -452,7 +453,7 @@ function MenuPage() {
                     }`}
                   >
                     <div className="h-9 w-9 rounded-xl bg-background/80 flex items-center justify-center shrink-0">
-                      <Sparkles className="h-4 w-4 text-primary" />
+                      <LayoutGrid className="h-4 w-4 text-primary" />
                     </div>
                     <div>
                       <div className="font-bold text-xs">
@@ -518,7 +519,7 @@ function MenuPage() {
                   : "bg-cream/70 hover:bg-cream text-muted-foreground hover:text-ink border border-border/60"
               }`}
             >
-              <Sparkles className="h-3 w-3" />
+              <LayoutGrid className="h-3.5 w-3.5" />
               <span>{lang === "ar" ? "الكل" : "All"}</span>
             </button>
 

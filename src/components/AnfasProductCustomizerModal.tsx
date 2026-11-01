@@ -235,7 +235,7 @@ export default function AnfasProductCustomizerModal() {
               value={specialInstructions}
               onChange={(e) => setSpecialInstructions(e.target.value)}
               placeholder={t('specialInstructionsPlaceholder')}
-              className="w-full text-xs px-3 py-2.5 rounded-xl border border-border bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary"
+              className="w-full text-base sm:text-xs px-3.5 py-2.5 rounded-xl border border-border bg-card text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary touch-manipulation"
             />
           </div>
         </div>
