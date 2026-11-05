@@ -114,17 +114,6 @@ export const anfasCategories: MenuCategory[] = [
         img: "/dishes/soup-lentil.webp",
         isPopular: true,
       },
-      {
-        id: "p-anfas-soup-day",
-        nameAr: "شوربة اليوم",
-        nameEn: "Soup of the Day",
-        descAr: "",
-        descEn: "",
-        price: "٢٠",
-        priceNum: 20,
-        calories: 195,
-        img: "/dishes/soup-of-the-day-fresh.webp?v=4",
-      },
     ],
   },
 
