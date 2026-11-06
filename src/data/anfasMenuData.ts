@@ -464,7 +464,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥٥",
         priceNum: 55,
         calories: 620,
-        img: "/dishes/anfas-kebab.webp",
+        img: "/dishes/saraya-kebab.webp",
         isPopular: true,
       },
       {
@@ -521,7 +521,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥٥",
         priceNum: 55,
         calories: 590,
-        img: "/dishes/saraya-kebab.webp",
+        img: "/dishes/anfas-kebab.webp",
       },
       {
         id: "p-anfas-iskender-kebab",
