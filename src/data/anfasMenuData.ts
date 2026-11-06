@@ -464,7 +464,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٥٥",
         priceNum: 55,
         calories: 620,
-        img: "/dishes/saraya-kebab.webp",
+        img: "/dishes/anfas-kebab.webp",
         isPopular: true,
       },
       {
@@ -589,7 +589,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "٢٢٠",
         priceNum: 220,
         calories: 2350,
-        img: "/dishes/one-kg-anfas-dome.webp",
+        img: "/dishes/one-kg-meat.webp",
         isChefSpecial: true,
         isPopular: true,
       },
@@ -602,7 +602,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٨٠",
         priceNum: 180,
         calories: 2100,
-        img: "/dishes/one-kg-meat.webp",
+        img: "/dishes/one-kg-anfas-dome.webp",
       },
       {
         id: "p-anfas-half-kg-meat",
@@ -624,7 +624,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٦٠",
         priceNum: 160,
         calories: 1950,
-        img: "/dishes/one-kg-mix.webp",
+        img: "/dishes/one-kg-anfas-dome.webp",
         isPopular: true,
       },
       {
@@ -647,7 +647,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٦٠",
         priceNum: 160,
         calories: 1800,
-        img: "/dishes/one-kg-chicken.webp",
+        img: "/dishes/one-kg-anfas-dome.webp",
       },
       {
         id: "p-anfas-half-kg-chicken",
