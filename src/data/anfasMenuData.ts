@@ -624,7 +624,7 @@ export const anfasCategories: MenuCategory[] = [
         price: "١٦٠",
         priceNum: 160,
         calories: 1950,
-        img: "/dishes/one-kg-anfas-dome.webp",
+        img: "/dishes/one-kg-mix.webp",
         isPopular: true,
       },
       {
